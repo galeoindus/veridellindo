@@ -29,6 +29,7 @@ import {
 import { sectionHead, card, errorBox, emptyState, toast } from '../components.js';
 import { mountOpenSources } from './library.js';
 import { composerForm, depthControl, attachSuggest } from '../composer.js';
+import { requestAiAnswer, applyOrganisation } from '../answer-ai.js';
 import { articleHref, searchHref } from '../router.js';
 import { jumper, toggleContents } from './article.js';
 
@@ -185,10 +186,14 @@ async function paint(ctx, mount, state) {
   }));
 
   // The topic-wise breakdown: short by default, extended at deep-dive depth.
-  // The article, in the core-answer architecture: one point per sentence
-  // under each section heading.
+  // The article in the Q&A shape — one sentence per line, under the question
+  // that section answers. The question and the line order come from Workers AI
+  // when the deployment has the binding (see answer-ai.js); without it the
+  // page's own ranking stands, and the reader sees the same layout either way.
+  const topicsHost = el('div', { class: 'topic-host' });
   if (answer.topics.length) {
-    content.append(pointsBlocks(answer.topics, { idPrefix: 'topic' }));
+    topicsHost.append(pointsBlocks(answer.topics, { idPrefix: 'topic' }));
+    content.append(topicsHost);
   }
 
   // Facts.
@@ -215,6 +220,20 @@ async function paint(ctx, mount, state) {
   content.append(methodNote(answer.method, { revid: answer.revid, lang: state.lang, title: answer.title, wikiUrl: answer.wikiUrl }));
   content.append(scopeNote(t('scopeAnswer')));
   content.append(feedback(ctx, `ask:${state.lang}:${answer.title}`));
+
+  /* Progressive, never blocking: the answer is on screen before this is sent,
+     and a slow, missing or refused model simply leaves the page as it is. */
+  if (answer.topics.length) {
+    requestAiAnswer({
+      question: state.question,
+      title: answer.title,
+      lang: state.lang,
+      sections: answer.topics,
+    }).then((organised) => {
+      if (!organised || generation !== paintGeneration) return;
+      topicsHost.replaceChildren(pointsBlocks(applyOrganisation(answer.topics, organised), { idPrefix: 'topic' }));
+    }).catch(() => { /* the deterministic ranking already stands */ });
+  }
 
   loadRelated(ctx, mount, { title: answer.title, lang: state.lang });
 }

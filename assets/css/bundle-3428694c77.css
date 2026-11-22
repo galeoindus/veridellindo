@@ -1827,7 +1827,7 @@ body.amigo-chat .composer,
   border: 1px solid var(--border-2) !important;
   border-radius: 26px !important;
   padding: 8px 8px 8px 16px !important;
-  box-shadow: none !important;
+  box-shadow: var(--surface-shadow) !important;
 }
 body.amigo-chat .composer:focus-within,
 .composer:focus-within {
@@ -1913,7 +1913,6 @@ body.amigo-chat .composer:focus-within,
    the field does. */
 .dash-hero-ask,
 .dash-hero-ask:focus-within,
-.panel,
 .ask-panel,
 .hero-search {
   background: transparent !important;
@@ -2031,6 +2030,14 @@ body:not(.amigo-chat) .composer,
 .dash-hero .searchbar {
   padding: 12px !important;
   border-radius: 32px !important;
+  /* the surface system (refine.css) owns the face, the shadow and the blur;
+     this sheet owns the card's geometry, and reads the tokens here so the card
+     follows whichever preset is active */
+  background-color: var(--surface-face, var(--surface)) !important;
+  box-shadow: var(--surface-shadow) !important;
+  border: var(--surface-border, 1px solid var(--border-2)) !important;
+  -webkit-backdrop-filter: var(--surface-blur, none);
+  backdrop-filter: var(--surface-blur, none);
 }
 @media (max-width: 560px) {
   .searchbar,
@@ -2739,33 +2746,6 @@ body.amigo-chat .thread {
 }
 body.amigo-chat .stage { width: min(calc(100% - 64px), var(--im-chat-column-width)); }
 body.amigo-chat .thread { width: 100%; }
-
-/* Glassmorphism is deliberately restricted to persistent navigation and
-   floating controls, where transparency communicates layering. */
-html[data-surface-style="glass"] .topbar,
-html[data-surface-style="glass"] .top,
-html[data-surface-style="glass"] .rail,
-html[data-surface-style="glass"] .dock,
-html[data-surface-style="glass"] .bottom-nav,
-html[data-surface-style="glass"] .im-preferences-panel {
-  background: color-mix(in srgb, var(--im-surface) 84%, transparent);
-  -webkit-backdrop-filter: blur(22px) saturate(1.35);
-  backdrop-filter: blur(22px) saturate(1.35);
-}
-/* Claymorphism is a focal treatment, not a blanket card style. */
-html[data-surface-style="clay"] .empty-mark,
-html[data-surface-style="clay"] .dash-hero,
-html[data-surface-style="clay"] .welcome-block,
-html[data-surface-style="clay"] .aotd,
-html[data-surface-style="clay"] .composer,
-html[data-surface-style="clay"] .im-preferences-panel {
-  border-color: color-mix(in srgb, var(--im-accent) 22%, var(--im-border));
-  box-shadow: var(--im-clay-shadow), 0 16px 38px -28px color-mix(in srgb, var(--im-accent) 35%, transparent);
-}
-html[data-surface-style="clay"] .starters button,
-html[data-surface-style="clay"] .suggestion-card {
-  box-shadow: var(--im-shadow);
-}
 
 /* A user who requests reduced transparency always receives opaque controls. */
 @media (prefers-reduced-transparency: reduce) {

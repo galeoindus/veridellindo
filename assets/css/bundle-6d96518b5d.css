@@ -2532,7 +2532,7 @@ body.amigo-chat .composer,
   border: 1px solid var(--border-2) !important;
   border-radius: 26px !important;
   padding: 8px 8px 8px 16px !important;
-  box-shadow: none !important;
+  box-shadow: var(--surface-shadow) !important;
 }
 body.amigo-chat .composer:focus-within,
 .composer:focus-within {
@@ -2618,7 +2618,6 @@ body.amigo-chat .composer:focus-within,
    the field does. */
 .dash-hero-ask,
 .dash-hero-ask:focus-within,
-.panel,
 .ask-panel,
 .hero-search {
   background: transparent !important;
@@ -2736,6 +2735,14 @@ body:not(.amigo-chat) .composer,
 .dash-hero .searchbar {
   padding: 12px !important;
   border-radius: 32px !important;
+  /* the surface system (refine.css) owns the face, the shadow and the blur;
+     this sheet owns the card's geometry, and reads the tokens here so the card
+     follows whichever preset is active */
+  background-color: var(--surface-face, var(--surface)) !important;
+  box-shadow: var(--surface-shadow) !important;
+  border: var(--surface-border, 1px solid var(--border-2)) !important;
+  -webkit-backdrop-filter: var(--surface-blur, none);
+  backdrop-filter: var(--surface-blur, none);
 }
 @media (max-width: 560px) {
   .searchbar,
@@ -3444,33 +3451,6 @@ body.amigo-chat .thread {
 }
 body.amigo-chat .stage { width: min(calc(100% - 64px), var(--im-chat-column-width)); }
 body.amigo-chat .thread { width: 100%; }
-
-/* Glassmorphism is deliberately restricted to persistent navigation and
-   floating controls, where transparency communicates layering. */
-html[data-surface-style="glass"] .topbar,
-html[data-surface-style="glass"] .top,
-html[data-surface-style="glass"] .rail,
-html[data-surface-style="glass"] .dock,
-html[data-surface-style="glass"] .bottom-nav,
-html[data-surface-style="glass"] .im-preferences-panel {
-  background: color-mix(in srgb, var(--im-surface) 84%, transparent);
-  -webkit-backdrop-filter: blur(22px) saturate(1.35);
-  backdrop-filter: blur(22px) saturate(1.35);
-}
-/* Claymorphism is a focal treatment, not a blanket card style. */
-html[data-surface-style="clay"] .empty-mark,
-html[data-surface-style="clay"] .dash-hero,
-html[data-surface-style="clay"] .welcome-block,
-html[data-surface-style="clay"] .aotd,
-html[data-surface-style="clay"] .composer,
-html[data-surface-style="clay"] .im-preferences-panel {
-  border-color: color-mix(in srgb, var(--im-accent) 22%, var(--im-border));
-  box-shadow: var(--im-clay-shadow), 0 16px 38px -28px color-mix(in srgb, var(--im-accent) 35%, transparent);
-}
-html[data-surface-style="clay"] .starters button,
-html[data-surface-style="clay"] .suggestion-card {
-  box-shadow: var(--im-shadow);
-}
 
 /* A user who requests reduced transparency always receives opaque controls. */
 @media (prefers-reduced-transparency: reduce) {
@@ -4644,11 +4624,208 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
 /* the answer's own card keeps its border, and loses the float that made it read
    as a second page sitting on the first */
 .qa-answer { box-shadow: none !important; }
-/* and the glass preset is only transparent where something is behind it */
-:root[data-surface-style="glass"] .qa-answer,
-:root[data-surface-style="glass"] .topic-block,
-:root[data-surface-style="glass"] .src-group {
-  background: var(--surface) !important;
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MULTIMORPHISM — one system, one place, applied by default
+   ══════════════════════════════════════════════════════════════════════════
+   What was wrong: the preferences panel offered four surface styles and the
+   controller wrote data-surface-style on <html>, but the rules were scattered
+   across three sheets and reached only a handful of elements — five cards in
+   brand-refresh.css, six panels in preferences.css. Everything else (the search
+   card, the answer blocks, the source cards, the credits, the launcher) drew its
+   own shadow, so the chosen style looked applied on one page and absent on the
+   next. That is the "sometimes it works" the reader saw.
+
+   The rule now, in three parts:
+
+   1. TOKENS. One preset defines four values — the face colour, the shadow, the
+      border and the blur. `soft` is the default, so the site is multimorphic on
+      a first visit, before anyone opens the settings panel. An explicit choice
+      in the panel overrides it.
+
+   2. SURFACES. The treatment belongs to containers: the cards, the panels, the
+      answer blocks, the source and credit cards, the search card, the composer,
+      the navigation bars and the launcher. They are named once, here.
+
+   3. NEVER ON TEXT. A reading surface stays flat: the treatment is a claim about
+      layering, and prose is not layered. Rows inside a container are separators,
+      not surfaces, and lose it too. */
+
+:root {
+  /* the default: soft, applied before any preference is read */
+  --surface-face: var(--surface);
+  --surface-shadow:
+    inset 1px 1px 0 color-mix(in srgb, #ffffff 70%, transparent),
+    inset -1px -1px 0 color-mix(in srgb, var(--ink) 6%, transparent),
+    0 10px 24px -18px color-mix(in srgb, var(--ink) 30%, transparent);
+  --surface-border: 1px solid color-mix(in srgb, var(--border-2) 55%, transparent);
+  --surface-blur: none;
+  --surface-hover-lift: -2px;
+}
+
+:root[data-surface-style="balanced"] {
+  --surface-face: var(--surface);
+  --surface-shadow: 0 1px 2px rgba(16, 24, 20, .05), 0 12px 28px -20px rgba(16, 24, 20, .30);
+  --surface-border: 1px solid var(--border-2);
+  --surface-blur: none;
+  --surface-hover-lift: -2px;
+}
+:root[data-surface-style="soft"] {
+  --surface-face: var(--surface);
+  --surface-shadow:
+    inset 1px 1px 0 color-mix(in srgb, #ffffff 70%, transparent),
+    inset -1px -1px 0 color-mix(in srgb, var(--ink) 6%, transparent),
+    0 10px 24px -18px color-mix(in srgb, var(--ink) 30%, transparent);
+  --surface-border: 1px solid color-mix(in srgb, var(--border-2) 55%, transparent);
+  --surface-blur: none;
+  --surface-hover-lift: -2px;
+}
+:root[data-surface-style="clay"] {
+  --surface-face: color-mix(in srgb, var(--surface) 96%, var(--accent));
+  --surface-shadow:
+    inset -3px -3px 8px color-mix(in srgb, var(--ink) 10%, transparent),
+    inset 3px 3px 8px color-mix(in srgb, #ffffff 75%, transparent),
+    0 16px 32px -22px color-mix(in srgb, var(--ink) 34%, transparent);
+  --surface-border: 0;
+  --surface-blur: none;
+  --surface-hover-lift: -3px;
+}
+:root[data-surface-style="glass"] {
+  --surface-face: color-mix(in srgb, var(--surface) 72%, transparent);
+  --surface-shadow: 0 1px 2px rgba(16, 24, 20, .04), 0 18px 40px -24px rgba(16, 24, 20, .34);
+  --surface-border: 1px solid color-mix(in srgb, var(--border-2) 55%, transparent);
+  --surface-blur: blur(16px) saturate(1.25);
+  --surface-hover-lift: -2px;
+}
+
+/* the dark theme needs its own light source: an inset white highlight at 70%
+   on a dark face reads as a glow, not as a raised edge */
+[data-theme="dark"] {
+  --surface-shadow:
+    inset 1px 1px 0 color-mix(in srgb, #ffffff 6%, transparent),
+    inset -1px -1px 0 color-mix(in srgb, #000000 40%, transparent),
+    0 12px 26px -18px rgba(0, 0, 0, .75);
+}
+[data-theme="dark"][data-surface-style="clay"] {
+  --surface-shadow:
+    inset -3px -3px 8px color-mix(in srgb, #000000 55%, transparent),
+    inset 3px 3px 8px color-mix(in srgb, #ffffff 5%, transparent),
+    0 16px 32px -22px rgba(0, 0, 0, .8);
+}
+
+/* ── the surfaces that take the treatment ───────────────────────────────── */
+.card,
+.panel,
+.datacard,
+.intro-card,
+.rail-card,
+.q-card,
+.cat-card,
+.dash-action,
+.dash-hero .aotd,
+.aotd,
+.answer-card,
+.topic-block,
+.src-group,
+.factbox,
+.credit-stack-card,
+.credit-person-card,
+.credit-identity,
+.credit-sarvam-card,
+.empty-mark,
+.welcome-block,
+.suggestion-card,
+.starters button,
+.im-preferences-panel,
+.saved-item,
+.im-card {
+  background-color: var(--surface-face);
+  box-shadow: var(--surface-shadow);
+  border: var(--surface-border);
+  -webkit-backdrop-filter: var(--surface-blur);
+  backdrop-filter: var(--surface-blur);
+}
+
+/* the navigation bars and the launcher: the same face, and the only surfaces
+   allowed to blur what is behind them */
+.topbar,
+.top,
+.rail,
+.dock,
+.bottom-nav,
+.amigo-launcher {
+  background-color: var(--surface-face);
+  box-shadow: var(--surface-shadow);
+  -webkit-backdrop-filter: var(--surface-blur);
+  backdrop-filter: var(--surface-blur);
+}
+
+/* a raised surface lifts on hover — one value for every preset */
+.card:hover,
+.q-card:hover,
+.cat-card:hover,
+.rail-card:hover,
+.dash-action:hover,
+.credit-stack-card:hover,
+.credit-person-card:hover,
+.suggestion-card:hover {
+  transform: translateY(var(--surface-hover-lift));
+}
+
+/* ── what never takes it ────────────────────────────────────────────────── */
+.prose,
+.art-body,
+.answer-body,
+.qa-answer .line-list,
+.qa-lines,
+.qa-line,
+.points-list,
+.method-note,
+.scope-note,
+.credit-section p,
+.credit-disclosure-note,
+.credit-stack-description,
+.article-shell p,
+.factbox dl,
+.src-group .sc-meta {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+/* a container inside a container is not a second surface */
+.card .card,
+.panel .panel,
+.panel .card,
+.card .panel,
+.answer-card .card,
+.src-group .source-card,
+.src-group .source-card .card,
+.credit-stack-card .credit-logo-frame,
+.credit-person-card .credit-person-avatar-v2,
+.factbox .row,
+.rail-card .sres-row,
+.card .sres-row,
+.panel .sres-row {
+  background-color: transparent;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+/* A reader who asks the system for less transparency gets opaque surfaces, and
+   a reader who asks for less motion gets no lift. Both are honoured on top of
+   whichever preset is active. */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --surface-face: var(--surface);
+    --surface-blur: none;
+  }
+  .topbar, .top, .rail, .dock, .bottom-nav, .amigo-launcher {
+    background-color: var(--surface) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --surface-hover-lift: 0px; }
 }
 
 }

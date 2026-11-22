@@ -766,7 +766,7 @@ body.amigo-chat .composer,
   border: 1px solid var(--border-2) !important;
   border-radius: 26px !important;
   padding: 8px 8px 8px 16px !important;
-  box-shadow: none !important;
+  box-shadow: var(--surface-shadow) !important;
 }
 body.amigo-chat .composer:focus-within,
 .composer:focus-within {
@@ -852,7 +852,6 @@ body.amigo-chat .composer:focus-within,
    the field does. */
 .dash-hero-ask,
 .dash-hero-ask:focus-within,
-.panel,
 .ask-panel,
 .hero-search {
   background: transparent !important;
@@ -970,6 +969,14 @@ body:not(.amigo-chat) .composer,
 .dash-hero .searchbar {
   padding: 12px !important;
   border-radius: 32px !important;
+  /* the surface system (refine.css) owns the face, the shadow and the blur;
+     this sheet owns the card's geometry, and reads the tokens here so the card
+     follows whichever preset is active */
+  background-color: var(--surface-face, var(--surface)) !important;
+  box-shadow: var(--surface-shadow) !important;
+  border: var(--surface-border, 1px solid var(--border-2)) !important;
+  -webkit-backdrop-filter: var(--surface-blur, none);
+  backdrop-filter: var(--surface-blur, none);
 }
 @media (max-width: 560px) {
   .searchbar,

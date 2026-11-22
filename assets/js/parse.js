@@ -118,7 +118,7 @@ export function paragraphsToPoints(root) {
     if (!p.isConnected) continue;
     if (p.closest(skip)) continue;
     const points = splitPoints(p);
-    if (points.length < 2) continue;
+    if (!points.length) continue;
     const list = document.createElement('ul');
     list.className = 'line-list qa-lines';
     /* A line must begin at a sentence and end at its full stop. splitPoints
@@ -127,12 +127,57 @@ export function paragraphsToPoints(root) {
        it has collected really ends a sentence. Anything unfinished carries on
        into the next line instead of standing alone. */
     let held = [];
-    const close = () => {
-      if (!held.length) return;
+    const emit = (nodes) => {
+      if (!nodes.length) return;
       const li = document.createElement('li');
       li.className = 'qa-line';
-      for (const node of held) li.append(node);
+      for (const node of nodes) li.append(node);
       list.append(li);
+    };
+    /* Split a run of nodes at a character offset, keeping every element and
+       every citation marker in the half it belongs to. Only a text node is cut,
+       and only inside its own string. */
+    const splitAt = (nodes, offset) => {
+      const head = [];
+      const tail = [];
+      let pos = 0;
+      for (const node of nodes) {
+        const length = (node.textContent || '').length;
+        if (pos + length <= offset) { head.push(node); pos += length; continue; }
+        if (pos >= offset) { tail.push(node); pos += length; continue; }
+        if (node.nodeType === 3) {
+          const cut = offset - pos;
+          const value = node.nodeValue || '';
+          const left = node.cloneNode(true); left.nodeValue = value.slice(0, cut);
+          const right = node.cloneNode(true); right.nodeValue = value.slice(cut);
+          head.push(left); tail.push(right);
+        } else {
+          head.push(node);
+        }
+        pos += length;
+      }
+      return { head, tail };
+    };
+
+    /* A sentence can run to nine hundred characters, which is a wall of text on
+       a phone even as one line. Break it at a semicolon, or at a comma when it
+       is very long — pauses the author already marked — and never mid-word. */
+    const MAX_LINE = 360;
+    const close = () => {
+      if (!held.length) return;
+      let text = held.map((n) => n.textContent || '').join('');
+      while (text.length > MAX_LINE) {
+        const window = text.slice(0, MAX_LINE + 40);
+        let cut = Math.max(window.lastIndexOf('; '), window.lastIndexOf(': '));
+        if (cut < 80) cut = window.lastIndexOf(', ');
+        if (cut < 80) break;                    // no natural pause: leave it whole
+        const { head, tail } = splitAt(held, cut + 1);
+        if (!tail.length || !head.length) break;
+        held = tail;
+        emit(head);
+        text = held.map((n) => n.textContent || '').join('');
+      }
+      emit(held);
       held = [];
     };
     for (const nodes of points) {
@@ -141,7 +186,9 @@ export function paragraphsToPoints(root) {
       if (SENTENCE_DONE.test(text) && !ABBREV_END.test(text)) close();
     }
     close();
-    if (list.children.length > 1) p.replaceWith(list);
+    /* One sentence still becomes one line: a paragraph with a single long
+       sentence is exactly the block of text a reader asked not to see. */
+    if (list.children.length) p.replaceWith(list);
   }
   return root;
 }

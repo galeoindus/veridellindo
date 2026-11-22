@@ -13,7 +13,7 @@
   };
   const LABELS = { auto: 'System appearance', light: 'Light appearance', dark: 'Dark appearance' };
   const PREFS = {
-    surface: { key: 'veridell:surface-style', values: ['balanced', 'glass', 'soft', 'clay'], fallback: 'balanced' },
+    surface: { key: 'veridell:surface-style', values: ['soft', 'clay', 'glass', 'balanced'], fallback: 'soft' },
     accent: { key: 'veridell:accent-palette', values: ['forest', 'ocean', 'violet', 'amber'], fallback: 'forest' },
     width: { key: 'veridell:reading-width', values: ['comfortable', 'compact', 'wide'], fallback: 'comfortable' },
     scale: { key: 'veridell:reading-scale', values: ['standard', 'large', 'larger'], fallback: 'standard' },

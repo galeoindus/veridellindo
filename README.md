@@ -2,7 +2,7 @@
 
 **Every answer, with its source.**
 
-Veridellindo is a Wikimedia knowledge research and discovery platform. Ask a question, or open a topic, and get a direct answer, the key points, a topic-wise breakdown, the facts from the infobox, and every source with a link back to Wikipedia.
+Veridellindo is a Wikimedia knowledge research and discovery platform. Ask a question, or open a topic, and get a direct answer in question-by-question lines, a topic-wise breakdown, the facts from the infobox, and every source with a link back to Wikipedia.
 
 It is a **static single-page application** — plain HTML, CSS and ES modules with no frontend bundler — plus Cloudflare Pages Functions for Amigo chat and image generation. Amigo gathers optional live research sources in the browser before sending the conversation to the model endpoint. Cloudflare Pages runs a small Node build step to stamp each deployment and bundle the stylesheets. Search, article and Wikidata data are fetched live in the reader's browser from the public Wikimedia APIs, which need no key. The AI endpoint's OpenRouter credentials are Cloudflare encrypted Secrets and never reach the browser.
 
@@ -48,7 +48,7 @@ disagree about who this site is.
 |---|---|
 | **Ask** — a question in your own words, answered from the best-matching article | `#/ask?q=…` |
 | **Search** — matching articles as cards | `#/search?q=…` |
-| **Article** — opens as a Veridellindo **breakdown**, not a Wikipedia page: evidence, the definition, key points, numbered topic blocks that open short and extend on demand, facts, sources, method. Two more tabs carry the full re-set text and the Markdown. | `#/article/<Title>` |
+| **Article** — opens as a Veridellindo **breakdown**, not a Wikipedia page: evidence, numbered topic blocks whose lines run one sentence each, facts, sources, method. Two more tabs carry the full re-set text and the Markdown. | `#/article/<Title>` |
 | **On this day** — events, births, deaths and holidays for any date, as a timeline | `#/today` |
 | **Explore** — categories and the most-read articles right now | `#/explore` |
 | **Saved / Bookmarks** — kept on the device | `#/bookmarks` |
@@ -74,7 +74,7 @@ design system already defines:
 ```
 .evidence      how the answer was ranked, and from how much
 .qa-answer     the sentences that answer it (.line-list)
-.answer-card   the key points (.points-list)
+.qa-line       one sentence per line (.qa-lines)
 .topic-block   numbered topics, short by default, each extendable
 .factbox       the infobox, as label/value rows
 .src-group     sources as cards, with licences
@@ -92,7 +92,7 @@ shows which level is active.
 1. **Ask** — the question goes to the Wikipedia search API.
 2. **Research** — the best-matching article is fetched in full, with its sections.
 3. **Filter** — the article is cleaned (navigation boxes, edit links, footnote markers and MathML annotations dropped), split into a lead and topic sections, and its sentences are scored against the question.
-4. **Understand** — a direct answer, key points, topic blocks, facts and sources are laid out.
+4. **Understand** — a direct answer in lines, topic blocks, facts and sources are laid out.
 
 The default ranker is keyword overlap with a rough IDF weighting. The optional **Understand meaning** switch loads a small open sentence-embedding model (`Xenova/all-MiniLM-L6-v2`, about 23 MB, once) via transformers.js and re-orders the same sentences by cosine similarity. In this extractive mode nothing is generated — every sentence is quoted from the article, and the ranking only chooses the order.
 
@@ -168,7 +168,7 @@ for, and submitting an empty field says so instead of doing nothing.
 
 **Evidence before decoration.** An answer reads: the query, the article it came
 from, *Passages selected from this Wikipedia article — not newly written*, the
-core answer, key points, numbered topic blocks, facts, sources, then the method.
+the topic blocks (one sentence per line), facts, sources, then the method.
 Citation markers carry a name a screen reader can use ("Open source 2, section
 'Causes'"), the facts panel says the facts come from the infobox and may be
 incomplete, and the method note keeps its headline counts visible while the

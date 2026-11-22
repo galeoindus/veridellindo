@@ -13,6 +13,40 @@ The build id on every page is `<version>-<commit>`, written by
 
 Nothing yet.
 
+## [6.10.54] — 22 November 2026
+
+The release where the reading model, the surfaces and the brand were settled.
+
+### Changed
+- **Answers and articles read in Q&A lines**: one sentence per line, ending at
+  its full stop. The Core answer and Key points sections were removed from every
+  surface; a sentence over ~360 characters is broken at a semicolon or comma.
+- **Multimorphism is one system** in one sheet, applied by default (`soft`),
+  with each preset carrying its own face, shadow, border, blur and corner
+  radius. It reaches every container surface and no reading surface.
+- **Brand**: one master produces every icon size, the maskable icon, the
+  favicon and the social card; every brand URL carries the build, so a cached
+  copy cannot outlive a logo change.
+- **Ask page**: Workers AI (Pages Function `/api/answer`) phrases the question
+  each section answers and orders its lines, with a strict grounding check and
+  the page's own ranking as the fallback.
+
+### Fixed
+- The floating Amigo launcher is shown at every width and can be dragged up or
+  down; the chat rail has one working control per layout.
+- The send arrow is centred on the circle's centre, not beside the label.
+- Contributor initials no longer print through a logo; a failed avatar falls
+  back to the initials instead of an empty circle.
+- Thirteen article pages said "Veridell" — the retired name — in their titles,
+  structured data, header and footer.
+- Dead weight removed: six unused exports, two unreferenced modules
+  (`library-search.js`, `ollama-client.js`), seven orphaned mascot images, and
+  the key-points CSS the removal orphaned.
+
+### Note
+Releases 6.2.0 – 6.10.43 were shipped without changelog entries; their commits
+are in the git log, and this file resumes here.
+
 ## [6.1.0] — 14 November 2026
 
 The release that makes the repository as orderly as the site. No reading

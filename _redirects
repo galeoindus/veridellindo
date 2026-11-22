@@ -1,4 +1,4 @@
-# Veridell — Cloudflare Pages redirects.
+# Veridellindo — Cloudflare Pages redirects.
 # The app is one document; these keep old-style deep links working and give the
 # crawlable index pages a canonical trailing slash.
 

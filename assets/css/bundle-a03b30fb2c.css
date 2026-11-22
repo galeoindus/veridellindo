@@ -5687,13 +5687,13 @@ section.dash-hero,
 .searchbar .suggest,
 .searchbar .composer-tools { background: transparent; border: 0; box-shadow: none; }
 
-/* ── the hero carries no boxes ────────────────────────────────────────────
-   Under the heading sat a grid of bordered "intro-card" tiles — "Ask, don't
-   hunt" and its neighbours — each with its own surface, border and radius. With
-   the search card above them, the first screen was a stack of boxes, which is
-   the opposite of the one-field pattern. They are plain text now: an icon and a
-   short line, no surface of its own. The search card is the only box on the
-   page. */
+/* ── the hero's tiles are surfaces again ──────────────────────────────────
+   These were flattened to plain text so the search card would be the only box
+   on the first screen. The reader's verdict was the opposite: the tiles carry
+   the page's argument, and with no face, no curve and no shadow they read as
+   loose text rather than as three things you can take in at a glance. They now
+   take the site's surface system (refine.css) like every other card — the face,
+   the curve, the shadow and the blur of whichever preset is active. */
 .intro-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -5701,14 +5701,10 @@ section.dash-hero,
   margin-top: 22px;
 }
 .intro-card {
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: flex-start;
+  padding: 18px 20px;
 }
 .intro-card .ic {
   background: transparent;

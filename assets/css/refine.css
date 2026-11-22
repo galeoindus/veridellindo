@@ -308,6 +308,7 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
   --surface-border: 1px solid color-mix(in srgb, var(--border-2) 70%, transparent);
   --surface-blur: none;
   --surface-hover-lift: -2px;
+  --surface-radius: 20px;
 }
 
 :root[data-surface-style="balanced"] {
@@ -316,6 +317,7 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
   --surface-border: 1px solid var(--border-2);
   --surface-blur: none;
   --surface-hover-lift: -2px;
+  --surface-radius: 16px;
 }
 :root[data-surface-style="soft"] {
   --surface-face: var(--surface);
@@ -327,6 +329,7 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
   --surface-border: 1px solid color-mix(in srgb, var(--border-2) 70%, transparent);
   --surface-blur: none;
   --surface-hover-lift: -2px;
+  --surface-radius: 20px;
 }
 :root[data-surface-style="clay"] {
   --surface-face: color-mix(in srgb, var(--surface) 96%, var(--accent));
@@ -338,6 +341,7 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
   --surface-border: 0;
   --surface-blur: none;
   --surface-hover-lift: -3px;
+  --surface-radius: 26px;
 }
 :root[data-surface-style="glass"] {
   --surface-face: color-mix(in srgb, var(--surface) 72%, transparent);
@@ -345,6 +349,7 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
   --surface-border: 1px solid color-mix(in srgb, var(--border-2) 55%, transparent);
   --surface-blur: blur(16px) saturate(1.25);
   --surface-hover-lift: -2px;
+  --surface-radius: 22px;
 }
 
 /* the dark theme needs its own light source: an inset white highlight at 70%
@@ -392,6 +397,7 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
   background-color: var(--surface-face);
   box-shadow: var(--surface-shadow);
   border: var(--surface-border);
+  border-radius: var(--surface-radius, 20px);
   -webkit-backdrop-filter: var(--surface-blur);
   backdrop-filter: var(--surface-blur);
 }

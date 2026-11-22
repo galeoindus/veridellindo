@@ -495,36 +495,4 @@ export async function wikidata(id, { signal } = {}) {
 /* ----------------------------------------------------------------- commons */
 
 /** Image credit + licence for a File: page on Commons. */
-export async function imageInfo(fileTitle, { signal } = {}) {
-  if (!fileTitle) return null;
-  const url = new URL(COMMONS_API);
-  url.searchParams.set('action', 'query');
-  url.searchParams.set('titles', fileTitle.startsWith('File:') ? fileTitle : `File:${fileTitle}`);
-  url.searchParams.set('prop', 'imageinfo');
-  url.searchParams.set('iiprop', 'extmetadata|url|size');
-  url.searchParams.set('format', 'json');
-  url.searchParams.set('formatversion', '2');
-  url.searchParams.set('origin', '*');
-  const data = await get(url.toString(), { ttl: TTL.wikidata, signal });
-  const page = data.query?.pages?.[0];
-  const info = page?.imageinfo?.[0];
-  if (!info || page.missing) return null;
-  const meta = info.extmetadata || {};
-  const pick = (k) => (meta[k]?.value ? String(meta[k].value).replace(/<[^>]*>/g, '').trim() : '');
-  return {
-    // The resolved title matters: what we asked for may have been a guess.
-    title: page.title,
-    filePage: `https://commons.wikimedia.org/wiki/${encodeURIComponent(page.title.replace(/ /g, '_'))}`,
-    url: info.url,
-    width: info.width,
-    height: info.height,
-    artist: pick('Artist'),
-    credit: pick('Credit'),
-    licence: pick('LicenseShortName') || pick('License'),
-    licenceUrl: pick('LicenseUrl') || pick('LicenseUrlShort'),
-    usageTerms: pick('UsageTerms'),
-    attributionRequired: pick('AttributionRequired'),
-    description: pick('ImageDescription'),
-  };
-}
 

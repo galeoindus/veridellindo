@@ -389,13 +389,4 @@ export function composeAnswer(hit, { depth = 'detailed' } = {}) {
 }
 
 /** The article, shaped like a source card the chat already knows how to draw. */
-export function librarySource(hit) {
-  return {
-    n: 1,
-    title: hit.item.title,
-    url: hit.item.url,
-    sourceType: 'Veridellindo library',
-    snippet: hit.item.summary || hit.item.lead || '',
-    image: null,
-  };
-}
+

@@ -845,7 +845,6 @@ body.amigo-chat .composer:focus-within,
   line-height: 1;
 }
 .searchbar .mode-btn { padding: 0 12px; }
-.searchbar button[type="submit"] { margin-inline-start: auto; }
 
 /* The rectangle around the rounded card in the screenshot is the ask panel
    wrapper, not the card. It is flattened so the card is the only shape, and the
@@ -879,7 +878,6 @@ body:not(.amigo-chat) .composer,
 /* the send button stays inside the card: on a narrow phone the control row
    could push it past the rounded edge */
 .searchbar .composer-tools { flex-wrap: nowrap !important; min-width: 0; }
-.searchbar button[type="submit"] { flex: 0 0 auto; margin-inline-start: auto; }
 .searchbar .mic, .searchbar .btn-icon, .searchbar .mode-btn { flex: 0 0 auto; }
 
 /* ── the control row, tidied ──────────────────────────────────────────────

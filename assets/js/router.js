@@ -126,25 +126,10 @@ export function articleHref(title, lang, project) {
   return q ? `${base}?${q}` : base;
 }
 
-export function libraryHref(q, { src } = {}) {
-  const params = new URLSearchParams();
-  if (q) params.set('q', q);
-  if (src) params.set('src', src);
-  const qs = params.toString();
-  return `#/library${qs ? `?${qs}` : ''}`;
-}
-
 /**
  * The address to put in the bar for an article: a real path where the page can
  * serve one, the in-app route otherwise.
  */
-export function articlePath(title, lang, project) {
-  const params = new URLSearchParams();
-  if (lang) params.set('lang', lang);
-  if (project && project !== 'wikipedia') params.set('project', project);
-  const q = params.toString();
-  return `/articles/${slugify(title)}${q ? `?${q}` : ''}`;
-}
 
 export function workHref(source, id) {
   return `#/work?src=${encodeURIComponent(source)}&id=${encodeURIComponent(String(id))}`;

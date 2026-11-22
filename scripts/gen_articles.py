@@ -440,10 +440,10 @@ HEAD = """<!DOCTYPE html>
   <meta property="og:image" content="{imageUrl}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="{imageUrl}">
-  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/brand/favicon-mark-48.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/brand/favicon-mark-96.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/brand/favicon-mark-192.png">
-  <link rel="apple-touch-icon" href="/assets/img/brand/logo-180.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/brand/favicon-mark-48.png?v={build}">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/brand/favicon-mark-96.png?v={build}">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/brand/favicon-mark-192.png?v={build}">
+  <link rel="apple-touch-icon" href="/assets/img/brand/logo-180.png?v={build}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Lora:ital,wght@0,500;0,600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
   <link rel="stylesheet" href="/assets/css/styles.css?v={version}">
   <link rel="stylesheet" href="/assets/css/app.css?v={version}">
@@ -456,7 +456,7 @@ HEAD = """<!DOCTYPE html>
   <header class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="/#/">
-        <img class="brand-mark" src="/assets/img/brand/logo-96.png" alt="" width="26" height="26" decoding="async">
+        <img class="brand-mark" src="/assets/img/brand/logo-96.png?v={build}" alt="" width="26" height="26" decoding="async">
         <span class="brand-text"><strong>Veridellindo</strong><small>Understand a question. Follow the evidence.</small></span>
       </a>
 {nav}
@@ -564,7 +564,7 @@ def page_html(art, related, article_map=None):
         title_enc=urllib.parse.quote(art["title"]),
         wikiUrl=art["wikiUrl"],
         jsonld=jsonld,
-        imageUrl=html.escape(art["thumb"], quote=True) if art["thumb"] else f"{ORIGIN}/assets/img/brand/og-card.png",
+        imageUrl=html.escape(art["thumb"], quote=True) if art["thumb"] else f"{ORIGIN}/assets/img/brand/og-card.png?v={build}",
         version=VERSION,
     )]
 
@@ -860,18 +860,18 @@ def main():
   <meta property="og:url" content="{ORIGIN}/articles/">
   <meta property="og:site_name" content="Veridellindo">
   <meta property="og:locale" content="en_IN">
-  <meta property="og:image" content="{ORIGIN}/assets/img/brand/og-card.png">
+  <meta property="og:image" content="{ORIGIN}/assets/img/brand/og-card.png?v={build}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Articles — Veridellindo">
   <meta name="twitter:description" content="Thirteen curated Veridellindo article pages with images, quick facts, cited sections and references. Search opens the full live Wikipedia catalogue.">
-  <meta name="twitter:image" content="{ORIGIN}/assets/img/brand/og-card.png">
+  <meta name="twitter:image" content="{ORIGIN}/assets/img/brand/og-card.png?v={build}">
   <meta name="theme-color" content="#101713">
-  <link rel="icon" href="/assets/img/brand/logo-48.png" sizes="48x48" type="image/png">
-  <link rel="icon" href="/assets/img/brand/logo-192.png" sizes="192x192" type="image/png">
-  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/brand/favicon-mark-48.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/brand/favicon-mark-96.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/brand/favicon-mark-192.png">
-  <link rel="apple-touch-icon" href="/assets/img/brand/logo-180.png">
+  <link rel="icon" href="/assets/img/brand/logo-48.png?v={build}" sizes="48x48" type="image/png">
+  <link rel="icon" href="/assets/img/brand/logo-192.png?v={build}" sizes="192x192" type="image/png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/brand/favicon-mark-48.png?v={build}">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/brand/favicon-mark-96.png?v={build}">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/brand/favicon-mark-192.png?v={build}">
+  <link rel="apple-touch-icon" href="/assets/img/brand/logo-180.png?v={build}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Lora:ital,wght@0,500;0,600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
   <link rel="stylesheet" href="/assets/css/styles.css?v={VERSION}">
   <link rel="stylesheet" href="/assets/css/app.css?v={VERSION}">
@@ -884,7 +884,7 @@ def main():
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="grain" aria-hidden="true"></div>
   <header class="topbar"><div class="topbar-inner">
-    <a class="brand" href="/#/"><img src="/assets/img/brand/logo-96.png" alt="" width="26" height="26" decoding="async"><span class="brand-text"><strong>Veridellindo</strong><small>Understand a question. Follow the evidence.</small></span></a>
+    <a class="brand" href="/#/"><img src="/assets/img/brand/logo-96.png?v={build}" alt="" width="26" height="26" decoding="async"><span class="brand-text"><strong>Veridellindo</strong><small>Understand a question. Follow the evidence.</small></span></a>
 {NAV}
   </div></header>
   <main id="main" class="wrap" tabindex="-1">

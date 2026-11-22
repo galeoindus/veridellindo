@@ -29,9 +29,9 @@ test('the supplied Veridellindo logo is the shared source for site and chat bran
   const chat = read('amigo/index.html');
   const app = read('amigo/app.js');
   assert.match(home, /brand-refresh\.css/, 'home launcher redesign is not loaded');
-  assert.match(home, /<img src="\/assets\/img\/brand\/logo-96\.png"/, 'home assistant launcher does not use the supplied logo');
+  assert.match(home, /<img src="\/assets\/img\/brand\/logo-96\.png(?:\?v=[^"]*)?"/, 'home assistant launcher does not use the supplied logo');
   assert.match(chat, /redesign\.css/, 'chat redesign is not loaded');
-  assert.match(chat, /\/assets\/img\/brand\/logo-96\.png/, 'chat rail does not use the supplied logo');
+  assert.match(chat, /\/assets\/img\/brand\/logo-96\.png(?:\?v=[^"]*)?/, 'chat rail does not use the supplied logo');
   assert.match(app, /AMIGO_BRAND_URI\s*=\s*"\/assets\/img\/brand\/logo-192\.png"/, 'chat application does not use the supplied brand asset');
 });
 
@@ -43,7 +43,7 @@ test('every assistant launcher across root and article pages uses the supplied l
     const launcher = html.match(/<a\s+class="amigo-launcher"[\s\S]*?<\/a>/i)?.[0];
     if (!launcher) continue;
     launcherCount += 1;
-    assert.match(launcher, /<img src="\/assets\/img\/brand\/logo-96\.png"/, `${page} launcher does not use the supplied logo`);
+    assert.match(launcher, /<img src="\/assets\/img\/brand\/logo-96\.png(?:\?v=[^"]*)?"/, `${page} launcher does not use the supplied logo`);
     assert.doesNotMatch(launcher, /<svg/i, `${page} launcher still embeds the old bubble glyph`);
     assert.match(html, /brand-refresh\.css/, `${page} does not load the shared brand system`);
   }

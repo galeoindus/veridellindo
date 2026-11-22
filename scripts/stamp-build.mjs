@@ -317,6 +317,16 @@ for (const file of await walk(ROOT)) {
   bundledPages += 1;
 }
 
+// The manifest carries brand image URLs, and those files keep their names when
+// the artwork changes — so the manifest's `?v=` has to move with the build, or a
+// phone keeps its old home-screen icon.
+try {
+  const manifestPath = join(ROOT, 'manifest.webmanifest');
+  const manifest = await readFile(manifestPath, 'utf8');
+  const restamped = manifest.replace(/([?&]v=)[^&"'\s]+/g, `$1${build}`);
+  if (restamped !== manifest) await writeFile(manifestPath, restamped);
+} catch { /* no manifest on a stripped checkout */ }
+
 for (const { name, css } of bundles.values()) {
   await writeFile(join(CSS_DIR, name), css);
 }

@@ -127,15 +127,31 @@ function textOf(result) {
   return '';
 }
 
-function openRouterKeys(env) {
+/* Twelve keys, not six.
+ *
+ * A free OpenRouter tier is rate-limited per key, and the chat used to stop at
+ * OPENROUTER_API_KEY_6 — anything past it was silently ignored, which looked
+ * like "the extra keys do nothing". Every slot from 1 to 12 is read now, plus
+ * the unnumbered legacy name.
+ *
+ * The list is also rotated per request: with several keys configured, every
+ * call used to start at key 1, so key 1 took the rate limit for the whole site
+ * while the rest sat idle. Each request now starts one slot further along, and
+ * the fallback still walks the whole list from there. */
+const MAX_OPENROUTER_KEYS = 12;
+let keyCursor = 0;
+
+export function openRouterKeys(env) {
   const keys = [];
-  for (let i = 1; i <= 6; i += 1) {
+  for (let i = 1; i <= MAX_OPENROUTER_KEYS; i += 1) {
     const key = String(env?.[`OPENROUTER_API_KEY_${i}`] || '').trim();
     if (key && !keys.includes(key)) keys.push(key);
   }
   const legacy = String(env?.OPENROUTER_API_KEY || '').trim();
   if (legacy && !keys.includes(legacy)) keys.push(legacy);
-  return keys;
+  if (keys.length < 2) return keys;
+  keyCursor = (keyCursor + 1) % keys.length;
+  return [...keys.slice(keyCursor), ...keys.slice(0, keyCursor)];
 }
 
 /* ── Workers AI ─────────────────────────────────────────────────────────── */

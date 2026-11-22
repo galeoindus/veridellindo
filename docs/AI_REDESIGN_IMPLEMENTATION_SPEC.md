@@ -137,7 +137,7 @@ Passing static checks do not prove that all browser interactions, external APIs,
 ### V-11 — AI provider environment templates contain stale controls
 
 **Severity:** Medium / operations risk  
-**Evidence:** The active `functions/api/chat.js` reads `env.AI`, `OPENROUTER_API_KEY_1..6`, and the legacy `OPENROUTER_API_KEY`; it hard-codes its current model ids and OpenRouter free-model list. Root sample templates and older documentation also mention controls such as `AI_PROVIDER`, `WORKERS_AI_MODEL`, `ENABLE_PAID_AI`, and `OPENROUTER_MODEL_TIER`, which this Pages Function does not read.
+**Evidence:** The active `functions/api/chat.js` reads `env.AI`, `OPENROUTER_API_KEY_1..12`, and the legacy `OPENROUTER_API_KEY`; it hard-codes its current model ids and OpenRouter free-model list. Root sample templates and older documentation also mention controls such as `AI_PROVIDER`, `WORKERS_AI_MODEL`, `ENABLE_PAID_AI`, and `OPENROUTER_MODEL_TIER`, which this Pages Function does not read.
 
 **Change made in this patch:** The checked-in local and Cloudflare examples were simplified to the secrets actually read by the current Pages Function. The maintenance documentation now distinguishes Pages Functions from the separately deployable optional Worker.
 

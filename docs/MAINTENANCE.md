@@ -47,7 +47,7 @@ One answer, in one place, so the docs stop disagreeing:
 |---|---|
 | `wrangler.toml` `[ai]` | Declares the `AI` binding used by the Pages Function; verify the binding is enabled for production and preview in Cloudflare Pages settings |
 | Pages Function binding | `env.AI` must be available to `functions/api/chat.js` in production and preview |
-| Dashboard secrets | Optional `OPENROUTER_API_KEY_1..6` values (legacy single key `OPENROUTER_API_KEY` is also read) |
+| Dashboard secrets | Optional `OPENROUTER_API_KEY_1..12` values (legacy single key `OPENROUTER_API_KEY` is also read); the list is rotated per request so no single key takes every call |
 | Default request path | The handler attempts Cloudflare Workers AI first when the client sends `provider: "auto"` |
 | Fallback | The handler may try its fixed OpenRouter free-model allowlist when a key exists and Workers AI fails; an explicit OpenRouter choice is also supported |
 | Google Gemini | Not integrated in this checkout; add a dedicated server-side adapter only after the API, budget, grounding and citation contracts are approved |

@@ -228,14 +228,6 @@ export function markdownActions({ getText, filename }) {
  * The one-line trust statement, kept near the answer rather than in the footer:
  * these passages were selected from a named article, not written.
  */
-export function selectedNote(articleTitle, lang, wikiUrl) {
-  const note = el('p', { class: 'selected-note' });
-  note.append(document.createTextNode(`${t('selectedNotGenerated')} `));
-  if (wikiUrl) note.append(el('a', { href: wikiUrl, target: '_blank', rel: 'noopener noreferrer', text: articleTitle }));
-  return note;
-}
-
-/** A short note on what the answer does and does not cover. */
 export function scopeNote(text) {
   const box = el('div', { class: 'scope-note' });
   box.append(el('p', { text }));

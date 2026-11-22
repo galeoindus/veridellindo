@@ -102,12 +102,47 @@ const ABBREV = /\b(?:Mr|Mrs|Ms|Dr|Prof|St|vs|etc|e\.g|i\.e|No|Fig|approx|ca|cf|S
  * the change — only the presentation.
  */
 export function paragraphsToPoints(root) {
-  const skip = 'figure, figcaption, table, .infobox, .thumb, .gallery, .gallerybox, .article-gallery-grid, .reflist, .references, .navbox, blockquote';
+  const skip = 'figure, figcaption, table, .infobox, .thumb, .gallery, .gallerybox, .article-gallery-grid, .reflist, .references, .navbox, blockquote, .qa-lines';
 
-  /* Paragraphs stay paragraphs. This used to split every sentence out of a
-     paragraph into a bullet, so a reference article arrived as a wall of
-     fragments — the reader lost the argument the prose was making. A paragraph
-     is now rendered as a paragraph; lists in the source are still lists. */
+  /* One line per sentence: the line starts, the full stop ends it, and the next
+     sentence begins on the line below. That is the Q&A shape the whole site
+     uses — the same one the answer's topic blocks already had — so a reader
+     never meets a block of prose in one lump on an article page while the
+     answer pages read in lines.
+     Nothing is rewritten: the sentence keeps its own links and citation
+     markers, because the split works over the paragraph's nodes (see
+     splitPoints) rather than over its plain text. A paragraph that holds a
+     single sentence stays a paragraph. */
+  const paragraphs = [...root.querySelectorAll('p')];
+  for (const p of paragraphs) {
+    if (!p.isConnected) continue;
+    if (p.closest(skip)) continue;
+    const points = splitPoints(p);
+    if (points.length < 2) continue;
+    const list = document.createElement('ul');
+    list.className = 'line-list qa-lines';
+    /* A line must begin at a sentence and end at its full stop. splitPoints
+       can stop early inside a date or an initial ("c." then "304 BCE"), which
+       left a fragment on its own line, so a line is only closed once the text
+       it has collected really ends a sentence. Anything unfinished carries on
+       into the next line instead of standing alone. */
+    let held = [];
+    const close = () => {
+      if (!held.length) return;
+      const li = document.createElement('li');
+      li.className = 'qa-line';
+      for (const node of held) li.append(node);
+      list.append(li);
+      held = [];
+    };
+    for (const nodes of points) {
+      held.push(...nodes);
+      const text = held.map((n) => n.textContent || '').join('');
+      if (SENTENCE_DONE.test(text) && !ABBREV_END.test(text)) close();
+    }
+    close();
+    if (list.children.length > 1) p.replaceWith(list);
+  }
   return root;
 }
 
@@ -117,6 +152,10 @@ export function paragraphsToPoints(root) {
  * split misses it. Work across the paragraph's own nodes instead: keep the
  * just-ended sentence open so a following citation marker stays with it, and
  * start a new point only when the next node really begins a new sentence. */
+const SENTENCE_DONE = /[.!?]["'”’)\]]*\s*$/;
+/* A dot that closes an abbreviation is not the end of a sentence: "from c."
+   then "304 BCE" is one sentence, not two lines. */
+const ABBREV_END = /\b(?:c|ca|approx|etc|al|No|Fig|vol|pp|ed|eds|Dr|Mr|Mrs|Ms|St|vs|Jr|Sr|Inc|Ltd|Co|Gov|Gen|Col|Capt|Lt|Sgt|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.\s*$/i;
 const POINT_START = /^[A-Z0-9"'“(\u0900-\u097F]/;
 const POINT_END = /[.!?]["'”’)\]]?\s*$/;
 

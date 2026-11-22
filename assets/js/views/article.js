@@ -21,7 +21,7 @@ import { composeAnswer, factsFromInfobox } from '../answer.js';
 import { articleToMarkdown } from '../markdown.js';
 import {
   factsBox, sourcesGroup, feedback, referencesBlock, markdownActions,
-  evidenceStrip, methodNote, selectedNote,
+  evidenceStrip, methodNote,
 } from '../answerui.js';
 import { sectionHead, card, errorBox, emptyState, toast, breadcrumbs } from '../components.js';
 import { mountOpenSources } from './library.js';
@@ -466,31 +466,6 @@ async function repaintFull(ctx, state) {
       sections: composed.method.sectionsRead,
       title: state.data.title,
     }));
-    const coreBox = el('div', { class: 'qa-answer' });
-    coreBox.append(el('h2', { text: t('coreAnswer') }));
-    coreBox.append(selectedNote(state.data.title, state.lang, state.wikiUrl));
-    const core = (composed.core || []).slice(0, 5);
-    if (core.length) {
-      const list = el('ul', { class: 'line-list' });
-      core.forEach((sentence) => list.append(el('li', { text: sentence })));
-      coreBox.append(list);
-    }
-    content.append(coreBox);
-
-    const points = (composed.keyPoints || []).slice(0, 8);
-    if (points.length > 1) {
-      const keyCard = el('div', { class: 'answer-card' });
-      keyCard.append(el('h2', { text: t('keyPoints') }));
-      const ol = el('ol', { class: 'points-list' });
-      points.forEach((point) => {
-        const li = el('li');
-        li.append(el('span', { class: 'point-text', text: point.text }));
-        if (point.section) li.append(el('span', { class: 'point-from', text: `— ${point.section}` }));
-        ol.append(li);
-      });
-      keyCard.append(ol);
-      content.append(keyCard);
-    }
   }
 
   // The lead, then every section, in Wikipedia's own order — but read as

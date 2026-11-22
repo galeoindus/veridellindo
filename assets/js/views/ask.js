@@ -4,10 +4,9 @@
  * own architecture rather than as a Wikipedia page:
  *
  *   .evidence     how the answer was ranked, and from how much
- *   .qa-answer    the sentences that answer it (.line-list)
- *   .answer-card  the key points
- *   .topic-block  the article broken up topic by topic, numbered, short by
- *                 default with a control that extends each one
+ *   .topic-block  the article broken up topic by topic, numbered, one sentence
+ *                 per line — the Q&A shape — short by default with a control
+ *                 that extends each one
  *   .factbox      the infobox, as label/value rows
  *   .src-group    the sources, as cards, with licences
  *   .method-note  exactly how the answer was produced
@@ -25,7 +24,7 @@ import { composeAnswer } from '../answer.js';
 import { answerToMarkdown } from '../markdown.js';
 import {
   evidenceStrip, pointsBlocks, methodNote, factsBox, sourcesGroup,
-  scopeNote, feedback, markdownActions, selectedNote,
+  scopeNote, feedback, markdownActions,
 } from '../answerui.js';
 import { sectionHead, card, errorBox, emptyState, toast } from '../components.js';
 import { mountOpenSources } from './library.js';
@@ -184,35 +183,6 @@ async function paint(ctx, mount, state) {
     title: answer.title,
     deep: ctx.state.deepRank,
   }));
-
-  // The direct answer, kept short: the depth presets cap it at three to
-  // sixteen sentences, so the breakdown stays a summary rather than a dump.
-  const qaAnswer = el('div', { class: 'qa-answer' });
-  qaAnswer.append(el('h2', { text: t('coreAnswer') }));
-  qaAnswer.append(selectedNote(answer.title, state.lang, answer.wikiUrl));
-  if (answer.core.length) {
-    const list = el('ul', { class: 'line-list' });
-    answer.core.forEach((sentence) => list.append(el('li', { text: sentence })));
-    qaAnswer.append(list);
-  } else {
-    qaAnswer.append(el('p', { class: 'prose', text: clamp(answer.leadText, 400) }));
-  }
-  content.append(qaAnswer);
-
-  // Key points.
-  if (answer.keyPoints.length > 1) {
-    const keyCard = el('div', { class: 'answer-card' });
-    keyCard.append(el('h2', { text: t('keyPoints') }));
-    const ol = el('ol', { class: 'points-list' });
-    answer.keyPoints.forEach((point) => {
-      const li = el('li');
-      li.append(el('span', { class: 'point-text', text: point.text }));
-      if (point.section) li.append(el('span', { class: 'point-from', text: `— ${point.section}` }));
-      ol.append(li);
-    });
-    keyCard.append(ol);
-    content.append(keyCard);
-  }
 
   // The topic-wise breakdown: short by default, extended at deep-dive depth.
   // The article, in the core-answer architecture: one point per sentence

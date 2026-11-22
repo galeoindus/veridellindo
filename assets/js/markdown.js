@@ -140,12 +140,6 @@ export function answerToMarkdown(answer, { url = '' } = {}) {
     answer.core.forEach((s) => lines.push(`- ${s}`));
     lines.push('');
   }
-  if (answer.keyPoints?.length) {
-    lines.push('## Key points');
-    lines.push('');
-    answer.keyPoints.forEach((p) => lines.push(`- ${p.text}${p.section ? `  \n  *— ${p.section}*` : ''}`));
-    lines.push('');
-  }
   if (answer.topics?.length) {
     lines.push('## In depth');
     lines.push('');

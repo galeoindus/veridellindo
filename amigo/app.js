@@ -2305,10 +2305,53 @@ document.addEventListener("click", (e) => {
     }
   };
 })();
+/* One control, one behaviour.
+ *
+ * The rail used to be toggled by adding `.open`, which only means anything in
+ * the phone layout — above 861 px the rail is a static column, so the button
+ * changed a class that nothing read and did nothing visible. On top of that the
+ * rail carried its own close button, so a desktop reader saw two controls for
+ * one job and neither of them worked.
+ *
+ * Now: on a desktop the header button collapses and restores the rail (and the
+ * choice is remembered); on a phone it opens the drawer, and the close button
+ * inside the drawer is the way out. The duplicate close button is hidden on a
+ * desktop by CSS. */
+const desktopRail = () => (typeof window.matchMedia === "function"
+  ? window.matchMedia("(min-width: 861px)").matches
+  : window.innerWidth > 860);
+
+function syncMenuBtn() {
+  const b = $("#btnMenu"); if (!b) return;
+  const sd = $("#side");
+  const hidden = document.body.classList.contains("rail-hidden");
+  const open = desktopRail() ? !hidden : !!(sd && sd.classList.contains("open"));
+  b.setAttribute("aria-expanded", String(open));
+  const label = desktopRail()
+    ? (hidden ? "Show your chats" : "Hide your chats")
+    : (open ? "Close your chats" : "Open saved chats");
+  b.title = label;
+  b.setAttribute("aria-label", label);
+}
+
+function setRailHidden(hidden) {
+  document.body.classList.toggle("rail-hidden", !!hidden);
+  try { localStorage.setItem("veridell.rail.hidden", hidden ? "1" : "0"); } catch {}
+  syncMenuBtn();
+}
+
 $("#btnMenu").addEventListener("click", () => {
+  if (desktopRail()) { setRailHidden(!document.body.classList.contains("rail-hidden")); return; }
   const sd = $("#side"); if (sd) sd.classList.toggle("open");
   const sc = $("#scrim"); if (sc) sc.classList.toggle("show", !!(sd && sd.classList.contains("open")));
+  syncMenuBtn();
 });
+
+try {
+  if (localStorage.getItem("veridell.rail.hidden") === "1") document.body.classList.add("rail-hidden");
+} catch {}
+syncMenuBtn();
+window.addEventListener("resize", syncMenuBtn);
 $("#sideClose").addEventListener("click", closeDrawer);
 $("#sideSearch").addEventListener("input", sideListRender);
 $("#scrim").addEventListener("click", closeDrawer);
@@ -2449,6 +2492,7 @@ function sideListRender(){
 function closeDrawer(){
   const sd = $("#side"); if (sd) sd.classList.remove("open");
   const sc = $("#scrim"); if (sc) sc.classList.remove("show");
+  if (typeof syncMenuBtn === "function") syncMenuBtn();
 }
 function openChat(id){
   if (!_histories[id]) return;

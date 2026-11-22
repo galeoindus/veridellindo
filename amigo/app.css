@@ -958,3 +958,29 @@ body.dark .msg.me .bubble{background:linear-gradient(140deg,rgba(72,76,140,.38),
     box-shadow: none;
   }
 }
+
+@layer overrides {
+/* ── one way to show and hide your chats ───────────────────────────────────
+   The header's menu button and the rail's own close button were both on screen
+   at a desktop width, and neither did anything there: the rail is a static
+   column above 861 px, so toggling `.open` (the phone drawer's class) changed
+   nothing a reader could see.
+
+   The rule now is one control per layout. Above 861 px the header button
+   collapses and restores the rail, and the rail's close button is hidden as the
+   duplicate it is. Below 861 px the header button opens the drawer and the
+   close button inside it closes the drawer, which is the only way out when the
+   drawer covers the header. */
+@media (min-width: 861px) {
+  body.amigo-chat #sideClose { display: none !important; }
+  body.amigo-chat #btnMenu { display: grid !important; }
+  body.amigo-chat.rail-hidden #side { display: none !important; }
+  body.amigo-chat.rail-hidden .app { max-width: 100%; }
+}
+@media (max-width: 860px) {
+  body.amigo-chat #btnMenu { display: grid !important; }
+  body.amigo-chat #sideClose { display: grid !important; }
+  /* the saved choice is a desktop preference; a phone always starts closed */
+  body.amigo-chat.rail-hidden #side { display: flex !important; }
+}
+}

@@ -57,7 +57,7 @@ const SKILLS = {"design-critique": {"icon": "🎨", "name": "Design Critique", "
 const BUILD_ID = (document.querySelector('meta[name="veridell-build"]') || {}).content || "";
 const AMIGO_BRAND_URI = "/assets/img/brand/logo-192.png" + (BUILD_ID ? "?v=" + BUILD_ID : "");
 function darkNow(){ return document.body.classList.contains("dark"); }
-function heroMarkHTML(){ return '<img class="lgimg" alt="Veridellindo logo" src="' + AMIGO_BRAND_URI + '">'; }
+function heroMarkHTML(){ return '<img class="lgimg" alt="Veridellindo logo" src="' + AMIGO_BRAND_URI + '" srcset="/assets/img/brand/veridellindo-round.svg 1x">'; }
 function dharmaHTML(){ return '<span class="typing-mascot" aria-label="Amigo is thinking"><i></i><i></i><i></i></span>'; }
 
 const AMP = String.fromCharCode(38);
@@ -2615,7 +2615,7 @@ $("#btnTest").addEventListener("click", async () => {
   syncLiveBtn();
   renderAttBar();
   sideListRender();
-  const _bl = $("#brandLogo"); if (_bl) _bl.src = AMIGO_BRAND_URI;
+  const _bl = $("#brandLogo"); if (_bl) { _bl.src = AMIGO_BRAND_URI; _bl.srcset = "/assets/img/brand/veridellindo-round.svg 1x"; }
   renderAll();
   updateEngineStatus();
   inputEl.focus();

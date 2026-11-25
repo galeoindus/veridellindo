@@ -1,0 +1,76 @@
+# Automatically publish a patch release after the main-branch CI is green.
+# The release command updates package.json, package-lock.json, every HTML
+# semantic/build marker, cache-busted asset URLs and assets/version.json.
+name: automatic-version-bump
+
+on:
+  workflow_run:
+    workflows: ["ci"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: automatic-version-bump-main
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      !contains(github.event.workflow_run.head_commit.message, '[auto-version]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out the exact successful main revision
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Avoid releasing an older push after a newer one
+        id: freshness
+        env:
+          SUCCESSFUL_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          git fetch origin main
+          CURRENT_SHA=$(git rev-parse origin/main)
+          if [ "$CURRENT_SHA" != "$SUCCESSFUL_SHA" ]; then
+            echo "current=false" >> "$GITHUB_OUTPUT"
+            echo "A newer main commit exists; its own successful CI run will release it."
+          else
+            echo "current=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Install locked dependencies
+        if: steps.freshness.outputs.current == 'true'
+        run: npm ci
+      - name: Increment patch version and stamp every page
+        if: steps.freshness.outputs.current == 'true'
+        run: npm run release patch
+      - name: Verify the versioned release before publishing it
+        if: steps.freshness.outputs.current == 'true'
+        run: |
+          npm run verify
+          npm run doctor
+      - name: Commit and push the versioned release
+        if: steps.freshness.outputs.current == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          VERSION=$(node -p "require('./package.json').version")
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No versioned files changed; nothing to commit."
+            exit 0
+          fi
+          git commit -m "release: v${VERSION} [auto-version]"
+          git push origin HEAD:main
+          echo "Published automatic version bump to v${VERSION}."

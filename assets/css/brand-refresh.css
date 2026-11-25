@@ -98,7 +98,8 @@ html[data-theme="dark"][data-accent="violet"] { --accent-2: #ddcaff; }
 }
 
 
-/* Circular Veridellindo brand mark: keep the full emblem legible at every size. */
-.brand-mark, .brand-mark img, img.brand-mark { border-radius: 50%; }
-.brand-mark { overflow: hidden; }
-.brand-mark img { object-fit: contain; }
+@layer overrides {
+  .brand-mark, .brand-mark img, img.brand-mark { border-radius: 50%; }
+  .brand-mark { overflow: hidden; }
+  .brand-mark img { object-fit: contain; }
+}

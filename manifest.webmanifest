@@ -11,19 +11,39 @@
   "theme_color": "#173b32",
   "lang": "en",
   "dir": "ltr",
-  "categories": ["education", "reference", "books"],
+  "categories": [
+    "education",
+    "reference",
+    "books"
+  ],
   "icons": [
     {
-      "src": "assets/img/brand/logo-512.png?v=6.10.58-733513e",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "src": "assets/img/brand/veridellindo-round.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
-    {"name": "Ask a question", "short_name": "Ask", "url": "/#/ask"},
-    {"name": "Explore", "short_name": "Explore", "url": "/#/explore"},
-    {"name": "On this day", "short_name": "Today", "url": "/#/today"},
-    {"name": "Saved", "short_name": "Saved", "url": "/#/bookmarks"}
+    {
+      "name": "Ask a question",
+      "short_name": "Ask",
+      "url": "/#/ask"
+    },
+    {
+      "name": "Explore",
+      "short_name": "Explore",
+      "url": "/#/explore"
+    },
+    {
+      "name": "On this day",
+      "short_name": "Today",
+      "url": "/#/today"
+    },
+    {
+      "name": "Saved",
+      "short_name": "Saved",
+      "url": "/#/bookmarks"
+    }
   ]
 }

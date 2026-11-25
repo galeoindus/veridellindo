@@ -13,6 +13,15 @@ The build id on every page is `<version>-<commit>`, written by
 
 Nothing yet.
 
+## [6.10.57] — 25 November 2026
+
+### Changed
+- Bump the site version so this maintenance update is visible in the footer and build stamp.
+- Keep the package manifest, lockfile and site configuration on the same semantic version.
+
+### Verified
+- Version workflow checks the package, lockfile, site configuration and every generated HTML build marker against the exact commit.
+
 ## [6.10.54] — 22 November 2026
 
 The release where the reading model, the surfaces and the brand were settled.

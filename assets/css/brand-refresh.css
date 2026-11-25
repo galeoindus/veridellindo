@@ -97,3 +97,8 @@ html[data-theme="dark"][data-accent="violet"] { --accent-2: #ddcaff; }
   .amigo-launcher, .amigo-launcher:hover { transition: none; transform: none; }
 }
 
+
+/* Circular Veridellindo brand mark: keep the full emblem legible at every size. */
+.brand-mark, .brand-mark img, img.brand-mark { border-radius: 50%; }
+.brand-mark { overflow: hidden; }
+.brand-mark img { object-fit: contain; }

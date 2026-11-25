@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">Veridellindo</title><desc id="desc">White lotus emblem inside an orange, pink and violet circular gradient.</desc>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffad36"/><stop offset=".28" stop-color="#ff633f"/><stop offset=".56" stop-color="#e52b91"/><stop offset=".78" stop-color="#a01bd1"/><stop offset="1" stop-color="#5515d9"/></linearGradient></defs>
+<circle cx="256" cy="256" r="248" fill="url(#g)"/>
+<circle cx="256" cy="256" r="235" fill="none" stroke="#fff" stroke-opacity=".88" stroke-width="7"/>
+<g fill="none" stroke="#fff" stroke-width="17" stroke-linecap="round" stroke-linejoin="round">
+<path d="M256 111 C216 147 185 190 185 231 C185 267 215 295 256 313 C297 295 327 267 327 231 C327 190 296 147 256 111Z"/>
+<path d="M111 256 C147 216 190 185 231 185 C267 185 295 215 313 256 C295 297 267 327 231 327 C190 327 147 296 111 256Z"/>
+<path d="M401 256 C365 216 322 185 281 185 C245 185 217 215 199 256 C217 297 245 327 281 327 C322 327 365 296 401 256Z"/>
+<path d="M256 401 C216 365 185 322 185 281 C185 245 215 217 256 199 C297 217 327 245 327 281 C327 322 296 365 256 401Z"/>
+<path d="M157 157 C190 149 224 157 245 178 C260 193 267 213 265 233 C244 235 224 228 209 213 C188 192 180 169 157 157Z"/>
+<path d="M355 157 C322 149 288 157 267 178 C252 193 245 213 247 233 C268 235 288 228 303 213 C324 192 332 169 355 157Z"/>
+<path d="M157 355 C190 363 224 355 245 334 C260 319 267 299 265 279 C244 277 224 284 209 299 C188 320 180 343 157 355Z"/>
+<path d="M355 355 C322 363 288 355 267 334 C252 319 245 299 247 279 C268 277 288 284 303 299 C324 320 332 343 355 355Z"/>
+<path d="M256 191 C239 220 222 238 193 256 C222 274 239 292 256 321 C273 292 290 274 319 256 C290 238 273 220 256 191Z" fill="#fff" stroke="none"/>
+</g><circle cx="256" cy="256" r="16" fill="#fff"/>
+</svg>

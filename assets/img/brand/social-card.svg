@@ -14,7 +14,7 @@
 <path d="M355 157 C322 149 288 157 267 178 C252 193 245 213 247 233 C268 235 288 228 303 213 C324 192 332 169 355 157Z"/>
 <path d="M157 355 C190 363 224 355 245 334 C260 319 267 299 265 279 C244 277 224 284 209 299 C188 320 180 343 157 355Z"/>
 <path d="M355 355 C322 363 288 355 267 334 C252 319 245 299 247 279 C268 277 288 284 303 299 C324 320 332 343 355 355Z"/>
-<path d="M256 191 C239 220 222 238 193 256 C222 274 239 292 256 321 C273 292 290 274 319 256 C290 238 273 220 256 191Z" fill="#fff" stroke="none"/>
+<path d="M256 191 C239 220 222 238 193 256 C222 274 239 292 256 321 C273 292 290 274 319 256 C290 238 273 220 256 191Z" fill="none" stroke="#fff" stroke-width="17"/>
 </g><circle cx="600" cy="245" r="10" fill="#fff"/>
 <text x="600" y="495" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="62" font-weight="700">Veridellindo</text>
 <text x="600" y="545" text-anchor="middle" fill="#d8cce6" font-family="Arial,sans-serif" font-size="25">Every answer, with its source</text>

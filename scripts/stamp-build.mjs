@@ -114,7 +114,7 @@ for (const file of await walk(ROOT)) {
   // a panel: it opens the page rather than growing a second chat inside the site.
   if (!standalone && !/amigo-launcher/.test(html) && /<\/body>/i.test(html)) {
     html = html.replace(/<\/body>/i, `  <a class="amigo-launcher" href="/amigo/" aria-label="Open Amigo, the assistant">
-    <img src="/assets/img/brand/logo-96.png" alt="" width="24" height="24" loading="lazy" decoding="async">
+    <img src="/assets/img/brand/veridellindo-round.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
     <span>Amigo</span>
   </a>\n</body>`);
   }

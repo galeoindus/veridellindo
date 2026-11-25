@@ -55,7 +55,7 @@ const SKILLS = {"design-critique": {"icon": "🎨", "name": "Design Critique", "
  * file name never changes, so without the query a browser or the CDN edge
  * keeps serving the previous artwork. */
 const BUILD_ID = (document.querySelector('meta[name="veridell-build"]') || {}).content || "";
-const AMIGO_BRAND_URI = "/assets/img/brand/logo-192.png" + (BUILD_ID ? "?v=" + BUILD_ID : "");
+const AMIGO_BRAND_URI = "/assets/img/brand/veridellindo-round.svg" + (BUILD_ID ? "?v=" + BUILD_ID : "");
 function darkNow(){ return document.body.classList.contains("dark"); }
 function heroMarkHTML(){ return '<img class="lgimg" alt="Veridellindo logo" src="' + AMIGO_BRAND_URI + '">'; }
 function dharmaHTML(){ return '<span class="typing-mascot" aria-label="Amigo is thinking"><i></i><i></i><i></i></span>'; }

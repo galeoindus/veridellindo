@@ -9,7 +9,7 @@ export const SITE = {
   name: 'Veridellindo',
   title: 'Veridellindo — every answer, with its source',
   tagline: 'Every answer, with its source',
-  version: '6.10.62',
+  version: '6.10.63',
   // The canonical origin. Everything that has to be an absolute URL — canonical
   // links, Open Graph, the sitemap — is built from this and nothing else, so a
   // single edit moves the whole site.

@@ -2429,7 +2429,7 @@ body::after { opacity: 0; }   /* the old grid belongs to the glass era */
   background: var(--clay-face);
   border: 0;
   border-radius: var(--clay-r-lg);
-  box-shadow: var(--clay-hi), var(--clay-lo), var(--clay-drop);
+  box-shadow: var(--surface-shadow);
 }
 
 .panel::before, .answer-card::before, .sec:has(> .sec-head)::before,
@@ -2443,13 +2443,13 @@ body::after { opacity: 0; }   /* the old grid belongs to the glass era */
   background: var(--clay-face);
   border: 0;
   border-radius: var(--clay-r);
-  box-shadow: var(--clay-hi), var(--clay-lo), var(--clay-drop);
+  box-shadow: var(--surface-shadow);
   transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
 }
 .card:hover, .q-card:hover, .cat-card:hover, .dash-action:hover,
 .topic-card:hover, .howstep:hover {
   transform: translateY(-5px);
-  box-shadow: var(--clay-hi), var(--clay-lo),
+  box-shadow: var(--surface-shadow),
               0 30px 52px -24px color-mix(in srgb, var(--forest) 55%, transparent),
               0 12px 22px -14px color-mix(in srgb, var(--copper) 45%, transparent);
 }
@@ -2481,7 +2481,7 @@ body::after { opacity: 0; }   /* the old grid belongs to the glass era */
   border-radius: var(--clay-r-pill);
   background: var(--clay-face);
   color: var(--text);
-  box-shadow: var(--clay-hi), var(--clay-lo), var(--clay-drop);
+  box-shadow: var(--surface-shadow);
   transition: transform .18s var(--ease-out), box-shadow .18s var(--ease-out), background-color .18s var(--ease-out);
 }
 .btn:hover { transform: translateY(-2px); }
@@ -2570,7 +2570,7 @@ body::after { opacity: 0; }   /* the old grid belongs to the glass era */
   background: var(--clay-face);
   border: 0;
   border-radius: var(--clay-r-lg);
-  box-shadow: var(--clay-hi), var(--clay-lo), var(--clay-drop);
+  box-shadow: var(--surface-shadow);
 }
 .dash-hero::after { display: none; }.dash-hero .depth-btn, .dash-hero .chip-btn, .dash-hero .chips .chip,
 .dash-hero .example-prompts button {
@@ -2678,7 +2678,7 @@ body::after { opacity: 0; }   /* the old grid belongs to the glass era */
 .prose h3 { letter-spacing: -.01em; }
 .prose .thumb, .gallery img, .topic-figure img, .art-body img, .aotd-media img {
   border-radius: var(--clay-r);
-  box-shadow: var(--clay-hi), var(--clay-lo), var(--clay-drop);
+  box-shadow: var(--surface-shadow);
 }
 .factbox h3, .panel-head { color: var(--copper-ink); }
 
@@ -2716,7 +2716,7 @@ body::after { opacity: 0; }   /* the old grid belongs to the glass era */
   display: flex; gap: 14px; align-items: flex-start;
   padding: 20px 22px; border-radius: var(--clay-r);
   background: var(--clay-face); border: 0;
-  box-shadow: var(--clay-hi), var(--clay-lo), var(--clay-drop);
+  box-shadow: var(--surface-shadow);
 }
 .site-intro .intro-card h2 { font-size: 16px; margin: 0 0 4px; font-family: var(--font-body); font-weight: 650; }
 .site-intro .intro-card p { margin: 0; color: var(--muted); font-size: 14px; }
@@ -2728,7 +2728,7 @@ body::after { opacity: 0; }   /* the old grid belongs to the glass era */
   padding: 12px 20px; border-radius: var(--clay-r-pill); font-weight: 550; font-size: 14.5px;
   color: var(--text); background: var(--clay-face);
   border: 1px solid color-mix(in srgb, var(--border-2) 55%, transparent);
-  box-shadow: var(--clay-hi), var(--clay-lo), var(--clay-drop); text-decoration: none;
+  box-shadow: var(--surface-shadow); text-decoration: none;
   transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out);
 }
 .site-intro .intro-links a:hover { transform: translateY(-2px); text-decoration: none; }
@@ -2740,10 +2740,10 @@ body::after { opacity: 0; }   /* the old grid belongs to the glass era */
    ====================================================================== */
 
 .evidence, .scope-note {
-  box-shadow: inset 9px 0 0 -5px var(--copper), var(--clay-hi), var(--clay-lo), var(--clay-drop);
+  box-shadow: inset 9px 0 0 -5px var(--copper), var(--surface-shadow);
 }
-.evidence.is-ok { box-shadow: inset 9px 0 0 -5px var(--ok), var(--clay-hi), var(--clay-lo), var(--clay-drop); }
-.evidence.is-warn { box-shadow: inset 9px 0 0 -5px var(--warn), var(--clay-hi), var(--clay-lo), var(--clay-drop); }
+.evidence.is-ok { box-shadow: inset 9px 0 0 -5px var(--ok), var(--surface-shadow); }
+.evidence.is-warn { box-shadow: inset 9px 0 0 -5px var(--warn), var(--surface-shadow); }
 
 .saved-main img, .saved-ph { border-radius: 14px; }
 .saved-ph { background: var(--neo-face); box-shadow: var(--neo-in); }
@@ -2799,7 +2799,7 @@ body::after { opacity: 0; }   /* the old grid belongs to the glass era */
 .lead-figure img {
   margin: 0 auto; max-height: 360px; border: 0;
   background: color-mix(in srgb, var(--surface-2) 92%, var(--sand));
-  box-shadow: var(--clay-hi), var(--clay-lo), var(--clay-drop);
+  box-shadow: var(--surface-shadow);
 }
 .lead-figure figcaption { text-align: center; color: var(--faint); }
 

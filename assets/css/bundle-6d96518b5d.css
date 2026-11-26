@@ -4624,98 +4624,87 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
 /* ══════════════════════════════════════════════════════════════════════════
    MULTIMORPHISM — one system, one place, applied by default
    ══════════════════════════════════════════════════════════════════════════
-   What was wrong: the preferences panel offered four surface styles and the
-   controller wrote data-surface-style on <html>, but the rules were scattered
-   across three sheets and reached only a handful of elements — five cards in
-   brand-refresh.css, six panels in preferences.css. Everything else (the search
-   card, the answer blocks, the source cards, the credits, the launcher) drew its
-   own shadow, so the chosen style looked applied on one page and absent on the
-   next. That is the "sometimes it works" the reader saw.
+   Every value here is a literal colour, not a reference to another token. The
+   first version wrote `--surface-shadow: ... var(--ink) ...`; where that token
+   did not resolve, the whole declaration became invalid and the surface fell
+   back to no shadow at all — which is why a card could look flat on one page and
+   raised on another. Literals cannot go invalid.
 
-   The rule now, in three parts:
+   Four presets, one default (soft), each with its own face, shadow, border,
+   blur and corner. Applied to containers only, never to a reading surface. */
 
-   1. TOKENS. One preset defines four values — the face colour, the shadow, the
-      border and the blur. `soft` is the default, so the site is multimorphic on
-      a first visit, before anyone opens the settings panel. An explicit choice
-      in the panel overrides it.
-
-   2. SURFACES. The treatment belongs to containers: the cards, the panels, the
-      answer blocks, the source and credit cards, the search card, the composer,
-      the navigation bars and the launcher. They are named once, here.
-
-   3. NEVER ON TEXT. A reading surface stays flat: the treatment is a claim about
-      layering, and prose is not layered. Rows inside a container are separators,
-      not surfaces, and lose it too. */
-
-:root {
-  /* the default: soft, applied before any preference is read */
-  --surface-face: var(--surface);
-  --surface-shadow:
-    inset 1px 1.5px 0 color-mix(in srgb, #ffffff 92%, transparent),
-    inset -1.5px -1.5px 3px color-mix(in srgb, var(--ink) 9%, transparent),
-    0 3px 6px -2px color-mix(in srgb, var(--ink) 14%, transparent),
-    0 18px 34px -22px color-mix(in srgb, var(--ink) 42%, transparent);
-  --surface-border: 1px solid color-mix(in srgb, var(--border-2) 70%, transparent);
-  --surface-blur: none;
-  --surface-hover-lift: -2px;
-  --surface-radius: 20px;
-}
-
-:root[data-surface-style="balanced"] {
-  --surface-face: var(--surface);
-  --surface-shadow: 0 1px 2px rgba(16, 24, 20, .05), 0 12px 28px -20px rgba(16, 24, 20, .30);
-  --surface-border: 1px solid var(--border-2);
-  --surface-blur: none;
-  --surface-hover-lift: -2px;
-  --surface-radius: 16px;
-}
+:root,
 :root[data-surface-style="soft"] {
-  --surface-face: var(--surface);
+  --surface-face: #ffffff;
   --surface-shadow:
-    inset 1px 1.5px 0 color-mix(in srgb, #ffffff 92%, transparent),
-    inset -1.5px -1.5px 3px color-mix(in srgb, var(--ink) 9%, transparent),
-    0 3px 6px -2px color-mix(in srgb, var(--ink) 14%, transparent),
-    0 18px 34px -22px color-mix(in srgb, var(--ink) 42%, transparent);
-  --surface-border: 1px solid color-mix(in srgb, var(--border-2) 70%, transparent);
+    inset 1px 1.5px 0 rgba(255, 255, 255, .30),
+    inset -1.5px -1.5px 3px rgba(16, 24, 20, .09),
+    0 3px 6px -2px rgba(16, 24, 20, .14),
+    0 18px 34px -22px rgba(16, 24, 20, .42);
+  --surface-border: 1px solid rgba(16, 24, 20, .10);
   --surface-blur: none;
-  --surface-hover-lift: -2px;
   --surface-radius: 20px;
+  --surface-hover-lift: -2px;
+}
+:root[data-surface-style="balanced"] {
+  --surface-face: #ffffff;
+  --surface-shadow: 0 1px 2px rgba(16, 24, 20, .05), 0 12px 28px -20px rgba(16, 24, 20, .30);
+  --surface-border: 1px solid rgba(16, 24, 20, .12);
+  --surface-blur: none;
+  --surface-radius: 16px;
+  --surface-hover-lift: -2px;
 }
 :root[data-surface-style="clay"] {
-  --surface-face: color-mix(in srgb, var(--surface) 96%, var(--accent));
+  --surface-face: #fdfbf7;
   --surface-shadow:
-    inset -4px -4px 10px color-mix(in srgb, var(--ink) 14%, transparent),
-    inset 4px 4px 10px color-mix(in srgb, #ffffff 92%, transparent),
-    0 4px 8px -3px color-mix(in srgb, var(--ink) 18%, transparent),
-    0 22px 40px -24px color-mix(in srgb, var(--ink) 48%, transparent);
+    inset -4px -4px 10px rgba(16, 24, 20, .14),
+    inset 4px 4px 10px rgba(255, 255, 255, .92),
+    0 4px 8px -3px rgba(16, 24, 20, .18),
+    0 22px 40px -24px rgba(16, 24, 20, .48);
   --surface-border: 0;
   --surface-blur: none;
-  --surface-hover-lift: -3px;
   --surface-radius: 26px;
+  --surface-hover-lift: -3px;
 }
 :root[data-surface-style="glass"] {
-  --surface-face: color-mix(in srgb, var(--surface) 72%, transparent);
+  --surface-face: rgba(255, 255, 255, .72);
   --surface-shadow: 0 1px 2px rgba(16, 24, 20, .04), 0 18px 40px -24px rgba(16, 24, 20, .34);
-  --surface-border: 1px solid color-mix(in srgb, var(--border-2) 55%, transparent);
+  --surface-border: 1px solid rgba(255, 255, 255, .55);
   --surface-blur: blur(16px) saturate(1.25);
-  --surface-hover-lift: -2px;
   --surface-radius: 22px;
+  --surface-hover-lift: -2px;
 }
 
-/* the dark theme needs its own light source: an inset white highlight at 70%
-   on a dark face reads as a glow, not as a raised edge */
-[data-theme="dark"] {
+/* the dark theme needs its own light source: a white inset at the light value
+   reads as a glowing line along the top edge of every card */
+:root[data-theme="dark"][data-surface-style="soft"],
+:root[data-theme="dark"] {
+  --surface-face: #191422;
   --surface-shadow:
-    inset 1px 1.5px 0 color-mix(in srgb, #ffffff 12%, transparent),
-    inset -1.5px -1.5px 3px color-mix(in srgb, #000000 55%, transparent),
+    inset 1px 1.5px 0 rgba(255, 255, 255, .10),
+    inset -1.5px -1.5px 3px rgba(0, 0, 0, .55),
     0 3px 8px -2px rgba(0, 0, 0, .55),
     0 20px 36px -22px rgba(0, 0, 0, .85);
+  --surface-border: 1px solid rgba(255, 255, 255, .10);
 }
-[data-theme="dark"][data-surface-style="clay"] {
+:root[data-theme="dark"][data-surface-style="balanced"] {
+  --surface-face: #191422;
+  --surface-shadow: 0 1px 2px rgba(0, 0, 0, .5), 0 12px 28px -20px rgba(0, 0, 0, .8);
+  --surface-border: 1px solid rgba(255, 255, 255, .12);
+}
+:root[data-theme="dark"][data-surface-style="clay"] {
+  --surface-face: #1d1730;
   --surface-shadow:
-    inset -3px -3px 8px color-mix(in srgb, #000000 55%, transparent),
-    inset 3px 3px 8px color-mix(in srgb, #ffffff 5%, transparent),
-    0 16px 32px -22px rgba(0, 0, 0, .8);
+    inset -4px -4px 10px rgba(0, 0, 0, .6),
+    inset 4px 4px 10px rgba(255, 255, 255, .06),
+    0 4px 8px -3px rgba(0, 0, 0, .6),
+    0 22px 40px -24px rgba(0, 0, 0, .9);
+  --surface-border: 0;
+}
+:root[data-theme="dark"][data-surface-style="glass"] {
+  --surface-face: rgba(25, 20, 34, .72);
+  --surface-shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 40px -24px rgba(0, 0, 0, .8);
+  --surface-border: 1px solid rgba(255, 255, 255, .12);
 }
 
 /* ── the surfaces that take the treatment ───────────────────────────────── */

@@ -23,8 +23,8 @@ compatibility_date = "2026-01-01"
 pages_build_output_dir = "."
 
 # ── Workers AI ────────────────────────────────────────────────────────────
-# The /api/chat Pages Function reads this binding. It is free-tier friendly and
-# needs no key: Cloudflare runs the model.
+# The /api/chat Pages Function reads this binding. No provider key is needed.
+# Workers AI has a daily included allocation; usage beyond it depends on plan and billing.
 #
 # If the binding is added in the dashboard instead (Pages → Settings →
 # Functions → Bindings → Workers AI, variable name AI), this block is

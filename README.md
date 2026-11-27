@@ -277,7 +277,7 @@ short and they are enforced rather than remembered.
 
 ```bash
 npm run doctor        # modules, pages, deep audit, drift — about 35 seconds
-npm run doctor:full   # the same, then the 270-test suite
+npm run doctor:full   # the same, then the full Node test suite
 ```
 
 It runs the checks in the order that fails fastest and prints one verdict. CI

@@ -9,7 +9,7 @@ often, and what each failure means.
 
 ```bash
 npm run doctor          # the fast pass: modules, pages, identity, deep audit
-npm run doctor:full     # the fast pass plus the 270-test suite
+npm run doctor:full     # the fast pass plus the full Node test suite
 ```
 
 `doctor` runs the checks a push runs, in the order that fails fastest, and
@@ -24,7 +24,7 @@ that do not fail the build are printed separately and do not change the code.
 | Before every pull request | `npm run verify` | the above plus the full suite |
 | Every push | CI runs `stamp:build` then `verify` | the same, on a clean checkout, with the commit's own build id |
 | Every Monday, 03:30 IST | `scheduled-health.yml` runs the doctor and the weekly audit | drift: a page nothing links to, an article missing from the sitemap, a dead internal link, the live deployment being down |
-| Every release | `npm run release` | bumps the version, stamps, verifies, commits and tags |
+| Every release | `npm run release` | bumps the version, updates the lockfile, stamps every page, and prints a suggested commit message |
 | When a dependency alerts | `npm ci` then `npm run verify` | a lockfile that no longer installs, or an upgrade that breaks a test |
 
 ## The Node floor
@@ -108,6 +108,11 @@ npm run release -- minor   # or minor / major
 The release script is the only supported way to change the version. It moves
 `package.json`, `package-lock.json` (both the root version and the root package
 entry) and every stamped page together, then prints the commit message to use.
+It does not commit, tag, run the tests, or deploy; run `npm run verify` before
+shipping and create the Git commit/tag separately. A downloaded source ZIP has
+no `.git` metadata, so build stamping records a deterministic snapshot
+fingerprint in `assets/version.json` instead of pretending the fingerprint is
+a Git commit. Normal Git checkouts and CI continue to use the real commit SHA.
 
 **Never edit the version in `package.json` by hand.** That is exactly what broke
 CI twice: the package said one version, the lockfile another, and the `version`

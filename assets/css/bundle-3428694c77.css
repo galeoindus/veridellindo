@@ -1956,7 +1956,7 @@ body:not(.amigo-chat) .composer,
   justify-content: center;
 }
 .searchbar .composer-tools > button[type="submit"] {
-  margin-inline-start: auto !important;
+  margin-inline-start: auto;
   flex: 0 0 auto;
 }
 /* the voice button and the mode pills share one height so the row reads level */
@@ -1970,7 +1970,7 @@ body:not(.amigo-chat) .composer,
 .searchbar .composer-tools .mic { width: 36px; padding: 0; }
 
 /* the floating Amigo button sat on top of the Saved tab */
-@media (max-width: 860px) { .amigo-launcher { display: inline-flex !important; } }
+@media (max-width: 860px) { .amigo-launcher { display: inline-flex; } }
 
 /* ── multimorphism, cleared where it does not belong ──────────────────────
    The surface styles were reaching the reading surfaces: a blurred glass panel
@@ -1982,30 +1982,30 @@ body:not(.amigo-chat) .composer,
 .answer-body,
 .article-shell,
 .panel-prose {
-  backdrop-filter: none !important;
-  box-shadow: none !important;
+  backdrop-filter: none;
+  box-shadow: none;
 }
 :root[data-surface-style="glass"] .prose,
 :root[data-surface-style="glass"] .art-body,
 :root[data-surface-style="soft"] .prose,
 :root[data-surface-style="clay"] .prose {
-  background: transparent !important;
+  background: transparent;
 }
 
 /* the voice button is `.mic-btn`, not `.mic` — which is why the earlier rule
    matched nothing and it sat off the row's axis. Measured now, not assumed. */
 .searchbar .mic-btn,
 .composer .mic-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 36px !important;
-  height: 36px !important;
-  min-width: 36px !important;
-  padding: 0 !important;
-  border-radius: 999px !important;
-  background: transparent !important;
-  border: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  padding: 0;
+  border-radius: 999px;
+  background: transparent;
+  border: 0;
 }
 .searchbar .mic-btn svg,
 .composer .mic-btn svg { width: 20px; height: 20px; display: block; }
@@ -2024,13 +2024,13 @@ body:not(.amigo-chat) .composer,
 .searchbar,
 .composer .searchbar,
 .dash-hero .searchbar {
-  padding: 12px !important;
-  border-radius: 32px !important;
+  padding: 12px;
+  border-radius: 32px;
   /* the surface system (refine.css) owns the face, the shadow and the blur;
      this sheet owns the card's geometry, and reads the tokens here so the card
      follows whichever preset is active */
-  background-color: var(--surface-face, var(--surface)) !important;
-  box-shadow: var(--surface-shadow) !important;
+  background-color: var(--surface-face, var(--surface));
+  box-shadow: var(--surface-shadow);
   border: var(--surface-border, 1px solid var(--border-2)) !important;
   -webkit-backdrop-filter: var(--surface-blur, none);
   backdrop-filter: var(--surface-blur, none);
@@ -2108,6 +2108,98 @@ body:not(.amigo-chat) .composer,
   background: currentColor !important;
   -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 19.5V4.5M5.5 11 12 4.5l6.5 6.5'/></svg>") center / 20px 20px no-repeat !important;
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 19.5V4.5M5.5 11 12 4.5l6.5 6.5'/></svg>") center / 20px 20px no-repeat !important;
+}
+
+/* Theme-aware finish for the canonical search card. Keep its ownership in this sheet. */
+.composer .searchbar {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid color-mix(in srgb, var(--im-border-strong) 78%, transparent);
+  border-radius: 28px;
+  background: linear-gradient(145deg,
+    color-mix(in srgb, var(--im-surface) 94%, white 6%),
+    color-mix(in srgb, var(--im-surface-2) 84%, transparent));
+  box-shadow: 0 16px 38px -26px color-mix(in srgb, var(--im-text) 30%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 74%, transparent);
+  -webkit-backdrop-filter: saturate(150%) blur(20px);
+  backdrop-filter: saturate(150%) blur(20px);
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.composer .searchbar:focus-within {
+  border-color: color-mix(in srgb, var(--im-accent) 58%, var(--im-border-strong));
+  box-shadow: 0 18px 42px -24px color-mix(in srgb, var(--im-accent) 32%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--im-accent) 12%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 76%, transparent);
+}
+.composer .searchbar > textarea {
+  min-width: 0;
+  color: var(--im-text);
+  caret-color: var(--im-accent);
+}
+.composer .searchbar > textarea::placeholder { color: var(--im-muted); opacity: .88; }
+.composer .searchbar .mode-btn { transition: background .16s ease, border-color .16s ease, color .16s ease; }
+.composer .searchbar .mode-btn[aria-pressed="true"],
+.composer .searchbar .mode-btn.is-active {
+  color: var(--im-text);
+  background: color-mix(in srgb, var(--im-accent) 13%, var(--im-surface));
+  border-color: color-mix(in srgb, var(--im-accent) 34%, var(--im-border));
+}
+.composer .searchbar button[type="submit"] {
+  background: linear-gradient(118deg, #ff963e 0%, #dc398c 52%, #7939d3 100%);
+  border: 0;
+  color: #fff;
+  box-shadow: 0 7px 17px -8px rgba(174,57,151,.5);
+}
+.composer .searchbar button[type="submit"]:hover { filter: brightness(1.06); }
+.composer .suggest {
+  z-index: 100;
+  max-height: min(420px, 52dvh);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid color-mix(in srgb, var(--im-border-strong) 82%, transparent);
+  border-radius: 20px;
+  padding: 6px;
+  background: color-mix(in srgb, var(--im-surface) 90%, transparent);
+  box-shadow: 0 22px 54px -22px rgba(20,12,34,.32), inset 0 1px 0 rgba(255,255,255,.62);
+  -webkit-backdrop-filter: saturate(160%) blur(22px);
+  backdrop-filter: saturate(160%) blur(22px);
+}
+.composer .suggest-item {
+  min-height: 52px;
+  border: 0;
+  border-radius: 13px;
+  color: var(--im-text);
+}
+.composer .suggest-item:hover,
+.composer .suggest-item.active {
+  background: color-mix(in srgb, var(--im-accent) 10%, var(--im-surface));
+}
+html[data-theme="dark"] .composer .searchbar {
+  border-color: color-mix(in srgb, var(--im-border-strong) 80%, transparent);
+  background: linear-gradient(145deg, rgba(34,25,47,.88), rgba(24,18,35,.94));
+  box-shadow: 0 18px 44px -22px rgba(0,0,0,.72), inset 0 1px 0 rgba(255,255,255,.055);
+}
+html[data-theme="dark"] .composer .searchbar:focus-within {
+  border-color: color-mix(in srgb, var(--im-accent) 62%, var(--im-border-strong));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--im-accent) 16%, transparent),
+    0 20px 48px -24px rgba(0,0,0,.78), inset 0 1px 0 rgba(255,255,255,.06);
+}
+html[data-theme="dark"] .composer .suggest {
+  background: rgba(25,19,37,.94);
+  border-color: rgba(225,205,245,.14);
+  box-shadow: 0 24px 58px -22px rgba(0,0,0,.78), inset 0 1px 0 rgba(255,255,255,.045);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .composer .searchbar, .composer .suggest,
+  html[data-theme="dark"] .composer .searchbar,
+  html[data-theme="dark"] .composer .suggest {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--im-surface);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .composer .searchbar, .composer .searchbar .mode-btn { transition: none; }
 }
 
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* Stamp every HTML entry point with the same build id and cache-bust URL. */
-import { readFile, writeFile, readdir, stat, unlink } from 'node:fs/promises';
+import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { join, relative } from 'node:path';
 import { execFileSync } from 'node:child_process';
@@ -10,10 +10,7 @@ const pkg = JSON.parse(await readFile(join(ROOT, 'package.json'), 'utf8'));
 const version = String(pkg.version || '').trim();
 if (!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(version)) throw new Error(`Invalid package version: ${version}`);
 let commit = String(process.env.BUILD_COMMIT || '').trim();
-if (!commit) commit = execFileSync('git', ['rev-parse', '--short=7', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim();
-commit = commit.slice(0, 7);
-if (!/^[0-9a-f]{7}$/i.test(commit)) throw new Error('BUILD_COMMIT must be a 7-character git SHA');
-const build = `${version}-${commit}`;
+let revisionType = commit ? 'git' : '';
 const excluded = new Set(['.git', 'node_modules', '.wrangler', 'dist', 'build']);
 
 function metaAttribute(tag, attribute) {
@@ -46,6 +43,55 @@ async function walk(dir) {
   }
   return output;
 }
+
+async function walkFiles(dir) {
+  const output = [];
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    if (excluded.has(entry.name)) continue;
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) output.push(...await walkFiles(full));
+    else if (entry.isFile()) output.push(full);
+  }
+  return output;
+}
+
+/* A downloaded source ZIP has no .git directory. Keep `npm run release` usable
+ * there too: use a deterministic seven-character snapshot fingerprint instead
+ * of failing. Git checkouts still use their real HEAD SHA, and CI may override
+ * it with BUILD_COMMIT. Generated build metadata and cache-busters are ignored
+ * and generated content-hash CSS bundles are excluded because they are derived
+ * from the source stylesheets already included in the hash. */
+if (!commit) {
+  try {
+    commit = execFileSync('git', ['rev-parse', '--short=7', 'HEAD'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+    revisionType = 'git';
+  } catch {
+    const hash = createHash('sha256').update(version).update('\0');
+    const generated = new Set(['assets/version.json', 'sitemap.xml']);
+    const files = (await walkFiles(ROOT)).sort((a, b) => relative(ROOT, a).localeCompare(relative(ROOT, b)));
+    for (const file of files) {
+      const name = relative(ROOT, file).replace(/\\/g, '/');
+      if (generated.has(name) || /^assets\/css\/bundle-[0-9a-f]+\.css$/i.test(name)) continue;
+      let contents = await readFile(file, 'utf8').catch(() => '');
+      if (name.endsWith('.html')) {
+        contents = contents.replace(/<meta\b[^>]*>/gi, (tag) => (
+          metaAttribute(tag, 'name').toLowerCase() === 'veridell-build'
+            ? tag.replace(/(\bcontent\s*=\s*["'])[^"']+/i, '$1__BUILD__')
+            : tag
+        ));
+      }
+      if (name.endsWith('.html') || name.endsWith('.webmanifest')) {
+        contents = contents.replace(/([?&]v=)[^&"'\s<>]+/g, '$1__BUILD__');
+      }
+      hash.update(name).update('\0').update(contents).update('\0');
+    }
+    commit = hash.digest('hex').slice(0, 7);
+    revisionType = 'snapshot';
+  }
+}
+commit = commit.slice(0, 7);
+if (!/^[0-9a-f]{7}$/i.test(commit)) throw new Error('BUILD_COMMIT must be a 7-character git SHA or snapshot fingerprint');
+const build = `${version}-${commit}`;
 
 let changed = 0;
 for (const file of await walk(ROOT)) {
@@ -363,7 +409,7 @@ let config = await readFile(configPath, 'utf8');
 config = config.replace(/(\bversion:\s*')[^']+(')/, `$1${version}$2`);
 await writeFile(configPath, config);
 
-await writeFile(join(ROOT, 'assets/version.json'), `${JSON.stringify({ version, commit, built: new Date().toISOString() }, null, 2)}\n`);
+await writeFile(join(ROOT, 'assets/version.json'), `${JSON.stringify({ version, commit, revisionType, built: new Date().toISOString() }, null, 2)}\n`);
 process.stdout.write(`Build ${build}: stamped ${changed} HTML files, config.js and assets/version.json.\n`);
 
 // ── sitemap ────────────────────────────────────────────────────────────────

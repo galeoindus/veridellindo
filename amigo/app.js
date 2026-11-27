@@ -1102,7 +1102,7 @@ async function callAmigoAI(messages, overrides){
 function engineLabel(provider, model){
   const p = String(provider || "").toLowerCase(), m = String(model || "");
   if (m.indexOf("flux") >= 0) return "Workers AI · FLUX image";
-  if (p.indexOf("workers") >= 0 || m.indexOf("@cf/") === 0) return "Workers AI · " + (m.indexOf("llama-4") >= 0 ? "Llama 4 Scout" : m.indexOf("llama-3.2") >= 0 ? "Llama 3.2" : "Llama 3.3");
+  if (p.indexOf("workers") >= 0 || m.indexOf("@cf/") === 0) return "Workers AI · " + (m.indexOf("gemma-4") >= 0 ? "Gemma 4" : m.indexOf("llama-4") >= 0 ? "Llama 4 Scout" : m.indexOf("llama-3.2") >= 0 ? "Llama 3.2" : "Llama 3.3");
   if (p.indexOf("openrouter") >= 0 || m.indexOf("openrouter/") === 0 || m.indexOf("meta-llama/") === 0) return "OpenRouter · " + (m === "openrouter/free" ? "Free Router" : "Llama");
   if (p === "workers-ai") return "Workers AI";
   return "AI";
@@ -2574,7 +2574,10 @@ $("#btnTest").addEventListener("click", async () => {
   } catch(e){ noteError(e, "silent path"); }
   if (!SKILLS[settings.skill] && settings.skill !== "auto") settings.skill = "auto";
   settings.skill = "auto";
-  if (!["auto", "@cf/meta/llama-3.3-70b-instruct-fp8-fast", "@cf/meta/llama-4-scout-17b-16e-instruct", "@cf/meta/llama-3.2-3b-instruct", "openrouter/free", "meta-llama/llama-3.3-70b-instruct:free"].includes(settings.aiModel)) settings.aiModel = "auto";
+  // Cloudflare retired Llama 3.2 3B on 2026-11-20. Preserve an existing
+  // explicit choice by migrating it to Cloudflare’s recommended replacement.
+  if (settings.aiModel === "@cf/meta/llama-3.2-3b-instruct") settings.aiModel = "@cf/google/gemma-4-26b-a4b-it";
+  if (!["auto", "@cf/meta/llama-3.3-70b-instruct-fp8-fast", "@cf/meta/llama-4-scout-17b-16e-instruct", "@cf/google/gemma-4-26b-a4b-it", "openrouter/free", "meta-llama/llama-3.3-70b-instruct:free"].includes(settings.aiModel)) settings.aiModel = "auto";
   // Remove legacy browser-side provider credentials; all model keys now belong in Cloudflare Secrets.
   ["apiKey", "apiKeys", "openrouterKey", "openRouterKey", "provider", "baseUrl", "model"].forEach(k => { try { delete settings[k]; } catch(e){ noteError(e, "silent path"); } });
   try { localStorage.setItem("amigo2_settings", JSON.stringify(stripSecrets(settings))); } catch(e){ noteError(e, "silent path"); }

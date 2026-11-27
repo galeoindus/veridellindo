@@ -9,6 +9,30 @@ something was fixed.
 The build id on every page is `<version>-<commit>`, written by
 `npm run stamp:build`. If the two disagree, the page was hand-edited.
 
+## [6.10.67] — 27 November 2026
+
+### Fixed
+- Replaced the retired Workers AI `@cf/meta/llama-3.2-3b-instruct` selection with
+  Cloudflare’s recommended `@cf/google/gemma-4-26b-a4b-it` model across the
+  Pages API, Amigo selector and optional standalone Worker. Existing browser
+  settings that selected the retired model are migrated automatically.
+- Corrected the Amigo engine label so Gemma 4 is not displayed as Llama 3.3.
+- Added shared security and no-cache headers to Pages Function responses;
+  `_headers` alone does not cover Functions-generated responses.
+- Refined the rounded glass composer and suggestion panel across the main
+  search surface, themes and Amigo chat, including reduced-transparency fallbacks.
+- Corrected Workers AI comments so the included daily allocation is not
+  described as unlimited/free usage.
+- Made build stamping work from downloaded source archives without `.git` by
+  assigning a deterministic snapshot fingerprint while preserving real Git SHAs
+  in normal checkouts.
+
+### Verified
+- Added regression coverage for the Gemma model catalogue/routing, legacy
+  setting migration, Pages Function response headers and SSE preservation.
+- Full source review and final test/audit results are recorded in
+  `docs/REVIEW-2026-11-27.md`.
+
 ## [Unreleased]
 
 Nothing yet.

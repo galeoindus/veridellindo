@@ -83,7 +83,7 @@ async function runWorkersAI(env, messages, requestedModel, maxTokens, temperatur
   const allowedModels = new Set([
     DEFAULT_WORKERS_MODEL,
     VISION_WORKERS_MODEL,
-    "@cf/meta/llama-3.2-3b-instruct"
+    "@cf/google/gemma-4-26b-a4b-it"
   ]);
   let model = allowedModels.has(requestedModel) ? requestedModel : DEFAULT_WORKERS_MODEL;
   if (imageInput) model = VISION_WORKERS_MODEL;

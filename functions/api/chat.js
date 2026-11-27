@@ -9,7 +9,7 @@
  * moment the site is deployed, with no Worker to create and no key to paste.
  *
  * Providers, in order:
- *   1. Cloudflare Workers AI — free allocation, no key, the default.
+ *   1. Cloudflare Workers AI — no provider key required; daily included usage applies.
  *   2. OpenRouter `:free` models — only if OPENROUTER_API_KEY_* is set.
  *
  * Contract: POST { messages, model?, max_tokens?, temperature?, stream? }
@@ -20,7 +20,7 @@
  */
 
 const WORKERS_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
-const WORKERS_SMALL = '@cf/meta/llama-3.2-3b-instruct';
+const WORKERS_SMALL = '@cf/google/gemma-4-26b-a4b-it';
 const WORKERS_VISION = '@cf/meta/llama-4-scout-17b-16e-instruct';
 
 const WORKERS_MODELS = new Set([WORKERS_MODEL, WORKERS_SMALL, WORKERS_VISION]);
@@ -339,9 +339,9 @@ export async function onRequestPost({ request, env = {} }) {
   const model = String(body.model || '').slice(0, 120);
   const wantsStream = Boolean(body.stream);
 
-  /* Auto: Workers AI first, OpenRouter only if Workers AI is unavailable. That
-     order is deliberate — Workers AI is the free allocation this project
-     already pays for, and a key should be a fallback, not a requirement. */
+  /* Auto: Workers AI first, OpenRouter only if Workers AI is unavailable.
+     Workers AI needs no provider key, but its included daily allocation is
+     capped; usage beyond it can require a paid Workers plan. */
   /* The picker in the UI sends provider and model. They used to be ignored: a
      non-Workers model was quietly replaced by the default Workers model, so the
      label could show one thing and the answer come from another. The requested

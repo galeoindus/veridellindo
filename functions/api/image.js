@@ -1,8 +1,9 @@
 /**
  * Veridellindo — image generation on Workers AI.
  *
- * FLUX.1 schnell runs on the free allocation of the `AI` binding this Pages
- * project already has, so a picture costs nothing per image and needs no key.
+ * FLUX.1 schnell uses the `AI` binding this Pages project already has. No
+ * provider key is needed, but only the daily included Workers AI allocation
+ * is free; usage and plan limits still apply.
  *
  * What it refuses, and why: a request from another origin, a body that is not
  * JSON or is larger than a prompt could need, a prompt that is empty or too

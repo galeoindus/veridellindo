@@ -43,6 +43,8 @@ test('the endpoint reports what the deployment can do', async () => {
   assert.equal(body.workersAI, true);
   assert.equal(body.openRouter, false);
   assert.ok(Array.isArray(body.models) && body.models.length >= 3);
+  assert.ok(body.models.includes('@cf/google/gemma-4-26b-a4b-it'));
+  assert.ok(!body.models.includes('@cf/meta/llama-3.2-3b-instruct'));
 });
 
 test('a deployment without the binding says so instead of hanging', async () => {
@@ -111,4 +113,27 @@ test('a streamed turn arrives as SSE frames', async () => {
   assert.match(text, /"type":"delta"/);
   assert.match(text, /"type":"done"/);
   assert.match(text, /Hello/);
+});
+
+
+test('the Gemma 4 replacement can be selected explicitly', async () => {
+  const calls = [];
+  const env = {
+    AI: {
+      run: async (model, input) => {
+        calls.push({ model, input });
+        return { response: 'Gemma route works' };
+      },
+    },
+  };
+  const selected = '@cf/google/gemma-4-26b-a4b-it';
+  const res = await post({
+    messages: [{ role: 'user', content: 'hello' }],
+    model: selected,
+    provider: 'workers-ai',
+  }, env);
+  assert.equal(res.status, 200);
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].model, selected);
+  assert.equal((await res.json()).model, selected);
 });

@@ -223,3 +223,40 @@ body.amigo-chat .composer :focus-visible { outline-offset: 1px; }
 body.amigo-chat .dlbtn { background: linear-gradient(115deg,#ff963e,#dc398c 52%,#7939d3); box-shadow: 0 7px 18px -9px rgba(123,53,212,.55); }
 body.amigo-chat .bubble .tick.on { background: linear-gradient(135deg,#ff963e,#dc398c 52%,#7939d3); }
 body.amigo-chat .fgo, body.amigo-chat #setupBtn { background: linear-gradient(115deg,#ff963e,#dc398c 52%,#7939d3); color: #fff; }
+
+
+/* Composer finish: a stable, theme-aware glass surface shared with the main search. */
+body.amigo-chat .composer {
+  border-color: color-mix(in srgb, var(--amigo-line) 82%, transparent);
+  background: linear-gradient(145deg,
+    color-mix(in srgb, var(--amigo-panel) 94%, white 6%),
+    color-mix(in srgb, var(--amigo-page) 78%, transparent));
+  box-shadow: 0 18px 42px -26px rgba(70,42,108,.32),
+    inset 0 1px 0 rgba(255,255,255,.72);
+  -webkit-backdrop-filter: saturate(155%) blur(22px);
+  backdrop-filter: saturate(155%) blur(22px);
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+body.dark.amigo-chat .composer {
+  background: linear-gradient(145deg, rgba(36,27,51,.94), rgba(22,17,33,.96));
+  border-color: rgba(225,205,245,.16);
+  box-shadow: 0 18px 46px -22px rgba(0,0,0,.72),
+    inset 0 1px 0 rgba(255,255,255,.055);
+}
+body.amigo-chat .composer:focus-within {
+  border-color: color-mix(in srgb, var(--amigo-accent) 56%, var(--amigo-line));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amigo-accent) 13%, transparent),
+    0 20px 48px -24px rgba(70,42,108,.34), inset 0 1px 0 rgba(255,255,255,.7);
+}
+body.dark.amigo-chat .composer:focus-within {
+  box-shadow: 0 0 0 3px rgba(183,133,238,.14),
+    0 20px 48px -24px rgba(0,0,0,.78), inset 0 1px 0 rgba(255,255,255,.06);
+}
+body.amigo-chat .composer textarea { min-width: 0; caret-color: var(--amigo-accent); }
+body.amigo-chat .composer textarea::placeholder { opacity: .86; }
+body.amigo-chat .toolbtn { transition: background .16s ease, color .16s ease, transform .16s ease; }
+body.amigo-chat .toolbtn:focus-visible,
+body.amigo-chat #send:focus-visible { outline: 3px solid color-mix(in srgb, var(--amigo-accent) 60%, white); outline-offset: 3px; }
+@media (prefers-reduced-transparency: reduce) {
+  body.amigo-chat .composer { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--amigo-card); }
+}

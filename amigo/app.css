@@ -663,32 +663,8 @@ body.dark .msg.me .bubble{background:linear-gradient(140deg,rgba(72,76,140,.38),
   opacity: .72; font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .site-version .is-stale { color: #b45309; font-weight: 600; }
 
-/* ── the Amigo character, one pose per state ────────────────────────────────
-   Sizes follow the integration report: 128 px welcome (108 on a phone), 48 px
-   status (40), 64 px context (56), 30 px signature (26). The art is never
-   cropped, never given a coloured badge behind it, and never animated when the
-   reader has asked for less motion. */
-.amigo-mascot {
-  display: block; flex: none; object-fit: contain;
-  filter: drop-shadow(0 10px 22px rgba(23, 59, 50, .16));
-}
-.mascot-hero { width: 128px; height: 128px; margin: 0 auto; }
-.mascot-status { width: 48px; height: 48px; margin-right: 10px; vertical-align: middle; }
-.mascot-inline { width: 52px; height: 52px; }
-.mascot-context { width: 64px; height: 64px; }
-.mascot-success { width: 58px; height: 58px; }
-
-@media (max-width: 560px) {
-  .mascot-hero { width: 108px; height: 108px; }
-  .mascot-status { width: 40px; height: 40px; }
-  .mascot-inline { width: 44px; height: 44px; }
-  .mascot-context { width: 56px; height: 56px; }
-  .mascot-success { width: 50px; height: 50px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .amigo-mascot { animation: none !important; transition: none !important; }
-}
+/* The Amigo mascot artwork was removed on request; a replacement brings its own
+   sizing rules. The typing dots below are a progress indicator, not a mascot. */
 
 /* ── the faults a phone screenshot showed ───────────────────────────────────
    1. the welcome mascot was sliced across the top: the image carried

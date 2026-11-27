@@ -63,25 +63,8 @@ function dharmaHTML(){ return '<span class="typing-mascot" aria-label="Amigo is 
 const AMP = String.fromCharCode(38);
 const $ = s => document.querySelector(s);
 
-/* The Amigo character is a state indicator, not decoration: one pose per
- * interface state, and never the only signal of what is happening. */
-const AMIGO_POSE = {
-  wave: "/assets/img/amigo/amigo-wave.webp",
-  think: "/assets/img/amigo/amigo-think.webp",
-  insight: "/assets/img/amigo/amigo-insight.webp",
-  reading: "/assets/img/amigo/amigo-reading.webp",
-  celebrate: "/assets/img/amigo/amigo-celebrate.webp",
-  help: "/assets/img/amigo/amigo-help.webp"
-};
-function amigoPoseImg(state, cls){
-  const img = document.createElement("img");
-  img.src = AMIGO_POSE[state] || AMIGO_POSE.wave;
-  img.alt = "";
-  img.className = "amigo-mascot " + (cls || "");
-  img.width = 128; img.height = 128;
-  img.decoding = "async";
-  return img;
-}
+/* No mascot artwork is shown while a replacement is being drawn. The typing
+ * indicator stays: it reports progress, it is not a character. */
 
 
 /* A swallowed error is a bug nobody can see later. These are not fatal paths —
@@ -578,7 +561,6 @@ function addMsg(role, text, opts){
   wrap.className = "msg " + (role === "user" ? "me" : "ai");
   const bub = document.createElement("div"); bub.className = "bubble";
   if (opts && opts.typing){ bub.innerHTML = '<span class="typing">'
-    + '<img class="amigo-mascot mascot-status" src="' + AMIGO_POSE.think + '" alt="" width="48" height="48" decoding="async">'
     + dharmaHTML() + '<span class="sr-only">Amigo is thinking</span></span>'; }
   else if (opts && opts.raw){ bub.textContent = text || ""; bub.style.whiteSpace = "pre-wrap"; }
   else { bub.innerHTML = mdLite(text); }
@@ -1469,8 +1451,7 @@ async function send(){
       bub.innerHTML = '<span class="searching">' + dharmaHTML() + ' Researching live sources…</span>';
       sources = await runConnectors(text, deep);
       if (!sources) bub.innerHTML = '<span class="typing">'
-        + '<img class="amigo-mascot mascot-status" src="' + AMIGO_POSE.think + '" alt="" width="48" height="48" decoding="async">'
-        + dharmaHTML() + '<span class="sr-only">Amigo is responding</span></span>';
+            + dharmaHTML() + '<span class="sr-only">Amigo is responding</span></span>';
     }
   } catch(e){ sources = null; }
   const sys = (await buildSystemPrompt()) + researchBlock(sources);

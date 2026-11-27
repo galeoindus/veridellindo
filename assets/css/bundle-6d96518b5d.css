@@ -2573,13 +2573,13 @@ body.amigo-chat .composer:focus-within,
   border: 0 !important;
   border-bottom: 0 !important;
   background: transparent !important;
-  box-shadow: none !important;
-  outline: none !important;
-  border-radius: 0 !important;
+  box-shadow: none;
+  outline: none;
+  border-radius: 0;
 }
 .searchbar:focus-within,
 .composer:focus-within {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--border-2)) !important;
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border-2));
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 .searchbar:focus-within textarea,

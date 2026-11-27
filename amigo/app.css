@@ -679,8 +679,42 @@ body.dark .msg.me .bubble{background:linear-gradient(140deg,rgba(72,76,140,.38),
   background: none; border: 0; box-shadow: none;
   overflow: visible;
 }
+/* ── the loops ──────────────────────────────────────────────────────────────
+   Frames stack in one box and hand over to each other, the way a reel advances a
+   scene: each pose is visible for its share of the cycle, then fades to the next.
+   No video, no GIF — the same transparent PNGs, played by the compositor, so it
+   costs nothing on a slow connection and stops dead for a reader who asked for
+   reduced motion. */
+.mascot-loop {
+  position: relative;
+  display: inline-block;
+  width: var(--msize, 48px);
+  height: var(--msize, 48px);
+  flex: none;
+  vertical-align: middle;
+}
+.mascot-loop .amigo-mascot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  animation: mascotFrame calc(var(--n, 3) * 1.25s) linear infinite;
+  animation-delay: calc(var(--i, 0) * -1 * (var(--n, 3) * 1.25s) / var(--n, 3));
+  will-change: opacity;
+}
+@keyframes mascotFrame {
+  0%, 28% { opacity: 1; }
+  33.4%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot-loop .amigo-mascot { animation: none; }
+  .mascot-loop .amigo-mascot:first-child { opacity: 1; }
+}
+
 .mascot-hero { width: 148px; height: 148px; margin: 0 auto 6px; }
-.mascot-status { width: 40px; height: 40px; margin-right: 8px; }
+.mascot-status { width: 40px; height: 40px; margin-right: 8px; --msize: 40px; }
 .searching .amigo-mascot { display: inline-block; vertical-align: middle; margin-right: 6px; }
 @media (max-width: 560px) {
   .mascot-hero { width: 118px; height: 118px; }

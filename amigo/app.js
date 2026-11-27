@@ -67,23 +67,71 @@ const $ = s => document.querySelector(s);
  * Every pose is a transparent PNG, so the figure sits on the page rather than in
  * a white box, and the state it shows is the state the app is actually in. */
 const AMIGO_POSE = {
-  wave:      "/assets/img/amigo/amigo-wave.png",
-  think:     "/assets/img/amigo/amigo-think.png",
-  research:  "/assets/img/amigo/amigo-research.png",
-  reading:   "/assets/img/amigo/amigo-reading.png",
   celebrate: "/assets/img/amigo/amigo-celebrate.png",
-  insight:   "/assets/img/amigo/amigo-insight.png",
-  idea:      "/assets/img/amigo/amigo-idea.png",
-  curious:   "/assets/img/amigo/amigo-curious.png",
-  sad:       "/assets/img/amigo/amigo-sad.png",
-  goodjob:   "/assets/img/amigo/amigo-goodjob.png",
-  sleep:     "/assets/img/amigo/amigo-sleep.png",
-  love:      "/assets/img/amigo/amigo-love.png"
+  cheer: "/assets/img/amigo/amigo-cheer.png",
+  create: "/assets/img/amigo/amigo-create.png",
+  curious: "/assets/img/amigo/amigo-curious.png",
+  goodjob: "/assets/img/amigo/amigo-goodjob.png",
+  idea: "/assets/img/amigo/amigo-idea.png",
+  insight: "/assets/img/amigo/amigo-insight.png",
+  love: "/assets/img/amigo/amigo-love.png",
+  mail: "/assets/img/amigo/amigo-mail.png",
+  meditate: "/assets/img/amigo/amigo-meditate.png",
+  party: "/assets/img/amigo/amigo-party.png",
+  peek: "/assets/img/amigo/amigo-peek.png",
+  reading: "/assets/img/amigo/amigo-reading.png",
+  relax: "/assets/img/amigo/amigo-relax.png",
+  research: "/assets/img/amigo/amigo-research.png",
+  run: "/assets/img/amigo/amigo-run.png",
+  sad: "/assets/img/amigo/amigo-sad.png",
+  shy: "/assets/img/amigo/amigo-shy.png",
+  sleep: "/assets/img/amigo/amigo-sleep.png",
+  tea: "/assets/img/amigo/amigo-tea.png",
+  think: "/assets/img/amigo/amigo-think.png",
+  wave: "/assets/img/amigo/amigo-wave.png",
+  work: "/assets/img/amigo/amigo-work.png",
+  write: "/assets/img/amigo/amigo-write.png"
 };
+/* Loops, not stills.
+ *
+ * A single pose reads as a sticker. Three poses that hand over to each other
+ * read as behaviour — the way a film reel advances a scene, one frame replacing
+ * the last. Each loop is a short cycle of related poses, cross-faded in CSS, so
+ * it needs no video, no GIF and no extra format: the same PNGs, played.
+ *
+ * The loops are named for what the character is doing, not for the artwork:
+ *   idle      greeting, pleased, settling      (welcome, between turns)
+ *   thinking  considering, puzzled, struck      (waiting for a reply)
+ *   working   searching, at the desk, writing   (live research)
+ *   celebrate happy, party, approval            (a finished answer)
+ *   rest      asleep, tea, quiet                (idle for a long time)
+ */
+const AMIGO_LOOPS = {
+  idle: ["wave", "cheer", "relax"],
+  thinking: ["think", "curious", "idea"],
+  working: ["research", "work", "write"],
+  celebrate: ["celebrate", "party", "goodjob"],
+  rest: ["sleep", "tea", "meditate"]
+};
+
 function mascotHTML(state, cls, size){
   const src = AMIGO_POSE[state] || AMIGO_POSE.wave;
   const px = size || 48;
   return '<img class="amigo-mascot ' + (cls || "") + '" src="' + src + '" alt="" width="' + px + '" height="' + px + '" loading="lazy" decoding="async">';
+}
+
+/** A looping pose cycle. The first frame is the still shown when the reader has
+ *  asked for reduced motion. */
+function mascotLoopHTML(loopName, cls, size){
+  const frames = AMIGO_LOOPS[loopName] || AMIGO_LOOPS.idle;
+  const px = size || 48;
+  const imgs = frames.map((pose, i) => {
+    const src = AMIGO_POSE[pose] || AMIGO_POSE.wave;
+    return '<img class="amigo-mascot" src="' + src + '" alt="" width="' + px + '" height="' + px
+      + '" style="--i:' + i + '" loading="lazy" decoding="async">';
+  }).join("");
+  return '<span class="mascot-loop ' + (cls || "") + '" style="--n:' + frames.length + ';--msize:' + px + 'px" role="img" aria-label="Amigo">'
+    + imgs + "</span>";
 }
 
 
@@ -851,7 +899,7 @@ function fmt(n){
 function showHero(){
   const d = document.createElement("div"); d.className = "hero";
   d.innerHTML =
-    '<div class="hero-mascot">' + mascotHTML("wave", "mascot-hero", 148) + "</div>" +
+    '<div class="hero-mascot">' + mascotLoopHTML("idle", "mascot-hero", 148) + "</div>" +
     '<h2><span class="g">A little help, a lot of clarity.</span></h2>' +
     "<p>Your thoughtful AI companion for writing, research, ideas and everyday work.</p>" +
     (workerBase() ? '' : '<div class="worker-note">Using this site\'s own endpoint. <button type="button" data-open-settings="1">Open settings</button></div>') +
@@ -1469,7 +1517,7 @@ async function send(){
   try {
     const deep = !!settings.deepSearch;
     if (deep || wantsWeather(text) || wantsGithub(text) || wantsTrends(text) || wantsLive(text) || settings.liveMode || /https?:\/\//.test(text)){
-      bub.innerHTML = '<span class="searching">' + mascotHTML("research", "mascot-status", 32) + dharmaHTML() + ' Researching live sources…</span>';
+      bub.innerHTML = '<span class="searching">' + mascotLoopHTML("working", "mascot-status", 32) + dharmaHTML() + ' Researching live sources…</span>';
       sources = await runConnectors(text, deep);
       if (!sources) bub.innerHTML = '<span class="typing">'
             + mascotHTML("think", "mascot-status", 40) + dharmaHTML()

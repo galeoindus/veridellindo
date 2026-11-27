@@ -5599,7 +5599,7 @@ section.dash-hero,
 .dash-hero-ask::before,
 .dash-hero-ask::after {
   content: none !important;
-  display: none !important;
+  display: none;
 }
 
 /* ── the phone's "More" sheet ──────────────────────────────────────────────
@@ -5890,13 +5890,13 @@ section.dash-hero,
    screenshot. Both are removed here, in the layer that wins. */
 body.amigo-chat .composer,
 .composer.composer {
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  background: transparent !important;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
 }
 body.amigo-chat .composer textarea,
 .composer textarea {
-  outline: 0 !important;
+  outline: 0;
   box-shadow: none !important;
 }
 
@@ -5986,13 +5986,13 @@ body.amigo-chat .composer:focus-within,
 .searchbar:focus-within,
 .composer:focus-within {
   border-color: color-mix(in srgb, var(--accent) 55%, var(--border-2)) !important;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 .searchbar:focus-within textarea,
 .searchbar:focus-within input,
 .composer:focus-within textarea {
-  box-shadow: none !important;
-  outline: none !important;
+  box-shadow: none;
+  outline: none;
 }
 
 /* icons on one axis */
@@ -6022,7 +6022,7 @@ body.amigo-chat .composer:focus-within,
 .dash-hero-ask:focus-within,
 .ask-panel,
 .hero-search {
-  background: transparent !important;
+  background: transparent;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -6172,15 +6172,15 @@ body:not(.amigo-chat) .composer,
   margin-top: 8px !important;
   align-items: center !important;
   min-width: 0 !important;
-  max-width: 100% !important;
+  max-width: 100%;
 }
 
 /* the circle: one size everywhere, and a box that centres its contents */
 .searchbar button[type="submit"],
 .composer .searchbar button[type="submit"] {
-  position: relative !important;
-  overflow: hidden !important;
-  display: inline-flex !important;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
   align-items: center !important;
   justify-content: center !important;
   width: 44px !important;
@@ -6189,10 +6189,10 @@ body:not(.amigo-chat) .composer,
   min-height: 44px !important;
   max-width: 44px !important;
   padding: 0 !important;
-  margin: 0 0 0 auto !important;
-  line-height: 1 !important;
-  border-radius: 999px !important;
-  flex: 0 0 auto !important;
+  margin: 0 0 0 auto;
+  line-height: 1;
+  border-radius: 999px;
+  flex: 0 0 auto;
 }
 
 /* the arrow is drawn, not typed: a glyph in a font sits on its baseline, which

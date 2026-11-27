@@ -17,6 +17,16 @@ wrangler.jsonc     binding, allowed origins, site origin
 package.json       wrangler, nothing else
 ```
 
+## How this relates to the Pages Function
+
+The maintained path is `functions/api/chat.js`. This Worker is a **reduced**
+implementation of the same contract: it answers chat, vision and image requests
+on Workers AI with the same model ids (Gemma 4, Llama 3.3 70B, Llama 4 Scout,
+FLUX.1 schnell), but it does not carry the Function's request-size guards, its
+model allowlist validation, its OpenRouter key rotation across twelve slots, or
+its structured error codes. If you deploy this Worker, expect those differences —
+or point the page at `/api/chat` instead, which needs no deployment at all.
+
 ## What it serves
 
 | Route | What it does |

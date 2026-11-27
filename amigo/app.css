@@ -663,8 +663,32 @@ body.dark .msg.me .bubble{background:linear-gradient(140deg,rgba(72,76,140,.38),
   opacity: .72; font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .site-version .is-stale { color: #b45309; font-weight: 600; }
 
-/* The Amigo mascot artwork was removed on request; a replacement brings its own
-   sizing rules. The typing dots below are a progress indicator, not a mascot. */
+/* ── the Amigo character ────────────────────────────────────────────────────
+   Transparent PNGs, one per state. The hero pose is the welcome, the small one
+   sits beside the typing dots, and neither is ever given a coloured plate
+   behind it — the figure is the thing, not a badge. */
+.amigo-mascot {
+  display: block; flex: none; object-fit: contain; background: none;
+  filter: drop-shadow(0 10px 22px rgba(23, 59, 50, .18));
+}
+/* The welcome figure sits on the page itself: no plate, no rings, no crop. The
+   old .hstar box was built for a 48 px logo and clipped anything larger. */
+.hero-mascot {
+  display: grid; place-items: center;
+  margin: 0 auto 14px;
+  background: none; border: 0; box-shadow: none;
+  overflow: visible;
+}
+.mascot-hero { width: 148px; height: 148px; margin: 0 auto 6px; }
+.mascot-status { width: 40px; height: 40px; margin-right: 8px; }
+.searching .amigo-mascot { display: inline-block; vertical-align: middle; margin-right: 6px; }
+@media (max-width: 560px) {
+  .mascot-hero { width: 118px; height: 118px; }
+  .mascot-status { width: 34px; height: 34px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amigo-mascot { animation: none !important; transition: none !important; }
+}
 
 /* ── the faults a phone screenshot showed ───────────────────────────────────
    1. the welcome mascot was sliced across the top: the image carried

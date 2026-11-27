@@ -63,8 +63,28 @@ function dharmaHTML(){ return '<span class="typing-mascot" aria-label="Amigo is 
 const AMP = String.fromCharCode(38);
 const $ = s => document.querySelector(s);
 
-/* No mascot artwork is shown while a replacement is being drawn. The typing
- * indicator stays: it reports progress, it is not a character. */
+/* The Amigo character: one pose per state, drawn from the sheet supplied.
+ * Every pose is a transparent PNG, so the figure sits on the page rather than in
+ * a white box, and the state it shows is the state the app is actually in. */
+const AMIGO_POSE = {
+  wave:      "/assets/img/amigo/amigo-wave.png",
+  think:     "/assets/img/amigo/amigo-think.png",
+  research:  "/assets/img/amigo/amigo-research.png",
+  reading:   "/assets/img/amigo/amigo-reading.png",
+  celebrate: "/assets/img/amigo/amigo-celebrate.png",
+  insight:   "/assets/img/amigo/amigo-insight.png",
+  idea:      "/assets/img/amigo/amigo-idea.png",
+  curious:   "/assets/img/amigo/amigo-curious.png",
+  sad:       "/assets/img/amigo/amigo-sad.png",
+  goodjob:   "/assets/img/amigo/amigo-goodjob.png",
+  sleep:     "/assets/img/amigo/amigo-sleep.png",
+  love:      "/assets/img/amigo/amigo-love.png"
+};
+function mascotHTML(state, cls, size){
+  const src = AMIGO_POSE[state] || AMIGO_POSE.wave;
+  const px = size || 48;
+  return '<img class="amigo-mascot ' + (cls || "") + '" src="' + src + '" alt="" width="' + px + '" height="' + px + '" loading="lazy" decoding="async">';
+}
 
 
 /* A swallowed error is a bug nobody can see later. These are not fatal paths —
@@ -561,7 +581,8 @@ function addMsg(role, text, opts){
   wrap.className = "msg " + (role === "user" ? "me" : "ai");
   const bub = document.createElement("div"); bub.className = "bubble";
   if (opts && opts.typing){ bub.innerHTML = '<span class="typing">'
-    + dharmaHTML() + '<span class="sr-only">Amigo is thinking</span></span>'; }
+    + mascotHTML("think", "mascot-status", 40) + dharmaHTML()
+    + '<span class="sr-only">Amigo is thinking</span></span>'; }
   else if (opts && opts.raw){ bub.textContent = text || ""; bub.style.whiteSpace = "pre-wrap"; }
   else { bub.innerHTML = mdLite(text); }
   if (opts && opts.attachments && opts.attachments.length) addMsgAtt(bub, opts.attachments);
@@ -830,7 +851,7 @@ function fmt(n){
 function showHero(){
   const d = document.createElement("div"); d.className = "hero";
   d.innerHTML =
-    '<div class="hstar">' + heroMarkHTML() + "</div>" +
+    '<div class="hero-mascot">' + mascotHTML("wave", "mascot-hero", 148) + "</div>" +
     '<h2><span class="g">A little help, a lot of clarity.</span></h2>' +
     "<p>Your thoughtful AI companion for writing, research, ideas and everyday work.</p>" +
     (workerBase() ? '' : '<div class="worker-note">Using this site\'s own endpoint. <button type="button" data-open-settings="1">Open settings</button></div>') +
@@ -1448,10 +1469,11 @@ async function send(){
   try {
     const deep = !!settings.deepSearch;
     if (deep || wantsWeather(text) || wantsGithub(text) || wantsTrends(text) || wantsLive(text) || settings.liveMode || /https?:\/\//.test(text)){
-      bub.innerHTML = '<span class="searching">' + dharmaHTML() + ' Researching live sources…</span>';
+      bub.innerHTML = '<span class="searching">' + mascotHTML("research", "mascot-status", 32) + dharmaHTML() + ' Researching live sources…</span>';
       sources = await runConnectors(text, deep);
       if (!sources) bub.innerHTML = '<span class="typing">'
-            + dharmaHTML() + '<span class="sr-only">Amigo is responding</span></span>';
+            + mascotHTML("think", "mascot-status", 40) + dharmaHTML()
+            + '<span class="sr-only">Amigo is responding</span></span>';
     }
   } catch(e){ sources = null; }
   const sys = (await buildSystemPrompt()) + researchBlock(sources);

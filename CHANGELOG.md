@@ -13,6 +13,21 @@ The build id on every page is `<version>-<commit>`, written by
 
 Nothing yet.
 
+## [6.10.65] — 27 November 2026
+
+### Security
+- **`ci` declares its token scope.** The workflow had no `permissions` block, so
+  it ran with whatever the repository default grants. It now asks for
+  `contents: read` — all it has ever needed, since it only checks out and tests.
+- **`ci` and `deploy` jobs now have a wall clock.** `verify` stops at 20 minutes,
+  `browser` at 30 and the manual `deploy` job at 15. A hung browser install or a
+  stalled `pages deploy` used to hold a runner for up to six hours.
+
+### Verified
+- All five workflows now carry an explicit least-privilege `permissions` block
+  and a per-job timeout; each file was parsed as YAML after the edit.
+- `npm run verify` passes (234 tests) on the stamped tree.
+
 ## [6.10.57] — 25 November 2026
 
 ### Changed

@@ -15,10 +15,12 @@ one checked set of pages. The reading model — a question in, a sourced answer
 out — is unchanged, because it was the right one. What changed is everything
 around it.
 
-**One name, everywhere.** The product, the package, the Pages project, the
-manifest, the storage keys, the meta tags and the canonical host are all
-`veridell`. The repository is `galeoindus/veridellindo` and nothing in the shipped
-tree names another one.
+**One name, everywhere.** The product, the Pages project, the manifest, the meta
+tags and the canonical host are all `veridellindo` — the Pages project name in
+`wrangler.toml`, the host `https://veridellindo.pages.dev` and the repository
+`galeoindus/veridellindo` included. The one deliberate exception is the npm
+package name, `veridell`, which `test/identity.test.mjs` pins so that renaming it
+is a decision rather than a drift.
 
 **A unified mark.** The supplied Veridellindo lotus-and-gradient logo now appears
 throughout the site and Amigo, including browser/app icons and the social card.
@@ -227,7 +229,7 @@ section scrolls to it and opens it; the panel closes itself.
 ## Project layout
 
 ```
-veridell/
+veridellindo/
 ├── index.html                 the app shell (one document, hash-routed)
 ├── 404.html                   Cloudflare Pages not-found page
 ├── topics/                    crawlable index pages (static, no JS needed)
@@ -319,10 +321,12 @@ section and old ones are never rewritten.
 There is nothing to build. Serve the folder over HTTP:
 
 ```bash
-npx serve .          # or: python3 -m http.server 4173
+npm start            # python3 -m http.server 4173
+npm run dev          # the same site through wrangler pages dev, with functions/
 ```
 
-Then open <http://localhost:4173/>.
+Then open <http://localhost:4173/>. (`npx serve .` also works, but it picks its
+own port — usually 3000 — so read the URL it prints.)
 
 > Open it over `http://localhost`, not `file://` — ES modules and the Wikimedia APIs need a real origin.
 
@@ -345,8 +349,8 @@ project when the account has none, stamps the build and uploads. By hand it is
 two commands, and the first one is the one people forget:
 
 ```bash
-npx wrangler pages project create veridell --production-branch=main
-npx wrangler pages deploy . --project-name=veridell
+npx wrangler pages project create veridellindo --production-branch=main
+npx wrangler pages deploy . --project-name=veridellindo
 ```
 
 **A fresh Cloudflare account has no Pages projects.** A project belongs to the

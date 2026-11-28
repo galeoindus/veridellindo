@@ -26,6 +26,10 @@ npm-debug.log*
 # Local Pages Functions secrets
 .dev.vars*
 !.dev.vars.example
+
+# A filled-in copy of cloudflare.env.example — pasted into the dashboard, never committed
+*.env
+!*.env.example
 .gradle/
 **/build/
 local.properties

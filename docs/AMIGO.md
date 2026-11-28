@@ -12,10 +12,6 @@ No Worker URL, no key in the browser.
 2. `amigo/app.js` calls `/api/chat`. `functions/api/chat.js` runs Workers AI
    first and falls back to OpenRouter free models only when a key exists.
 3. `/api/image` draws pictures with FLUX.1 schnell.
-4. `/api/answer` is a separate, narrower Function: it sends one article's own
-   section headings and sentences so the model can order them for the question.
-   It never writes a sentence — a reply that is not a permutation of the
-   section's own indexes is dropped and the page keeps its own ranking.
 
 ## Appearance
 

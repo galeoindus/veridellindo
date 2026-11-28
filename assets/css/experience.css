@@ -1,0 +1,156 @@
+/* Veridellindo 6.11 — Veri companion + wider, responsive article reading. */
+
+/* The welcome companion on the knowledge home page. */
+.veri-home-welcome {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(150px, 216px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(14px, 2.8vw, 32px);
+  width: min(100%, 1120px);
+  margin: 0 auto clamp(22px, 3.2vw, 36px);
+  padding: clamp(15px, 2.5vw, 28px);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, #20b99a 24%, var(--border, #d7e9e3));
+  border-radius: clamp(20px, 2.4vw, 30px);
+  background:
+    radial-gradient(circle at 14% 24%, rgba(104, 236, 190, .18), transparent 35%),
+    linear-gradient(112deg, color-mix(in srgb, #e0fff2 78%, var(--surface, #fff)), var(--surface, #fff) 62%);
+  box-shadow: 0 16px 44px rgba(18, 112, 91, .08), inset 0 1px 0 rgba(255,255,255,.74);
+}
+[data-theme="dark"] .veri-home-welcome,
+body.dark .veri-home-welcome {
+  border-color: rgba(88, 224, 185, .2);
+  background:
+    radial-gradient(circle at 14% 24%, rgba(27, 196, 154, .18), transparent 36%),
+    linear-gradient(112deg, rgba(13, 67, 59, .52), color-mix(in srgb, var(--surface-2, #151d1a) 88%, #0d3932));
+  box-shadow: 0 18px 46px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.045);
+}
+.veri-home-art { position: relative; display: grid; place-items: center; min-width: 0; }
+.veri-home-art::before {
+  content: ""; position: absolute; inset: 14%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(65, 224, 178, .22), rgba(65, 224, 178, 0) 70%);
+  filter: blur(10px); z-index: -1;
+}
+.veri-home-art-image {
+  display: block; width: min(100%, 210px); height: auto; object-fit: contain;
+  filter: drop-shadow(0 14px 18px rgba(14, 126, 104, .17));
+  transform-origin: 50% 76%; animation: veriFloat 5.6s ease-in-out infinite;
+}
+.veri-home-copy { min-width: 0; text-align: left; }
+.veri-home-label, .veri-chat-label {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: #168b70; font-size: .68rem; font-weight: 800; letter-spacing: .12em;
+}
+[data-theme="dark"] .veri-home-label,
+body.dark .veri-home-label { color: #7de3c1; }
+.veri-home-copy h2 {
+  margin: 8px 0 8px; color: var(--text, var(--ink, #18342d));
+  font-size: clamp(1.35rem, 2.8vw, 2.15rem); line-height: 1.12; letter-spacing: -.045em;
+}
+.veri-home-speech { max-width: 52ch; margin: 0; color: var(--muted, #62736b); font-size: clamp(.94rem, 1.35vw, 1.08rem); line-height: 1.68; }
+.veri-home-footnote { display: inline-block; margin-top: 14px; color: var(--muted, #62736b); font-size: .76rem; font-weight: 650; }
+
+/* Amigo's first visit and zero-history state. */
+body.amigo-chat .veri-chat-welcome {
+  display: grid; grid-template-columns: minmax(190px, 285px) minmax(0, 1fr);
+  align-items: center; gap: clamp(18px, 3.4vw, 40px);
+  width: min(100%, 780px); margin: 0 auto 26px; padding: clamp(16px, 2.7vw, 30px);
+  text-align: left; border: 1px solid rgba(45, 183, 145, .22); border-radius: 30px;
+  background: radial-gradient(circle at 16% 30%, rgba(95, 226, 174, .17), transparent 36%),
+    linear-gradient(120deg, rgba(233, 255, 244, .93), rgba(255,255,255,.78));
+  box-shadow: 0 20px 52px rgba(32, 132, 105, .1), inset 0 1px 0 rgba(255,255,255,.82);
+}
+body.dark.amigo-chat .veri-chat-welcome {
+  border-color: rgba(92, 221, 181, .18);
+  background: radial-gradient(circle at 16% 30%, rgba(24, 167, 132, .16), transparent 38%),
+    linear-gradient(120deg, rgba(17, 62, 54, .65), rgba(24, 26, 37, .88));
+  box-shadow: 0 22px 54px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.veri-chat-art { position: relative; display: grid; place-items: center; min-width: 0; margin: 0; }
+.veri-chat-art::before { content: ""; position: absolute; inset: 13%; border-radius: 50%; background: radial-gradient(circle, rgba(48, 222, 170, .24), transparent 70%); filter: blur(12px); }
+.veri-chat-art img { position: relative; display: block; width: min(100%, 270px); height: auto; object-fit: contain; filter: drop-shadow(0 16px 22px rgba(8, 117, 93, .2)); animation: veriFloat 5.3s ease-in-out infinite; }
+.veri-chat-copy { min-width: 0; }
+body.amigo-chat .veri-chat-copy h2 { margin: 9px 0 10px; color: #155d4d; font-size: clamp(1.8rem, 4vw, 2.55rem); line-height: 1.06; font-weight: 820; letter-spacing: -.055em; }
+body.dark.amigo-chat .veri-chat-copy h2 { color: #dbfff0; }
+body.amigo-chat .veri-chat-copy p { max-width: 42ch; margin: 0; color: #547168; font-size: clamp(.94rem, 1.5vw, 1.05rem); line-height: 1.7; }
+body.dark.amigo-chat .veri-chat-copy p { color: #b3ccc2; }
+.veri-chat-note { display: inline-block; margin-top: 16px; color: #168b70; font-size: .75rem; font-weight: 750; }
+body.dark.amigo-chat .veri-chat-note { color: #7de3c1; }
+
+/* The same character accompanies every AI message; its pose reflects the turn. */
+body.amigo-chat .msg.ai .veri-who { width: 44px; height: 48px; margin-top: 5px; overflow: visible; display: grid; place-items: center; flex: 0 0 44px; }
+body.amigo-chat .msg.ai .bubble { flex: 1 1 0; min-width: 0; }
+body.amigo-chat .veri-chat-avatar { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 0; filter: drop-shadow(0 4px 8px rgba(23, 153, 119, .16)); transition: transform .22s ease, filter .22s ease; }
+body.amigo-chat .veri-chat-avatar[data-mood="think"] { animation: veriThink 1.35s ease-in-out infinite; }
+body.amigo-chat .veri-chat-avatar[data-mood="explain"] { animation: veriExplain 1.25s ease-in-out infinite; }
+body.amigo-chat .veri-chat-avatar[data-mood="celebrate"],
+body.amigo-chat .veri-chat-avatar[data-mood="joy"] { animation: veriCelebrate .72s cubic-bezier(.2,.8,.25,1) 2; }
+body.amigo-chat .veri-chat-avatar[data-mood="listen"] { filter: drop-shadow(0 4px 8px rgba(219, 151, 51, .16)); }
+body.amigo-chat .amigo-signature { gap: 7px; }
+body.amigo-chat .amigo-signature img { width: 34px; height: 38px; object-fit: contain; border-radius: 0; filter: drop-shadow(0 3px 7px rgba(23,153,119,.16)); }
+body.amigo-chat .amigo-signature .amigo-name { color: #18866d; }
+body.dark.amigo-chat .amigo-signature .amigo-name { color: #86ddc1; }
+
+@keyframes veriFloat { 0%,100% { transform: translateY(0) rotate(-1.2deg); } 50% { transform: translateY(-8px) rotate(1.2deg); } }
+@keyframes veriThink { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-4px) rotate(2deg); } }
+@keyframes veriExplain { 0%,100% { transform: translateY(0) rotate(-1deg) scale(1); } 50% { transform: translateY(-2px) rotate(1deg) scale(1.035); } }
+@keyframes veriCelebrate { 0%,100% { transform: translateY(0) scale(1) rotate(0); } 45% { transform: translateY(-5px) scale(1.08) rotate(-3deg); } }
+
+/* Article pages: widen the reading shell and facts panel without creating
+   excessively long desktop lines or horizontal scrolling on phones. */
+.article-grid, #main .article-grid {
+  --toc-w: 292px; --rail-gap: clamp(24px, 2.3vw, 38px);
+  width: 100%; max-width: none;
+}
+.article-grid > .panel, .article-grid > .panel.panel-wide, .panel.panel-wide {
+  max-width: min(100%, 860px); margin-inline: auto;
+}
+.article-grid > .panel.panel-wide > *, .panel.panel-wide > .art-body {
+  max-width: 82ch; margin-inline: auto;
+}
+.article-grid > .toc-rail { min-width: 0; }
+.art-body { font-size: clamp(15.5px, .95vw, 17px); line-height: 1.76; }
+@media (min-width: 1600px) {
+  .article-grid, #main .article-grid { --toc-w: 304px; --rail-gap: 40px; }
+  .article-grid > .panel, .article-grid > .panel.panel-wide, .panel.panel-wide { max-width: min(100%, 880px); }
+}
+@media (max-width: 1100px) {
+  .article-grid, #main .article-grid { grid-template-columns: minmax(0, 1fr); }
+  .article-grid > .panel, .article-grid > .panel.panel-wide, .panel.panel-wide { max-width: 100%; }
+}
+@media (max-width: 760px) {
+  .veri-home-welcome { grid-template-columns: 112px minmax(0,1fr); gap: 12px; padding: 14px; margin-bottom: 22px; border-radius: 20px; }
+  .veri-home-art-image { width: min(100%, 112px); }
+  .veri-home-label { font-size: .56rem; letter-spacing: .08em; }
+  .veri-home-copy h2 { font-size: clamp(1.15rem, 5vw, 1.55rem); margin: 6px 0; }
+  .veri-home-speech { font-size: .86rem; line-height: 1.5; }
+  .veri-home-footnote { margin-top: 8px; font-size: .68rem; }
+  body.amigo-chat .veri-chat-welcome { grid-template-columns: 142px minmax(0,1fr); gap: 14px; padding: 16px; border-radius: 22px; margin-bottom: 20px; }
+  body.amigo-chat .veri-chat-art img { width: min(100%, 142px); }
+  body.amigo-chat .veri-chat-copy h2 { font-size: clamp(1.55rem, 6vw, 2rem); }
+  body.amigo-chat .veri-chat-copy p { font-size: .88rem; line-height: 1.5; }
+  body.amigo-chat .veri-chat-note { margin-top: 9px; font-size: .68rem; }
+  body.amigo-chat .msg.ai .veri-who { width: 36px; height: 40px; flex-basis: 36px; margin-top: 4px; }
+}
+@media (max-width: 420px) {
+  .veri-home-welcome { grid-template-columns: 88px minmax(0,1fr); gap: 9px; padding: 12px; }
+  .veri-home-art-image { width: 88px; }
+  .veri-home-label { font-size: .5rem; }
+  .veri-home-copy h2 { font-size: 1.12rem; }
+  .veri-home-speech { font-size: .8rem; }
+  .veri-home-footnote { font-size: .62rem; }
+  body.amigo-chat .veri-chat-welcome { grid-template-columns: 104px minmax(0,1fr); gap: 10px; padding: 12px; }
+  body.amigo-chat .veri-chat-art img { width: 104px; }
+  body.amigo-chat .veri-chat-label { font-size: .54rem; letter-spacing: .08em; }
+  body.amigo-chat .veri-chat-copy h2 { font-size: 1.45rem; }
+  body.amigo-chat .veri-chat-copy p { font-size: .82rem; }
+  body.amigo-chat .veri-chat-note { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .veri-home-art-image, .veri-chat-art img, body.amigo-chat .veri-chat-avatar { animation: none !important; transition: none !important; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .veri-home-welcome, body.amigo-chat .veri-chat-welcome { backdrop-filter: none; -webkit-backdrop-filter: none; }
+}

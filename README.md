@@ -6,6 +6,16 @@ Veridellindo is a Wikimedia knowledge research and discovery platform. Ask a que
 
 It is a **static single-page application** — plain HTML, CSS and ES modules with no frontend bundler — plus Cloudflare Pages Functions for Amigo chat and image generation. Amigo gathers optional live research sources in the browser before sending the conversation to the model endpoint. Cloudflare Pages runs a small Node build step to stamp each deployment and bundle the stylesheets. Search, article and Wikidata data are fetched live in the reader's browser from the public Wikimedia APIs, which need no key. The AI endpoint's OpenRouter credentials are Cloudflare encrypted Secrets and never reach the browser.
 
+### 6.11.0 — Veri arrives
+
+The home page and Amigo now greet readers with **Veri**, a leafy botanical
+companion with nine optimized pose assets. Veri accompanies assistant messages
+and changes expression as Amigo thinks, responds, finishes, stops or encounters
+an error. Article reading panels are slightly wider on desktop and remain
+responsive on phones; the brand logo and the existing Wikipedia-style article
+and Q&A structures are preserved. See
+[`docs/DEEP-AUDIT-6.11.0.md`](docs/DEEP-AUDIT-6.11.0.md) for the full audit.
+
 ---
 
 ## What this release changes
@@ -15,12 +25,10 @@ one checked set of pages. The reading model — a question in, a sourced answer
 out — is unchanged, because it was the right one. What changed is everything
 around it.
 
-**One name, everywhere.** The product, the Pages project, the manifest, the meta
-tags and the canonical host are all `veridellindo` — the Pages project name in
-`wrangler.toml`, the host `https://veridellindo.pages.dev` and the repository
-`galeoindus/veridellindo` included. The one deliberate exception is the npm
-package name, `veridell`, which `test/identity.test.mjs` pins so that renaming it
-is a decision rather than a drift.
+**One name, everywhere.** The product, the package, the Pages project, the
+manifest, the storage keys, the meta tags and the canonical host are all
+`veridell`. The repository is `galeoindus/veridellindo` and nothing in the shipped
+tree names another one.
 
 **A unified mark.** The supplied Veridellindo lotus-and-gradient logo now appears
 throughout the site and Amigo, including browser/app icons and the social card.
@@ -229,7 +237,7 @@ section scrolls to it and opens it; the panel closes itself.
 ## Project layout
 
 ```
-veridellindo/
+veridell/
 ├── index.html                 the app shell (one document, hash-routed)
 ├── 404.html                   Cloudflare Pages not-found page
 ├── topics/                    crawlable index pages (static, no JS needed)
@@ -321,12 +329,10 @@ section and old ones are never rewritten.
 There is nothing to build. Serve the folder over HTTP:
 
 ```bash
-npm start            # python3 -m http.server 4173
-npm run dev          # the same site through wrangler pages dev, with functions/
+npx serve .          # or: python3 -m http.server 4173
 ```
 
-Then open <http://localhost:4173/>. (`npx serve .` also works, but it picks its
-own port — usually 3000 — so read the URL it prints.)
+Then open <http://localhost:4173/>.
 
 > Open it over `http://localhost`, not `file://` — ES modules and the Wikimedia APIs need a real origin.
 
@@ -349,8 +355,8 @@ project when the account has none, stamps the build and uploads. By hand it is
 two commands, and the first one is the one people forget:
 
 ```bash
-npx wrangler pages project create veridellindo --production-branch=main
-npx wrangler pages deploy . --project-name=veridellindo
+npx wrangler pages project create veridell --production-branch=main
+npx wrangler pages deploy . --project-name=veridell
 ```
 
 **A fresh Cloudflare account has no Pages projects.** A project belongs to the

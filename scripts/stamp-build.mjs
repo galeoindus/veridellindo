@@ -67,7 +67,7 @@ if (!commit) {
     revisionType = 'git';
   } catch {
     const hash = createHash('sha256').update(version).update('\0');
-    const generated = new Set(['assets/version.json', 'sitemap.xml']);
+    const generated = new Set(['assets/version.json', 'sitemap.xml', 'docs/DEEP-AUDIT-6.11.0.md', 'docs/FILE-INVENTORY-6.11.0.csv']);
     const files = (await walkFiles(ROOT)).sort((a, b) => relative(ROOT, a).localeCompare(relative(ROOT, b)));
     for (const file of files) {
       const name = relative(ROOT, file).replace(/\\/g, '/');
@@ -138,6 +138,12 @@ for (const file of await walk(ROOT)) {
   // Cross-route reading width, text scale and safe morphic surface presets.
   if (!hasBundle && !/assets\/css\/preferences\.css/.test(html) && /<\/head>/i.test(html)) {
     html = html.replace(/<\/head>/i, `  <link rel="stylesheet" href="/assets/css/preferences.css?v=${build}">\n</head>`);
+  }
+  // The shared experience layer stays outside existing bundles so it can be
+  // updated without reordering the legacy cascade; it covers the Veri mascot
+  // and responsive article reading width on every page.
+  if (!/assets\/css\/experience\.css/.test(html) && /<\/head>/i.test(html)) {
+    html = html.replace(/<\/head>/i, `  <link rel="stylesheet" href="/assets/css/experience.css?v=${build}">\n</head>`);
   }
   // One theme controller for the whole site, including static articles and
   // utility pages, so a reader's choice follows them across every route.
@@ -275,6 +281,7 @@ const SHEET_LAYER = {
   'amigo-ui.css': 'components',
   'article-layout.css': 'layout',
   'preferences.css': 'pages',
+  'experience.css': 'overrides',
   'mobile.css': 'responsive',
   'responsive.css': 'responsive',
   'polish.css': 'utilities',

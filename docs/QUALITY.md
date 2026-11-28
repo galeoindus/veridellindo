@@ -1,4 +1,26 @@
-# Quality report — main branch
+# Quality report — release verification history
+
+## Current verification — 28 November 2026 — Veridellindo 6.11.0
+
+| Check | Command / evidence | Status |
+|---|---|---|
+| Project health | `npm run doctor` | **pass** — all 6 checks passed (modules, pages, deep consistency, code scan, health and drift) |
+| Module/import/site check | `npm run check` | **pass** — 40 modules parsed, every import resolved, 22 HTML pages and 47 JavaScript files checked |
+| Deep audit | `npm run audit:deep` | **pass with 1 existing warning** — no problems; 73 `!important` rules remain in `assets/css/mobile.css` |
+| New Veri regression tests | `node --test test/mascot-integration.test.mjs` | **pass** — 5 passed, 0 failed |
+| Full test suite | `npm test` | **blocked** — 215 passed; 6 test files could not load because `jsdom` is absent from this working environment |
+| Dependency installation | `npm ci --ignore-scripts --no-audit --no-fund` | **not completed** — command timed out; `jsdom` is declared in the package manifest/lockfile but was not installed |
+| Browser geometry / screenshot | `npm run check:layout` / headless Chromium | **not verified** — browser tooling could not complete in this environment; do not treat CSS source checks as visual browser proof |
+| Lighthouse / Core Web Vitals | — | **not run** |
+| Real-device Android / iOS | — | **not run** |
+
+Environment: Node.js 22.16.0, npm 10.9.2. Release version: `6.11.0`; the final build ID is stamped into every HTML page and `assets/version.json`.
+The complete audit, changed-file detail and per-file SHA-256 inventory are in
+[`DEEP-AUDIT-6.11.0.md`](DEEP-AUDIT-6.11.0.md) and
+[`FILE-INVENTORY-6.11.0.csv`](FILE-INVENTORY-6.11.0.csv).
+
+---
+
 
 Verified locally on 22 November 2026 for v6.10.54, on Node.js 20.20.2 and npm 10.8.2.
 

@@ -46,7 +46,7 @@ One answer, in one place, so the docs stop disagreeing:
 | Where | Value |
 |---|---|
 | `wrangler.toml` `[ai]` | Declares the `AI` binding used by the Pages Function; verify the binding is enabled for production and preview in Cloudflare Pages settings |
-| Pages Function binding | `env.AI` must be available to `functions/api/chat.js`, `api/answer.js` and `api/image.js` in production and preview |
+| Pages Function binding | `env.AI` must be available to `functions/api/chat.js` in production and preview |
 | Dashboard secrets | Optional `OPENROUTER_API_KEY_1..12` values (legacy single key `OPENROUTER_API_KEY` is also read); the list is rotated per request so no single key takes every call |
 | Default request path | The handler attempts Cloudflare Workers AI first when the client sends `provider: "auto"` |
 | Fallback | The handler may try its fixed OpenRouter free-model allowlist when a key exists and Workers AI fails; an explicit OpenRouter choice is also supported |
@@ -132,16 +132,15 @@ list into the dashboard once — and that is what `cloudflare.env.example` is fo
 **The file.** `cloudflare.env.example` holds only `NAME=value` lines and no
 comments, on purpose: the dashboard's bulk editor imports every line it is
 given as a variable, so a `#` line becomes a variable called `#…`. Copy the
-whole file, fill in the twelve numbered `OPENROUTER_API_KEY_*` values, paste.
+whole file, fill in the six keys, paste.
 
 **Where it goes.**
 
-1. Cloudflare dashboard → Workers & Pages → **veridellindo** → Settings →
+1. Cloudflare dashboard → Workers & Pages → **veridell** → Settings →
    Variables and Secrets.
 2. Use **Bulk edit** (or *Import .env*) and paste the filled file.
-3. The twelve numbered `OPENROUTER_API_KEY_*` lines (and the legacy
-   `OPENROUTER_API_KEY` line, if you use it) are credentials. Cloudflare adds bulk
-   lines as **Plaintext** by default — change each of them to **Secret**, or add
+3. The four `OPENROUTER_API_KEY_*` lines are credentials. Cloudflare adds bulk
+   lines as **Plaintext** by default — change those four to **Secret**, or add
    them one at a time with *Add → Secret*. A plaintext key is readable by anyone
    who can open the project settings.
 4. Save, then redeploy. Variables set after a deployment do not reach the build
@@ -150,9 +149,9 @@ whole file, fill in the twelve numbered `OPENROUTER_API_KEY_*` values, paste.
 **By CLI, if you prefer.** This sets one secret at a time and needs no file:
 
 ```bash
-npx wrangler pages secret put OPENROUTER_API_KEY_1 --project-name veridellindo
-npx wrangler pages secret put OPENROUTER_API_KEY_2 --project-name veridellindo
-# … through _12
+npx wrangler pages secret put OPENROUTER_API_KEY_1 --project-name veridell
+npx wrangler pages secret put OPENROUTER_API_KEY_2 --project-name veridell
+# … through _6
 ```
 
 The current Pages Function uses the `AI` binding and optional OpenRouter keys.

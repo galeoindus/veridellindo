@@ -9,45 +9,37 @@ something was fixed.
 The build id on every page is `<version>-<commit>`, written by
 `npm run stamp:build`. If the two disagree, the page was hand-edited.
 
-## [6.10.78] — 28 November 2026
+## [6.11.0] — 28 November 2026
 
-Documentation and metadata brought back in line with what the code does. No
-shipped behaviour changed.
+### Added
+- Introduced **Veri**, a non-human, non-robot botanical companion based on the
+  supplied leaf mascot. Nine transparent WebP poses cover welcome, idle, wave,
+  thinking, warmth, explanation, celebration, listening and joy.
+- Added a large character-led greeting to the knowledge home page and Amigo's
+  empty state, plus a compact character avatar on every assistant message.
+- Linked the mascot's pose to request lifecycle states (thinking, responding,
+  completed, stopped and error); image generation gets a separate celebration
+  pose. All motion respects `prefers-reduced-motion`.
+- Added `assets/css/experience.css` as the site-wide, cache-busted experience
+  layer and widened desktop article panels modestly while preserving the TOC
+  rail, one-column mobile flow and readable line measure.
+- Added dependency-free regression tests for the mascot assets, state mapping,
+  responsive rules, reduced motion and build-stamp integration.
 
-### Fixed
-- The README and `docs/MAINTENANCE.md` named the Cloudflare Pages project
-  `veridell`. It is `veridellindo`, as `wrangler.toml`, the deploy workflow and
-  the live host all say; the old commands would have created a second project
-  and then set the OpenRouter secrets on it, leaving production untouched.
-- `docs/SECURITY.md` said the content policy allowed `script-src 'self'` only
-  and that no third-party script runs. Neither was true: the policy also allows
-  `'wasm-unsafe-eval'`, `https://cdn.jsdelivr.net` (the optional Hugging Face
-  Transformers runtime that `assets/js/rank.js` loads) and
-  `https://static.cloudflareinsights.com`. The file now states the policy it
-  actually ships, and says that no page loads a Cloudflare Insights beacon.
-- `docs/SECURITY.md` and `docs/CONTRIBUTING.md` described `/api/chat` as the one
-  server-side component. `functions/api/answer.js`, `functions/api/image.js` and
-  `functions/_middleware.js` also exist; all four are now named, and the data
-  flow section says what `answer` and `image` send to Workers AI.
-- `docs/MAINTENANCE.md` asked for "six keys" and "the four
-  `OPENROUTER_API_KEY_*` lines"; both examples list twelve numbered keys plus
-  the legacy `OPENROUTER_API_KEY`.
-- The local-run instructions offered `npx serve .` and then said to open port
-  4173, which that command does not use. They now name `npm start` and
-  `npm run dev`, which do.
-- The Help and How-it-works meta descriptions still said "veridell" in the
-  description, Open Graph and Twitter text.
-- `docs/README.md` did not index `AMIGO.md`, the two dated audits, the review or
-  the AI redesign specification, and described `functions/api/` as chat and image
-  only.
-
-### Security
-- `.gitignore` now ignores `*.env`, so a filled-in copy of
-  `cloudflare.env.example` saved as `cloudflare.env` cannot be committed with
-  live keys. `*.env.example` stays tracked.
+### Changed
+- Updated `docs/DESIGN.md` to distinguish the product mark, assistant name and
+  Veri mascot. The supplied Veridellindo logo remains the product identity.
+- Added the 6.11.0 audit record to `docs/` and the documentation index.
 
 ### Verified
-- `npm run verify` (240 tests) and `npm run doctor` on this commit.
+- `npm run doctor`: all six checks passed. `npm run check`: all 40 modules parsed,
+  all imports resolved, and 22 HTML pages / 47 JavaScript files passed the site audit.
+- The five new Veri integration tests pass. The full suite reports 215 passing
+  tests; six test files cannot load because `jsdom` is absent after the local
+  dependency-install attempt timed out. This is an environment limitation, not
+  a passing full-suite claim; details are in `docs/DEEP-AUDIT-6.11.0.md`.
+- `npm run audit:deep` reports no problems and one existing warning: 73
+  `!important` rules in `assets/css/mobile.css`.
 
 ## [6.10.67] — 27 November 2026
 

@@ -8,20 +8,17 @@ Thanks for helping. A few things worth knowing before you start.
   use a model, but only over the selected source passages, with citation markers
   preserved and an honest "not in the sources" answer when the passages are
   thin. A change that lets the app invent uncited facts is out of scope.
-- **Backend only for grounded AI.** The server-side surface is the four files in
-  `functions/`: `api/chat.js` (the assistant endpoint), `api/answer.js` (orders an
-  article's own sentences for a question), `api/image.js` (FLUX.1 schnell) and
-  `_middleware.js` (response headers). They may read credentials from Cloudflare
-  encrypted Secrets only — never from browser code, `.env.example`, commits or
-  logs. No database, no accounts, no analytics.
+- **Backend only for grounded AI.** The one server-side component is
+  `functions/api/chat.js`, the assistant endpoint. It may read
+  credentials from Cloudflare encrypted Secrets only — never from browser code,
+  `.env.example`, commits or logs. No database, no accounts, no analytics.
 - **No tracking.** No analytics, no cookies, no third-party scripts beyond the
   font stylesheet and the optional model CDN.
 
 ## Working on the code
 
 ```bash
-npm start          # python3 -m http.server 4173 — open http://localhost:4173
-npm run dev        # or wrangler pages dev, which also serves functions/
+npx serve .        # serve at http://localhost:4173
 ```
 
 There is no build step. Edit a file, reload.

@@ -12,10 +12,8 @@ kept in one folder so the repository root stays readable.
 | [AUDIT.md](AUDIT.md) | You want the history of what was found and fixed, release by release. |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | You are about to open a pull request. |
 | [SECURITY.md](SECURITY.md) | You found a vulnerability, or you are reviewing how secrets are handled. |
-| [AMIGO.md](AMIGO.md) | You are changing the chat surface, the mascot or the theme contract. |
-| [REVIEW-2026-11-27.md](REVIEW-2026-11-27.md) | You want the evidence behind one release's claims. |
-| [AUDIT-2026-11-21.md](AUDIT-2026-11-21.md) · [AUDIT-2026-11-22.md](AUDIT-2026-11-22.md) | You want the dated audit snapshots that AUDIT.md summarises. |
-| [AI_REDESIGN_IMPLEMENTATION_SPEC.md](AI_REDESIGN_IMPLEMENTATION_SPEC.md) | You need the long-form specification the AI surfaces were built from. |
+| [DEEP-AUDIT-6.11.0.md](DEEP-AUDIT-6.11.0.md) | Full file/folder audit, Veri mascot implementation, responsive article work and verification record for 6.11.0. |
+| [FILE-INVENTORY-6.11.0.csv](FILE-INVENTORY-6.11.0.csv) | Per-file inventory with folder, file type, byte size and SHA-256 for the 6.11.0 package. |
 
 ## How this folder is kept honest
 
@@ -38,7 +36,7 @@ docs/                  this folder
 articles/<slug>/       the thirteen published articles, as real HTML
 assets/js/             the ES modules the browser imports
 assets/css/            the stylesheets, and the four built bundles
-functions/api/         the Pages Functions (chat, answer, image) and _middleware.js
+functions/api/         the Pages Functions (chat, image)
 scripts/               build, audit, release and maintenance scripts
 test/                  the suite, one file per concern
 ```

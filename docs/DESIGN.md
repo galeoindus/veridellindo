@@ -7,16 +7,25 @@ Product: Veridellindo — every answer, with its source
 
 **The name.** *Veridellindo* — from *veri-* (true) and *-dell* (a small valley, a
 sheltered place). A quiet place where things are checked. The product is
-Veridellindo; the assistant inside it is Amigo. Never write the two as one name, and
-never ship a second product name.
+Veridellindo; the conversational assistant is Amigo; its botanical companion
+character is Veri. Veri is a mascot, not a second product or a replacement name.
 
 **The mark.** The supplied Veridellindo logo is a white lotus-like line symbol
 set over a warm orange, coral, magenta and violet gradient cloud, with a small
 charcoal sparkle at the lower right. Use the same master artwork for the site
-header, assistant entry points, chat welcome state, saved-chat identity, browser
-icons, app icons and social preview. Keep the transparent background around the
-mark; do not redraw it as a lettermark or substitute an unrelated assistant
-mascot. The typing indicator may remain a separate progress illustration.
+header, browser icons, app icons and social preview. Keep its transparent
+background; never replace the brand mark with the mascot.
+
+**The companion character.** Veri is the assistant's friendly botanical spirit:
+a translucent green/teal seed body, two leaf sprouts, large expressive eyes,
+small organic hands and feet. Veri is deliberately neither a robot nor a human.
+Use the transparent pose assets in `assets/img/mascot/` for the home welcome,
+Amigo's empty state, assistant message avatars and request moods. Keep the colour
+family and silhouette consistent; do not distort or crop the leaves, hands or
+feet. Poses are idle, wave, think, warm, celebrate, explain, welcome, listen and
+joy. The CSS motion is gentle and decorative only; text/state must still explain
+what the assistant is doing. The original Veridellindo mark remains the product
+identity and the companion must never replace it in the header, favicon or PWA.
 
 **The tile.** The supplied gradient is the visual anchor: warm orange and gold
 flow through coral and pink into violet. Use it sparingly for primary actions,
@@ -91,6 +100,8 @@ Article text, source citations, tables, infoboxes and answer bodies should use s
 ## Architecture map
 
 - `assets/css/design-system.css`: final shared visual token and multimorphism layer.
+- `assets/css/experience.css`: shared Veri welcome/chat styles, reduced-motion fallback and the controlled article-width enhancement.
+- `assets/img/mascot/`: nine transparent Veri pose assets plus their usage contract.
 - `assets/js/global-theme.js`: single theme controller, localStorage persistence, system preference handling and cross-tab synchronization.
 - `assets/js/theme.js`: home-only reading comfort and reading-progress behaviours; it delegates theme state globally.
 - `scripts/stamp-build.mjs`: installs the shared CSS/JS on every HTML entry point and cache-busts them during each release.
@@ -119,7 +130,7 @@ Article text, source citations, tables, infoboxes and answer bodies should use s
 
 ## Amigo assistant layer
 
-The conversational assistant is named **Amigo**; the knowledge platform remains Veridellindo. The supplied Veridellindo logo is reused for the rail, welcome state, saved-chat identity and chat header; the typing indicator remains a separate progress illustration. Assistant progress and answer-reveal states use restrained CSS motion, with a complete reduced-motion fallback. The dedicated `amigo/redesign.css` is loaded last on the chat route and owns the refreshed violet, coral and warm-orange chat surface while preserving the existing interaction IDs and data flow. The chat has a centred welcome state, starter cards, readable answer surfaces and a rounded composer with upload, microphone, stop and send actions. The rail carries the site's doorways (Articles, Topics, Library, Sources, How it works) so the chat is part of Veridellindo rather than a separate product. Every answer states what it is: a badge (Source-backed, From the library, Site guide, Conversation), how many of its sources are actually cited, and which model wrote it. Preserve the existing source-grounding, URL validation, server-side secret handling, and privacy notice when extending the agent.
+The conversational assistant is named **Amigo**; the knowledge platform remains Veridellindo. **Veri** is the botanical companion shown in the welcome state and beside assistant messages; the Veridellindo logo continues to identify the product in the rail and chat header. The typing indicator remains a separate progress illustration, while Veri's pose changes across thinking, responding, completion, stop and error states. Motion has a reduced-motion fallback. The dedicated `amigo/redesign.css` and shared `assets/css/experience.css` layers refine the chat surface while preserving the existing interaction IDs and data flow. The chat has a character-led welcome, starter cards, readable answer surfaces and a rounded composer with upload, microphone, stop and send actions. The rail carries the site's doorways (Articles, Topics, Library, Sources, How it works) so the chat is part of Veridellindo rather than a separate product. Every answer states what it is: a badge (Source-backed, From the library, Site guide, Conversation), how many of its sources are actually cited, and which model wrote it. Preserve the existing source-grounding, URL validation, server-side secret handling, and privacy notice when extending the agent.
 
 
 ## User-controlled reading and surface preferences

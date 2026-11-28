@@ -9,7 +9,7 @@
 import { el, clamp, cleanUrl, clockParts } from '../ui.js';
 import { icon } from '../icons.js';
 import { t } from '../i18n.js';
-import { CATEGORIES, QUICK_CHIPS, EXAMPLE_PROMPTS, ASK_CHIPS } from '../config.js';
+import { SITE, CATEGORIES, QUICK_CHIPS, EXAMPLE_PROMPTS, ASK_CHIPS } from '../config.js';
 import { sectionHead, bandHead, card, qCard, catCard, skeletonGrid, rowCta } from '../components.js';
 import { composerForm, depthControl, chipRow, attachSuggest } from '../composer.js';
 
@@ -38,6 +38,25 @@ export async function renderHome(ctx) {
 
 function hero(ctx) {
   const section = el('section', { class: 'dash-hero', id: 'dashHero' });
+  const buildId = document.querySelector('meta[name="veridell-build"]')?.content || SITE.version;
+  const welcome = el('div', { class: 'veri-home-welcome', 'aria-label': 'A welcome from Veri' });
+  const art = el('div', { class: 'veri-home-art' });
+  art.append(el('img', {
+    class: 'veri-home-art-image',
+    src: `/assets/img/mascot/veri-welcome.webp?v=${encodeURIComponent(buildId)}`,
+    alt: 'Veri, a cheerful glowing leaf spirit with two leaves, little green hands and feet',
+    width: '367', height: '403', loading: 'eager', decoding: 'async', fetchpriority: 'high',
+  }));
+  const copy = el('div', { class: 'veri-home-copy' });
+  copy.append(el('span', { class: 'veri-home-label', text: 'MEET VERI · YOUR LITTLE KNOWLEDGE COMPANION' }));
+  copy.append(el('h2', { text: 'Hello, curious mind!' }));
+  copy.append(el('p', {
+    class: 'veri-home-speech',
+    text: 'I’m Veri. Bring me a question and we’ll turn it into clear knowledge you can trace back to its source.',
+  }));
+  copy.append(el('span', { class: 'veri-home-footnote', text: 'A little wonder. A lot of well-sourced learning.' }));
+  welcome.append(art, copy);
+  section.append(welcome);
 
   section.append(el('span', {
     class: 'dash-hero-badge',

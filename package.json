@@ -1,6 +1,6 @@
 {
   "name": "veridell",
-  "version": "6.11.7",
+  "version": "6.11.8",
   "private": true,
   "type": "module",
   "description": "Veridellindo — a privacy-first Wikimedia research and discovery platform with Amigo multi-turn AI conversation, cited answers and local chat history.",

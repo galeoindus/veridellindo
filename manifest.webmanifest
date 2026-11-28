@@ -18,19 +18,19 @@
   ],
   "icons": [
     {
-      "src": "assets/img/brand/veridellindo-round.svg?v=6.10.76-fe0cfce",
+      "src": "assets/img/brand/veridellindo-round.svg?v=6.10.76-ad18f78",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "assets/img/brand/logo-512.png?v=6.10.76-fe0cfce",
+      "src": "assets/img/brand/logo-512.png?v=6.10.76-ad18f78",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "assets/img/brand/logo-maskable-512.png?v=6.10.76-fe0cfce",
+      "src": "assets/img/brand/logo-maskable-512.png?v=6.10.76-ad18f78",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

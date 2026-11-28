@@ -663,66 +663,8 @@ body.dark .msg.me .bubble{background:linear-gradient(140deg,rgba(72,76,140,.38),
   opacity: .72; font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .site-version .is-stale { color: #b45309; font-weight: 600; }
 
-/* ── the Amigo character ────────────────────────────────────────────────────
-   Transparent PNGs, one per state. The hero pose is the welcome, the small one
-   sits beside the typing dots, and neither is ever given a coloured plate
-   behind it — the figure is the thing, not a badge. */
-.amigo-mascot {
-  display: block; flex: none; object-fit: contain; background: none;
-  filter: drop-shadow(0 10px 22px rgba(23, 59, 50, .18));
-}
-/* The welcome figure sits on the page itself: no plate, no rings, no crop. The
-   old .hstar box was built for a 48 px logo and clipped anything larger. */
-.hero-mascot {
-  display: grid; place-items: center;
-  margin: 0 auto 14px;
-  background: none; border: 0; box-shadow: none;
-  overflow: visible;
-}
-/* ── the loops ──────────────────────────────────────────────────────────────
-   Frames stack in one box and hand over to each other, the way a reel advances a
-   scene: each pose is visible for its share of the cycle, then fades to the next.
-   No video, no GIF — the same transparent PNGs, played by the compositor, so it
-   costs nothing on a slow connection and stops dead for a reader who asked for
-   reduced motion. */
-.mascot-loop {
-  position: relative;
-  display: inline-block;
-  width: var(--msize, 48px);
-  height: var(--msize, 48px);
-  flex: none;
-  vertical-align: middle;
-}
-.mascot-loop .amigo-mascot {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  animation: mascotFrame calc(var(--n, 3) * 1.25s) linear infinite;
-  animation-delay: calc(var(--i, 0) * -1 * (var(--n, 3) * 1.25s) / var(--n, 3));
-  will-change: opacity;
-}
-@keyframes mascotFrame {
-  0%, 28% { opacity: 1; }
-  33.4%, 100% { opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mascot-loop .amigo-mascot { animation: none; }
-  .mascot-loop .amigo-mascot:first-child { opacity: 1; }
-}
-
-.mascot-hero { width: 148px; height: 148px; margin: 0 auto 6px; }
-.mascot-status { width: 40px; height: 40px; margin-right: 8px; --msize: 40px; }
-.searching .amigo-mascot { display: inline-block; vertical-align: middle; margin-right: 6px; }
-@media (max-width: 560px) {
-  .mascot-hero { width: 118px; height: 118px; }
-  .mascot-status { width: 34px; height: 34px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .amigo-mascot { animation: none !important; transition: none !important; }
-}
+/* The mascot was removed from the chat interface on request. The typing dots
+   below are a progress indicator, not a character, and stay. */
 
 /* ── the faults a phone screenshot showed ───────────────────────────────────
    1. the welcome mascot was sliced across the top: the image carried

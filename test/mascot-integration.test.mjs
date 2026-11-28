@@ -19,12 +19,12 @@ test('Amigo has a complete, optimized, transparent pose set', () => {
   }
 });
 
-test('the main knowledge home page introduces Amigo before its search hero', () => {
+test('the front page carries no mascot: Amigo lives in the chat only', () => {
   const home = read('assets/js/views/home.js');
-  assert.match(home, /amigo-home-welcome/);
-  assert.match(home, /amigo-welcome\.webp/);
-  assert.match(home, /Hello, curious mind/);
-  assert.match(home, /trace back to its source/);
+  assert.ok(!/amigo-home-welcome/.test(home), 'the home welcome card is back');
+  assert.ok(!/mascot\/amigo-/.test(home), 'the home page still references mascot art');
+  const css = read('assets/css/experience.css');
+  assert.ok(!/amigo-home/.test(css), 'dead home-mascot styles remain');
 });
 
 test('Amigo gives every assistant turn an avatar and maps request states to poses', () => {

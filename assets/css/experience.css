@@ -88,3 +88,25 @@ body.dark.amigo-chat .amigo-signature .amigo-name { color: #86ddc1; }
 }
 @media (prefers-reduced-transparency: reduce) {
 }
+
+/* ── the search field is plain ────────────────────────────────────────────────
+   The card draws one border. The field inside it draws nothing: no pill, no
+   radius, no ring on focus — the card's border already shows where the caret is.
+   This sheet loads after the bundle and is unlayered, so it wins against the
+   layered rules that were drawing the ring. */
+[role="search"] :is(input, textarea) {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+}
+[role="search"] :is(input, textarea):focus,
+[role="search"] :is(input, textarea):focus-visible,
+[role="search"] :is(input, textarea):focus-within {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+}

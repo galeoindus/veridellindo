@@ -5927,8 +5927,11 @@ section.dash-hero,
 .searchbar:focus-within textarea,
 .searchbar:focus-within input[type="search"],
 .searchbar:focus-within input[type="text"] {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--border-2));
+  border-color: transparent;
   outline: none;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
 }
 /* The search field's focus ring is removed in polish.css, where the ring is
    drawn: a rule here would sit in an earlier cascade layer and lose. */
@@ -6142,7 +6145,7 @@ body.amigo-chat .composer:focus-within,
 .searchbar:focus-within,
 .composer:focus-within {
   border-color: color-mix(in srgb, var(--accent) 55%, var(--border-2));
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+  box-shadow: 0 1px 2px rgba(16, 24, 20, .05), 0 14px 36px -20px rgba(16, 24, 20, .32);
 }
 .searchbar:focus-within textarea,
 .searchbar:focus-within input,
@@ -6449,8 +6452,7 @@ html[data-theme="dark"] .composer .searchbar {
 }
 html[data-theme="dark"] .composer .searchbar:focus-within {
   border-color: color-mix(in srgb, var(--im-accent) 62%, var(--im-border-strong));
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--im-accent) 16%, transparent),
-    0 20px 48px -24px rgba(0,0,0,.78), inset 0 1px 0 rgba(255,255,255,.06);
+  box-shadow: 0 20px 48px -24px rgba(0,0,0,.78), inset 0 1px 0 rgba(255,255,255,.06);
 }
 html[data-theme="dark"] .composer .suggest {
   background: rgba(25,19,37,.94);

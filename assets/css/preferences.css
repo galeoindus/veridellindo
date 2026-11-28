@@ -1,4 +1,4 @@
-/* Veridell cross-route reading and surface preferences. Keep prose surfaces
+/* Veridellindo cross-route reading and surface preferences. Keep prose surfaces
    flat and opaque; reserve morphic effects for controls and focal surfaces. */
 :root {
   --im-article-panel-width: 760px;
@@ -757,7 +757,7 @@ body.amigo-chat .page-context[hidden] { display: none; }
 
 /* ── one assistant mark per answer ───────────────────────────────────────
    Every answer carried two: the real .amigo-avatar image, and a legacy
-   .a::before that painted the Veridell facet behind it. Restoring a thread
+   .a::before that painted the Veridellindo facet behind it. Restoring a thread
    (Saved → Back, or reopening from the rail) rebuilt both, which is the
    crossed-marks the reader saw. The avatar is the one character; the legacy
    marker is removed here, in the last sheet of every bundle. */
@@ -813,7 +813,7 @@ body.amigo-chat .a-image figcaption {
    ══════════════════════════════════════════════════════════════════════════
    What the reference file does well is not a look to copy — it is a discipline:
    flat surfaces, generous radii, one strong accent, and typography doing the
-   work instead of effects. This takes that discipline and keeps Veridell's own
+   work instead of effects. This takes that discipline and keeps Veridellindo's own
    identity: forest for action, copper for provenance, cream for paper.
 
    Three rules, applied once here rather than patched per component:

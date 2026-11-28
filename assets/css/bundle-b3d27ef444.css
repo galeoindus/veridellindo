@@ -1449,9 +1449,9 @@ body::before { animation-duration: 34s, 46s; }
 }
 @layer components {
 /* ── app.css ── */
-/* Veridell — additions on top of the design system.
+/* Veridellindo — additions on top of the design system.
  *
- * styles.css is the original Veridell design system, kept intact. Everything
+ * styles.css is the original Veridellindo design system, kept intact. Everything
  * in this file is either a new component the rebuild introduced (the language
  * menu, the offline strip's spacing) or a small correction to a rule that did
  * not survive the move from a captured page to a live app.
@@ -2171,7 +2171,7 @@ button, .btn, [role="button"], .tab, .chip, .depth-btn, .chip-btn {
 [data-view="article"] .app-shell:has(.app-rail:not(:empty)) { grid-template-columns: minmax(0, 1fr); }
 
 /* ======================================================================
-   Veridell v5 — "Morphisms"
+   Veridellindo v5 — "Morphisms"
    ======================================================================
    Not one style painted over everything. Each morphism is given the job
    it is actually good at, and only that job — which is the rule the
@@ -4011,7 +4011,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
 @layer pages {
 /* ── home-morph.css ── */
 /* ══════════════════════════════════════════════════════════════════════════
-   Veridell — the front door
+   Veridellindo — the front door
    ══════════════════════════════════════════════════════════════════════════
    One sheet for the home page only. The rest of the site keeps its own
    rhythm; the first screen gets a different one, because it is the screen
@@ -4153,7 +4153,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
 @layer responsive {
 /* ── responsive.css ── */
 /* ══════════════════════════════════════════════════════════════════════════
-   Veridell — every screen
+   Veridellindo — every screen
    ══════════════════════════════════════════════════════════════════════════
    One sheet that makes the whole site answer to the device it is on, rather
    than to one width. Four ranges, each with its own rhythm:
@@ -4259,7 +4259,7 @@ h2 { font-size: var(--fluid-h2); }
 }
 @layer base {
 /* ── system.css ── */
-/* Veridell — one system for the whole site.
+/* Veridellindo — one system for the whole site.
  *
  * This is the layer that makes every page feel like the same product. It is
  * loaded last, on every page, so the reading surface, the controls and the
@@ -4865,7 +4865,7 @@ a, button, .btn, .chip, .pill, .side-link, .tab, .depth-btn, .mode-btn {
 @layer layout {
 /* ── article-layout.css ── */
 /* ==========================================================================
-   Veridell — article layout, rebuilt for the screen it is on
+   Veridellindo — article layout, rebuilt for the screen it is on
    --------------------------------------------------------------------------
    Why this file exists.
 
@@ -5313,7 +5313,7 @@ main#main {
 @layer responsive {
 /* ── mobile.css ── */
 /* ==========================================================================
-   Veridell — the phone
+   Veridellindo — the phone
    --------------------------------------------------------------------------
    What a site has to get right on a phone, and what this one did not.
 
@@ -6475,7 +6475,7 @@ html[data-theme="dark"] .composer .suggest {
 }
 @layer utilities {
 /* ── polish.css ── */
-/* Veridell — quiet, precise surface polish.
+/* Veridellindo — quiet, precise surface polish.
    A restrained iOS-inspired layer: soft translucency, clear hierarchy,
    consistent radii, tactile controls and no heavy neumorphic shadows. */
 
@@ -6719,7 +6719,7 @@ img.image-fallback {
 }
 @layer components {
 /* ── design-system.css ── */
-/* Veridell Design System 1.0 — shared tokens and restrained multimorphism.
+/* Veridellindo Design System 1.0 — shared tokens and restrained multimorphism.
    Rule of use: glass for navigation/chrome, clay for a few expressive feature
    surfaces, soft inset depth for controls, and calm flat surfaces for reading. */
 :root {
@@ -7032,7 +7032,7 @@ button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
 }
 @layer pages {
 /* ── preferences.css ── */
-/* Veridell cross-route reading and surface preferences. Keep prose surfaces
+/* Veridellindo cross-route reading and surface preferences. Keep prose surfaces
    flat and opaque; reserve morphic effects for controls and focal surfaces. */
 :root {
   --im-article-panel-width: 760px;
@@ -7791,7 +7791,7 @@ body.amigo-chat .page-context[hidden] { display: none; }
 
 /* ── one assistant mark per answer ───────────────────────────────────────
    Every answer carried two: the real .amigo-avatar image, and a legacy
-   .a::before that painted the Veridell facet behind it. Restoring a thread
+   .a::before that painted the Veridellindo facet behind it. Restoring a thread
    (Saved → Back, or reopening from the rail) rebuilt both, which is the
    crossed-marks the reader saw. The avatar is the one character; the legacy
    marker is removed here, in the last sheet of every bundle. */
@@ -7847,7 +7847,7 @@ body.amigo-chat .a-image figcaption {
    ══════════════════════════════════════════════════════════════════════════
    What the reference file does well is not a look to copy — it is a discipline:
    flat surfaces, generous radii, one strong accent, and typography doing the
-   work instead of effects. This takes that discipline and keeps Veridell's own
+   work instead of effects. This takes that discipline and keeps Veridellindo's own
    identity: forest for action, copper for provenance, cream for paper.
 
    Three rules, applied once here rather than patched per component:
@@ -8011,7 +8011,7 @@ body.amigo-chat .a-actions button:focus-visible {
 }
 @layer utilities {
 /* ── refine.css ── */
-/* Veridell — the finishing layer.
+/* Veridellindo — the finishing layer.
  *
  * Loaded last on every page, after every other sheet, so it can settle the
  * details that make a site feel made rather than assembled: one easing curve,

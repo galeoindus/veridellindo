@@ -1,4 +1,4 @@
-# Veridell — Cloudflare Pages headers.
+# Veridellindo — Cloudflare Pages headers.
 # https://developers.cloudflare.com/pages/configuration/headers/
 #
 # The caching rule, in one line: the document is revalidated on every visit,

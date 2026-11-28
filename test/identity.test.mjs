@@ -139,7 +139,7 @@ test('no page competes with the PNG icons by linking the .ico', () => {
 
 test('the package and the deployment agree on one name', () => {
   const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
-  assert.equal(pkg.name, 'veridell');
+  assert.equal(pkg.name, 'veridellindo');
   assert.equal(pkg.repository.url, 'https://github.com/galeoindus/veridellindo.git');
   assert.equal(pkg.homepage, 'https://veridellindo.pages.dev/');
 

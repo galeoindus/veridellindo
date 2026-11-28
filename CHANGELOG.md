@@ -117,7 +117,7 @@ The release where the reading model, the surfaces and the brand were settled.
 - The send arrow is centred on the circle's centre, not beside the label.
 - Contributor initials no longer print through a logo; a failed avatar falls
   back to the initials instead of an empty circle.
-- Thirteen article pages said "Veridell" — the retired name — in their titles,
+- Thirteen article pages said "Veridellindo" — the retired name — in their titles,
   structured data, header and footer.
 - Dead weight removed: six unused exports, two unreferenced modules
   (`library-search.js`, `ollama-client.js`), seven orphaned mascot images, and

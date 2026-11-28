@@ -1,6 +1,6 @@
 version: 2
 # Added by the automation maintenance run (WF-04, task 20261103-F03).
-# Veridell declares jsdom and runs three workflows (ci, deploy, version),
+# Veridellindo declares jsdom and runs three workflows (ci, deploy, version),
 # so both ecosystems are tracked. Updates are grouped and weekly; a major
 # npm bump stays on its own PR because it can change test behaviour.
 

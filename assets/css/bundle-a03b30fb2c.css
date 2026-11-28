@@ -5430,7 +5430,9 @@ main#main {
 /* ------------------------------------------------------- 7 · reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
-  .bottom-nav a, .btn, .chip { transition: none !important; }
+.bottom-nav.bottom-nav a,
+.btn.btn,
+.chip.chip{ transition: none; }
   .example-prompts { scroll-behavior: auto; }
 }
 
@@ -5894,10 +5896,10 @@ body.amigo-chat .composer,
   border-radius: 0;
   background: transparent;
 }
-body.amigo-chat .composer textarea,
-.composer textarea {
+body.amigo-chat.amigo-chat .composer.composer textarea,
+.composer.composer textarea{
   outline: 0;
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* ── rounded, like the AI-mode field ──────────────────────────────────────
@@ -6023,14 +6025,14 @@ body.amigo-chat .composer:focus-within,
 .ask-panel,
 .hero-search {
   background: transparent;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  padding: 0 !important;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
 }
-.searchbar .mode-help,
-.searchbar .composer-prompt,
-.searchbar .composer-label { display: none !important; }
+.searchbar.searchbar .mode-help.mode-help,
+.searchbar.searchbar .composer-prompt.composer-prompt,
+.searchbar.searchbar .composer-label.composer-label{ display: none; }
 
 /* the wrapper around the card on the site is not a second box */
 body:not(.amigo-chat) .composer,
@@ -6181,14 +6183,14 @@ body:not(.amigo-chat) .composer,
   position: relative;
   overflow: hidden;
   display: inline-flex;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
-  max-width: 44px !important;
-  padding: 0 !important;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  max-width: 44px;
+  padding: 0;
   margin: 0 0 0 auto;
   line-height: 1;
   border-radius: 999px;
@@ -6201,24 +6203,24 @@ body:not(.amigo-chat) .composer,
    construction at any size and in any font. */
 .searchbar button[type="submit"]::after,
 .composer .searchbar button[type="submit"]::after {
-  content: "" !important;
+  content: "";
   /* Absolute, not a flex item. The button still holds its text label in the
      DOM (the accessible name), and a text node inside a flex container becomes
      an anonymous flex item — so the arrow was centred with the label's box and
      sat about 4 px to the right of the circle's centre. Pinning the arrow to
      the circle's own centre removes the label from the geometry entirely. */
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  margin: 0 !important;
-  transform: translate(-50%, -50%) !important;
-  display: block !important;
-  width: 20px !important;
-  height: 20px !important;
-  font-size: 0 !important;
-  background: currentColor !important;
-  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 19.5V4.5M5.5 11 12 4.5l6.5 6.5'/></svg>") center / 20px 20px no-repeat !important;
-  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 19.5V4.5M5.5 11 12 4.5l6.5 6.5'/></svg>") center / 20px 20px no-repeat !important;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: 20px;
+  height: 20px;
+  font-size: 0;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 19.5V4.5M5.5 11 12 4.5l6.5 6.5'/></svg>") center / 20px 20px no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 19.5V4.5M5.5 11 12 4.5l6.5 6.5'/></svg>") center / 20px 20px no-repeat;
 }
 
 /* Theme-aware finish for the canonical search card. Keep its ownership in this sheet. */

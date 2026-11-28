@@ -123,6 +123,12 @@ select:focus-visible {
   outline-offset: 3px;
 }
 
+/* A search card shows focus with its own border, so the field inside it does not
+   need a second ring drawn around it. */
+[role="search"] :is(input, textarea):focus-visible {
+  outline: none;
+}
+
 /* Consistent image sizing; the app-level error handler swaps failed media
    for a local placeholder and keeps provider avatars on their initials. */
 img.image-fallback {

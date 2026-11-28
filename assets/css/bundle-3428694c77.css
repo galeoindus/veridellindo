@@ -1356,12 +1356,16 @@ main#main {
   background: var(--surface);
   border: 1px solid var(--border-2);
   box-shadow: 0 1px 2px rgba(16, 24, 20, .05), 0 14px 36px -20px rgba(16, 24, 20, .32);
-  transition: border-color .16s ease, box-shadow .16s ease;
+  transition: none;
 }
+/* Locked: the card does not grow, lift, glow or animate on hover or focus. Only
+   the field's own border changes, which is what tells a reader where the caret
+   is. */
 .searchbar:focus-within,
 .composer .searchbar:focus-within {
   border-color: color-mix(in srgb, var(--accent) 55%, var(--border-2));
-  box-shadow: 0 1px 2px rgba(16, 24, 20, .05), 0 18px 44px -20px rgba(16, 24, 20, .38);
+  box-shadow: 0 1px 2px rgba(16, 24, 20, .05), 0 14px 36px -20px rgba(16, 24, 20, .32);
+  transform: none;
 }
 
 /* the field: the largest, quietest thing in the card */
@@ -1670,9 +1674,17 @@ section.dash-hero,
 .searchbar:focus-within textarea,
 .searchbar:focus-within input[type="search"],
 .searchbar:focus-within input[type="text"] {
-  border-color: color-mix(in srgb, var(--accent) 60%, var(--border-2));
-  outline: 2px solid color-mix(in srgb, var(--accent) 28%, transparent);
-  outline-offset: 1px;
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border-2));
+  outline: none;
+}
+/* The search field's focus ring is removed in polish.css, where the ring is
+   drawn: a rule here would sit in an earlier cascade layer and lose. */
+.searchbar textarea:focus-visible,
+.searchbar input:focus-visible,
+.searchbar textarea:focus,
+.searchbar input:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 /* 3. the extra heading above the field is redundant with the placeholder */
@@ -2125,8 +2137,9 @@ body:not(.amigo-chat) .composer,
     inset 0 1px 0 color-mix(in srgb, white 74%, transparent);
   -webkit-backdrop-filter: saturate(150%) blur(20px);
   backdrop-filter: saturate(150%) blur(20px);
-  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  transition: none;
 }
+/* Locked on purpose: the card never moves, grows or glows. */
 .composer .searchbar:focus-within {
   border-color: color-mix(in srgb, var(--im-accent) 58%, var(--im-border-strong));
   box-shadow: 0 18px 42px -24px color-mix(in srgb, var(--im-accent) 32%, transparent),
@@ -2330,6 +2343,12 @@ input:focus-visible,
 select:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--accent) 60%, transparent);
   outline-offset: 3px;
+}
+
+/* A search card shows focus with its own border, so the field inside it does not
+   need a second ring drawn around it. */
+[role="search"] :is(input, textarea):focus-visible {
+  outline: none;
 }
 
 /* Consistent image sizing; the app-level error handler swaps failed media

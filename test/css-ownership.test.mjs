@@ -37,3 +37,15 @@ test('no sheet styles the card through a pseudo-element', () => {
       `${sheet} still draws the dark ornament behind the search panel`);
   }
 });
+
+test('the search card is locked: no ring, no transition, no lift', () => {
+  const card = readFileSync(new URL(OWNER, DIR), 'utf8');
+  assert.ok(!/\.searchbar[^{}]*\{[^}]*transition:\s*border-color/.test(card),
+    'the card animates again');
+  assert.match(card, /\.searchbar:focus-within[\s\S]{0,300}transform:\s*none/,
+    'the card can move again on focus');
+
+  const polish = readFileSync(new URL('polish.css', DIR), 'utf8');
+  assert.match(polish, /\[role="search"\] :is\(input, textarea\):focus-visible\s*\{\s*outline:\s*none/,
+    'the field ring is back around the search input');
+});

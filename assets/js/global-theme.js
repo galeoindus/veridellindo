@@ -23,7 +23,9 @@
     appearance: 'Appearance', surface: 'Surface style', accent: 'Accent palette', width: 'Reading width', scale: 'Text size',
     options: {
       balanced: 'Balanced', glass: 'Liquid glass', soft: 'Soft / neumorphic', clay: 'Claymorphic',
-      forest: 'Forest', ocean: 'Ocean', violet: 'Violet', amber: 'Amber',
+      // The default family is the brand's indigo. The stored value stays
+      // 'forest' so a reader's saved choice is not reset by the rename.
+      forest: 'Indigo', ocean: 'Ocean', violet: 'Violet', amber: 'Amber',
       comfortable: 'Comfortable', compact: 'Compact', wide: 'Wide',
       standard: 'Standard', large: 'Large', larger: 'Extra large',
     },

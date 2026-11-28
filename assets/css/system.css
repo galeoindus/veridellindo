@@ -81,7 +81,7 @@ textarea { line-height: 1.6; }
 
 /* ── focus: always visible, never a surprise ───────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--accent, #b46a45);
+  outline: 2px solid var(--accent, #2f4bd8);
   outline-offset: 2px;
   border-radius: var(--r-sm);
 }
@@ -101,7 +101,7 @@ textarea { line-height: 1.6; }
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
 /* ── small touches that make a site feel finished ──────────────────────── */
-::selection { background: color-mix(in srgb, var(--accent, #b46a45) 30%, transparent); }
+::selection { background: color-mix(in srgb, var(--accent, #2f4bd8) 30%, transparent); }
 
 * { scrollbar-width: thin; scrollbar-color: var(--border-2, #cfc3ac) transparent; }
 *::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -531,7 +531,7 @@ a, button, .btn, .chip, .pill, .side-link, .tab, .depth-btn, .mode-btn {
   width: 68px;
   height: 68px;
   border-radius: 50%;
-  background-image: linear-gradient(135deg, #173b32, #b46a45);
+  background-image: linear-gradient(135deg, #12224a, #2f4bd8);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -95,12 +95,26 @@ icoSizes.forEach((size, i) => {
 });
 await writeFile(join(ROOT, 'favicon.ico'), Buffer.concat([header, ...payloads]));
 
+/* --- veridellindo-round.svg: the mark as one self-contained SVG -----------
+   The tab icon and the 1x entry of every brand-mark srcset point here. It used
+   to be a hand-embedded PNG of an older emblem — a blue circle with a lotus, a
+   star and an open book — so the icon in the tab was a different drawing from
+   the mark beside it. It is derived from the master now, like every other file. */
+await writeFile(join(BRAND, 'veridellindo-round.svg'), [
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">',
+  '<title id="title">Veridellindo</title>',
+  '<desc id="desc">A hexagonal emblem built from interlocking cubes in indigo, royal blue, cyan and teal.</desc>',
+  '<image href="logo-512.png" width="512" height="512" preserveAspectRatio="xMidYMid meet"/>',
+  '</svg>',
+  '',
+].join('\n'));
+
 /* --- the social card: the mark and the product line on the brand field ---- */
 const W = 1200, H = 630;
 const card = await sharp({
   create: {
     width: W, height: H, channels: 4,
-    background: { r: 17, g: 23, b: 19, alpha: 1 },
+    background: { r: 7, g: 13, b: 26, alpha: 1 },
   },
 })
   .composite([
@@ -109,11 +123,11 @@ const card = await sharp({
         <defs>
           <radialGradient id="g" cx="18%" cy="16%" r="82%">
             <stop offset="0%" stop-color="${hex(field)}" stop-opacity="0.95"/>
-            <stop offset="52%" stop-color="#c2308a" stop-opacity="0.55"/>
-            <stop offset="100%" stop-color="#6b21c8" stop-opacity="0.18"/>
+            <stop offset="52%" stop-color="#2f6bf0" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#12aec8" stop-opacity="0.18"/>
           </radialGradient>
         </defs>
-        <rect width="${W}" height="${H}" fill="#111713"/>
+        <rect width="${W}" height="${H}" fill="#070d1a"/>
         <rect width="${W}" height="${H}" fill="url(#g)"/>
       </svg>`),
       top: 0, left: 0,
@@ -122,9 +136,9 @@ const card = await sharp({
     {
       input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300">
         <text x="0" y="96" font-family="DejaVu Serif, Georgia, serif" font-size="76" font-weight="700" fill="#ffffff">Veridellindo</text>
-        <text x="0" y="168" font-family="DejaVu Sans, Helvetica, sans-serif" font-size="30" fill="#ffd9c7">Understand a question.</text>
+        <text x="0" y="168" font-family="DejaVu Sans, Helvetica, sans-serif" font-size="30" fill="#9ce6f2">Understand a question.</text>
         <text x="0" y="212" font-family="DejaVu Sans, Helvetica, sans-serif" font-size="30" fill="#ffffff">Follow the evidence.</text>
-        <text x="0" y="276" font-family="DejaVu Sans, Helvetica, sans-serif" font-size="23" fill="#cfd8d2">Cited answers built from Wikipedia and Wikidata.</text>
+        <text x="0" y="276" font-family="DejaVu Sans, Helvetica, sans-serif" font-size="23" fill="#b9c6e2">Cited answers built from Wikipedia and Wikidata.</text>
       </svg>`),
       top: 190, left: 440,
     },
@@ -134,4 +148,4 @@ const card = await sharp({
 await writeFile(join(BRAND, 'social-card.png'), card);
 
 process.stdout.write(`brand assets rebuilt from ${masterPath}\n`);
-process.stdout.write(`  mark field ${hex(field)} · 7 sizes · maskable · favicon.ico · social-card.png\n`);
+process.stdout.write(`  mark field ${hex(field)} · 7 sizes · maskable · favicon.ico · round.svg · social-card.png\n`);

@@ -11,6 +11,31 @@ The build id on every page is `<version>-<commit>`, written by
 
 ## [Unreleased]
 
+### Changed
+- **The supplied hexagonal mark is the logo, everywhere.** `logo-master.png` is
+  now the supplied artwork, cut from its white field and carried on a
+  transparent one; every icon, app icon, maskable icon, favicon, tab SVG and
+  social card is generated from it by `npm run brand-assets`. The old
+  `veridellindo-round.svg` — a hand-embedded blue circle with a lotus, a star
+  and an open book — is produced from the master too, so the icon in the tab is
+  the same drawing as the mark beside it. It also stopped shipping 312 KB of
+  base64 and references the raster instead.
+- **The palette follows the mark.** Indigo `#4338ca`, blue `#2f4bd8` and
+  `#1a63d8` replace the orange–coral–magenta–violet identity; cyan `#12aec8`
+  and teal are the secondary family. Cool white `#f5f8fd` and deep navy
+  `#070d1a` replace the lilac and plum fields, and the design-system tokens,
+  the research desk, the chat surfaces and the generated social card were
+  retuned with them.
+- **Pink is gone from every gradient**, including the launcher, primary buttons,
+  the send button, the download button and the microphone's recording state,
+  which is a true red now rather than a crimson-pink.
+- Gradient stops that carry white text end at `#1a63d8`: the previous cyan end
+  measured 2.2:1 against white.
+- The default accent family is labelled **Indigo** instead of **Forest** — it
+  has been blue since the mark changed. The stored value stays `forest`, so no
+  reader's saved choice is reset.
+- `docs/DESIGN.md` and the README describe the new mark and palette.
+
 ### Fixed
 - **A citation marker no longer leaves the article.** Every `<sup>` marker is
   `<a href="#ref-3">`, and the hash router treated any fragment as a route, so
@@ -95,10 +120,6 @@ The build id on every page is `<version>-<commit>`, written by
   setting migration, Pages Function response headers and SSE preservation.
 - Full source review and final test/audit results are recorded in
   `docs/REVIEW-2026-11-27.md`.
-
-## [Unreleased]
-
-Nothing yet.
 
 ## [6.10.65] — 27 November 2026
 

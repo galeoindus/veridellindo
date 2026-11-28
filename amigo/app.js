@@ -1943,7 +1943,7 @@ function drawSpark(canvas, series, roll){
     const y = pad.t + (h - pad.t - pad.b) * g / 2;
     ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(w - pad.r, y); ctx.stroke();
   }
-  ctx.strokeStyle = "#9b72cb"; ctx.setLineDash([4, 3]); ctx.beginPath();
+  ctx.strokeStyle = "#2f4bd8"; ctx.setLineDash([4, 3]); ctx.beginPath();
   roll.forEach((v, i) => { i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v)); });
   ctx.stroke(); ctx.setLineDash([]);
   ctx.strokeStyle = "#1a73e8"; ctx.lineWidth = 2; ctx.beginPath();

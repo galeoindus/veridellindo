@@ -126,7 +126,7 @@
     note.id = 'veridell-build-update';
     note.setAttribute('role', 'status');
     note.setAttribute('aria-live', 'polite');
-    note.style.cssText = 'position:fixed;inset:auto 12px 12px 12px;z-index:99999;padding:12px 16px;border-radius:12px;background:#173b32;color:#fff;font:600 13px system-ui;box-shadow:0 8px 28px #0005;display:flex;align-items:center;gap:12px;justify-content:space-between';
+    note.style.cssText = 'position:fixed;inset:auto 12px 12px 12px;z-index:99999;padding:12px 16px;border-radius:12px;background:#12224a;color:#fff;font:600 13px system-ui;box-shadow:0 8px 28px #0005;display:flex;align-items:center;gap:12px;justify-content:space-between';
     const label = document.createElement('span');
     label.textContent = 'A newer version is available. Refresh this page to update.';
     const button = document.createElement('button');

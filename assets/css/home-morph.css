@@ -16,14 +16,14 @@
   --hm-lift: 7px 7px 18px rgba(23, 59, 50, .10), -6px -6px 16px rgba(255, 255, 255, .75);
   --hm-lift-sm: 4px 4px 11px rgba(23, 59, 50, .09), -4px -4px 10px rgba(255, 255, 255, .7);
   --hm-press: inset 4px 4px 10px rgba(23, 59, 50, .10), inset -4px -4px 10px rgba(255, 255, 255, .75);
-  --hm-grad: linear-gradient(135deg, var(--copper), #9a4f33 55%, var(--forest));
+  --hm-grad: linear-gradient(135deg, #4338ca 0%,#2f4bd8 52%,#1a63d8 100%);
 }
 
 [data-theme="dark"] {
   --hm-lift: 7px 7px 18px rgba(0, 0, 0, .55), -5px -5px 14px rgba(255, 245, 230, .035);
   --hm-lift-sm: 4px 4px 11px rgba(0, 0, 0, .5), -4px -4px 10px rgba(255, 245, 230, .03);
   --hm-press: inset 5px 5px 11px rgba(0, 0, 0, .6), inset -4px -4px 9px rgba(255, 245, 230, .035);
-  --hm-grad: linear-gradient(135deg, #d08a62, #a35f45 55%, #7fb3a0);
+  --hm-grad: linear-gradient(135deg, #4338ca 0%,#2f4bd8 52%,#1a63d8 100%);
 }
 
 /* the slab the first screen sits on */

@@ -30,8 +30,9 @@ manifest, the storage keys, the meta tags and the canonical host are all
 `veridell`. The repository is `galeoindus/veridellindo` and nothing in the shipped
 tree names another one.
 
-**A unified mark.** The supplied Veridellindo lotus-and-gradient logo now appears
-throughout the site and Amigo, including browser/app icons and the social card.
+**A unified mark.** The supplied Veridellindo hexagonal logo — indigo and blue
+into cyan and teal — appears throughout the site and Amigo, including
+browser/app icons and the social card.
 The original transparent artwork is kept as the master; responsive PNG sizes and
 a maskable app icon are generated from it.
 

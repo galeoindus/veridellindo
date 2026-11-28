@@ -319,7 +319,7 @@ function paintWork(ctx, mount, record) {
   mount.append(feedback(ctx, key));
 }
 
-const PLACEHOLDER = `<svg viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="#173b32"/><rect x="6.6" y="6.6" width="26.8" height="26.8" rx="6.2" fill="none" stroke="#f5f0e6" stroke-opacity=".32" stroke-width="1.3"/><g fill="none" stroke="#f5f0e6" stroke-width="2.7" stroke-linecap="round"><path d="M10.2 16.5c2.85-3.5 5.7-3.5 8.55 0s5.7 3.5 8.55 0"/><path d="M12.4 23.5c2.85-3.5 5.7-3.5 8.55 0s5.7 3.5 8.55 0"/></g></svg>`;
+const PLACEHOLDER = `<svg viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="#12224a"/><rect x="6.6" y="6.6" width="26.8" height="26.8" rx="6.2" fill="none" stroke="#e8eefc" stroke-opacity=".32" stroke-width="1.3"/><g fill="none" stroke="#e8eefc" stroke-width="2.7" stroke-linecap="round"><path d="M10.2 16.5c2.85-3.5 5.7-3.5 8.55 0s5.7 3.5 8.55 0"/><path d="M12.4 23.5c2.85-3.5 5.7-3.5 8.55 0s5.7 3.5 8.55 0"/></g></svg>`;
 
 function esc(value) {
   return String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

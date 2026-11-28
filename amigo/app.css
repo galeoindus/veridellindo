@@ -80,7 +80,7 @@ header{display:flex; align-items:center; gap:10px; padding:12px 0 10px}
 .bubble ul.sub{margin:4px 0 2px; padding-inline-start:1.15em; color:var(--muted)}
 .bubble li.task{list-style:none; display:flex; gap:9px; align-items:flex-start; margin-inline-start:-1.35em}
 .bubble .tick{flex:none; width:15px; height:15px; margin-top:5px; border:1.5px solid var(--line2); border-radius:4px; position:relative}
-.bubble .tick.on{background:linear-gradient(135deg,#4285F4,#9B72CB); border-color:transparent}
+.bubble .tick.on{background:linear-gradient(135deg,#4338ca,#1a63d8); border-color:transparent}
 .bubble .tick.on::after{content:""; position:absolute; inset:0; margin:auto; width:4px; height:8px;
   border-right:2px solid #fff; border-bottom:2px solid #fff; transform:translateY(-1px) rotate(45deg)}
 .bubble code{background:var(--hover); border:1px solid var(--line); border-radius:5px; padding:1px 5px; font-size:.86em;
@@ -272,7 +272,7 @@ body:not(.dark) .copybtn.vote.on{color:#1a73e8}
 .genimg{display:block; max-width:100%; max-height:520px; border-radius:14px; border:1px solid var(--line)}
 .imgcap{font-size:.72rem; color:var(--muted); margin-top:8px; white-space:normal; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
 .dlbtn{display:inline-flex; align-items:center; gap:7px; font-size:.75rem; font-weight:600; color:#fff;
-  background:linear-gradient(120deg,#4285f4,#9b72cb 55%,#d96570); border-radius:11px; padding:8px 15px;
+  background:linear-gradient(120deg,#4338ca,#2f4bd8 52%,#1a63d8); border-radius:11px; padding:8px 15px;
   text-decoration:none; box-shadow:0 7px 18px -9px rgba(120,110,210,.85);
   transition:transform .15s ease, box-shadow .15s ease, filter .15s ease}
 .dlbtn:hover{transform:translateY(-1.5px); filter:brightness(1.07); box-shadow:0 11px 22px -9px rgba(120,110,210,.95)}
@@ -592,7 +592,7 @@ body.dark{
   --bg:#0c1020; --panel:rgba(22,27,49,.82); --ink:#edf0ff; --muted:#a0a9c5;
   --line:rgba(165,177,230,.14); --line2:rgba(165,177,230,.24); --hover:rgba(144,150,255,.10);
   --bubble:rgba(27,34,60,.78); --field:rgba(22,28,50,.86); --btn:#a9a4ff; --btnink:#15152d;
-  --red:#ff8293; --green:#6bd3ae; --ring:rgba(0,0,0,.24); --link:#b4afff;
+  --red:#f87171; --green:#6bd3ae; --ring:rgba(0,0,0,.24); --link:#93b4ff;
 }
 body{background:radial-gradient(ellipse at 15% 5%,rgba(153,163,255,.18),transparent 32%),radial-gradient(ellipse at 90% 92%,rgba(255,174,153,.16),transparent 28%),var(--bg);}
 .shell{max-width:1440px; background:transparent;}
@@ -601,7 +601,7 @@ body{background:radial-gradient(ellipse at 15% 5%,rgba(153,163,255,.18),transpar
 header{width:100%; padding:12px 4px 13px; border-bottom:1px solid var(--line);}
 .brand .star{width:38px;height:38px;filter:drop-shadow(0 7px 14px rgba(91,92,226,.2));}
 .brand .star img{width:100%;height:100%;object-fit:contain;animation:amigoFloat 5s ease-in-out infinite;}
-.brand h1,.sBrand{font-family:ui-sans-serif,system-ui,sans-serif;font-weight:750;letter-spacing:-.045em;background:linear-gradient(110deg,#4e5ddb,#8a65d9 62%,#dc8da5);background-clip:text;-webkit-background-clip:text;color:transparent;}
+.brand h1,.sBrand{font-family:ui-sans-serif,system-ui,sans-serif;font-weight:750;letter-spacing:-.045em;background:linear-gradient(110deg,#4338ca,#2f4bd8 55%,#1a63d8);background-clip:text;-webkit-background-clip:text;color:transparent;}
 .brand h1{font-size:1.45rem;}
 .sBrand{font-size:1.3rem;}
 .engine-status{font-size:.68rem;font-weight:700;letter-spacing:.015em;color:var(--muted);border:1px solid var(--line);background:var(--bubble);border-radius:999px;padding:6px 10px;white-space:nowrap;margin-inline:8px auto;}
@@ -657,7 +657,7 @@ body.dark .msg.me .bubble{background:linear-gradient(140deg,rgba(72,76,140,.38),
 .sBrand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; color: inherit; }
 .sBrand img { display: block; flex: 0 0 auto; }
 .skip-link { position: absolute; left: -9999px; top: 0; z-index: var(--z-skip-link, 100); padding: 10px 16px;
-  background: #173b32; color: #fff; border-radius: 0 0 10px 0; font: 600 14px system-ui; }
+  background: #12224a; color: #fff; border-radius: 0 0 10px 0; font: 600 14px system-ui; }
 .skip-link:focus { left: 0; }
 .site-version { display: inline-block; margin-left: 6px; padding: 0; color: inherit;
   opacity: .72; font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap; }

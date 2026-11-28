@@ -119,7 +119,7 @@ form.panel .select { cursor: pointer; }
    `color: transparent` but lost its gradient, which left the second half of
    the headline invisible. Restore it. */
 .dash-hero h1 .dash-grad {
-  background-image: linear-gradient(100deg, var(--copper) 0%, #d08a62 45%, var(--accent-2) 100%);
+  background-image: linear-gradient(100deg, var(--copper) 0%, #5b7cfa 45%, var(--accent-2) 100%);
   background-size: 100% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -127,7 +127,7 @@ form.panel .select { cursor: pointer; }
   color: transparent;
 }
 [data-theme="dark"] .dash-hero h1 .dash-grad {
-  background-image: linear-gradient(100deg, #d08a62 0%, #e0a271 45%, var(--accent-2) 100%);
+  background-image: linear-gradient(100deg, #5b7cfa 0%, #e0a271 45%, var(--accent-2) 100%);
 }
 
 /* ------------------------------------------------------- small screens */

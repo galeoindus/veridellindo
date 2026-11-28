@@ -1,24 +1,25 @@
-/* Veridellindo's supplied orange–coral–magenta–violet identity.
+/* Veridellindo's identity, taken from the supplied hexagonal mark: indigo and
+   royal blue on the left, cyan and teal on the right, on a cool white field.
    Shared semantic tokens refresh the site surfaces without changing page layout
    or the user's light/dark, accent, reading-width and surface preferences. */
 :root {
-  --im-bg: #f8f6fb;
+  --im-bg: #f5f8fd;
   --im-surface: #ffffff;
-  --im-surface-2: #f1edf7;
-  --im-text: #241c30;
-  --im-muted: #655d70;
-  --im-faint: #756b80;
-  --im-border: #e4ddeb;
-  --im-border-strong: #d3c7df;
-  --im-accent: #7439bd;
-  --im-accent-soft: #efe5f9;
-  --im-warm: #df7145;
-  --im-shadow-sm: 0 2px 8px rgba(61, 37, 89, .06);
-  --im-shadow: 0 12px 32px -20px rgba(61, 37, 89, .24), 0 2px 6px rgba(61, 37, 89, .05);
-  --im-shadow-lg: 0 24px 60px -28px rgba(61, 37, 89, .30);
-  --im-clay-shadow: 8px 8px 20px rgba(61, 37, 89, .08), -7px -7px 18px rgba(255,255,255,.88);
-  --im-inset-shadow: inset 2px 2px 6px rgba(61,37,89,.07), inset -2px -2px 6px rgba(255,255,255,.84);
-  --im-glass: rgba(253,251,255,.80);
+  --im-surface-2: #e9effb;
+  --im-text: #101a33;
+  --im-muted: #556080;
+  --im-faint: #66718d;
+  --im-border: #dde4f3;
+  --im-border-strong: #c5cfe6;
+  --im-accent: #2f4bd8;
+  --im-accent-soft: #e6ecfd;
+  --im-warm: #0e93ad;
+  --im-shadow-sm: 0 2px 8px rgba(18, 32, 74, .06);
+  --im-shadow: 0 12px 32px -20px rgba(18, 32, 74, .24), 0 2px 6px rgba(18, 32, 74, .05);
+  --im-shadow-lg: 0 24px 60px -28px rgba(18, 32, 74, .30);
+  --im-clay-shadow: 8px 8px 20px rgba(18, 32, 74, .08), -7px -7px 18px rgba(255,255,255,.88);
+  --im-inset-shadow: inset 2px 2px 6px rgba(18,32,74,.07), inset -2px -2px 6px rgba(255,255,255,.84);
+  --im-glass: rgba(250,252,255,.80);
   --im-glass-border: rgba(255,255,255,.78);
   --bg: var(--im-bg); --surface: var(--im-surface); --surface-2: var(--im-surface-2);
   --panel: var(--im-surface); --panel-2: var(--im-surface-2); --panel-soft: var(--im-surface-2);
@@ -27,29 +28,29 @@
   --border: var(--im-border); --border-2: var(--im-border-strong);
   --line: var(--im-border); --line-2: var(--im-border-strong);
   --accent: var(--im-accent); --primary: var(--im-accent); --focus: var(--im-accent);
-  --accent-2: #c3318e; --on-primary: #fff;
-  --forest: #7439bd; --forest-ink: #7439bd; --copper: #f18a45; --copper-ink: #9d4b28;
-  --sage: #e4d5f2; --sand: #f1edf7;
+  --accent-2: #12aec8; --on-primary: #fff;
+  --forest: #2f4bd8; --forest-ink: #2f4bd8; --copper: #12aec8; --copper-ink: #0a6f83;
+  --sage: #dbe7fa; --sand: #e9effb;
   --shadow-sm: var(--im-shadow-sm); --shadow: var(--im-shadow); --shadow-lg: var(--im-shadow-lg);
 }
 html[data-theme="dark"] {
-  --im-bg: #100d18;
-  --im-surface: #191422;
-  --im-surface-2: #241c30;
-  --im-text: #f1ecf7;
-  --im-muted: #c1b6ce;
-  --im-faint: #aa9db8;
-  --im-border: #392d49;
-  --im-border-strong: #51405f;
-  --im-accent: #c9a1f3;
-  --im-accent-soft: #30213f;
-  --im-warm: #ffad76;
+  --im-bg: #070d1a;
+  --im-surface: #111a2e;
+  --im-surface-2: #1a2440;
+  --im-text: #eef2fb;
+  --im-muted: #a7b3cd;
+  --im-faint: #94a1bc;
+  --im-border: #243052;
+  --im-border-strong: #36456b;
+  --im-accent: #7ea6ff;
+  --im-accent-soft: #16264a;
+  --im-warm: #4fd6e6;
   --im-shadow-sm: 0 2px 8px rgba(0,0,0,.24);
   --im-shadow: 0 14px 34px -20px rgba(0,0,0,.68), 0 2px 6px rgba(0,0,0,.3);
   --im-shadow-lg: 0 24px 64px -28px rgba(0,0,0,.78);
   --im-clay-shadow: 8px 8px 20px rgba(0,0,0,.34), -7px -7px 18px rgba(255,255,255,.025);
   --im-inset-shadow: inset 2px 2px 7px rgba(0,0,0,.3), inset -2px -2px 7px rgba(255,255,255,.025);
-  --im-glass: rgba(18,14,27,.82);
+  --im-glass: rgba(10,16,30,.82);
   --im-glass-border: rgba(255,255,255,.08);
   --bg: var(--im-bg); --surface: var(--im-surface); --surface-2: var(--im-surface-2);
   --panel: var(--im-surface); --panel-2: var(--im-surface-2); --panel-soft: var(--im-surface-2);
@@ -58,9 +59,9 @@ html[data-theme="dark"] {
   --border: var(--im-border); --border-2: var(--im-border-strong);
   --line: var(--im-border); --line-2: var(--im-border-strong);
   --accent: var(--im-accent); --primary: var(--im-accent); --focus: var(--im-accent);
-  --accent-2: #f09aca; --on-primary: #21152f;
-  --forest: #c9a1f3; --forest-ink: #e0c5fb; --copper: #ffad76; --copper-ink: #ffc69c;
-  --sage: #49375d; --sand: #241c30;
+  --accent-2: #6fe0ee; --on-primary: #06101f;
+  --forest: #7ea6ff; --forest-ink: #a9c4ff; --copper: #4fd6e6; --copper-ink: #9ceaf5;
+  --sage: #24365c; --sand: #1a2440;
   --shadow-sm: var(--im-shadow-sm); --shadow: var(--im-shadow); --shadow-lg: var(--im-shadow-lg);
 }
 html[data-theme="light"] {
@@ -69,27 +70,27 @@ html[data-theme="light"] {
 }
 
 /* Preserve user-selected accent families; the mark itself remains unchanged. */
-html[data-accent="violet"] { --accent-2: #7652aa; }
-html[data-theme="dark"][data-accent="violet"] { --accent-2: #ddcaff; }
+html[data-accent="violet"] { --accent-2: #5b6fe0; }
+html[data-theme="dark"][data-accent="violet"] { --accent-2: #b9c8ff; }
 
 /* Reuse the provided logo in every shared assistant entry point. */
 .amigo-launcher {
   gap: 9px; padding: 10px 16px 10px 11px;
   border: 1px solid rgba(255,255,255,.22); border-radius: 999px; color: #fff;
-  background: linear-gradient(115deg,#ff963e 0%,#dc398c 52%,#7939d3 100%);
-  box-shadow: 0 12px 28px rgba(110,48,160,.28);
+  background: linear-gradient(115deg,#4338ca 0%,#2f4bd8 52%,#1a63d8 100%);
+  box-shadow: 0 12px 28px rgba(47,75,216,.28);
 }
 .amigo-launcher img {
   display: block; width: 30px; height: 30px; flex: 0 0 30px;
   object-fit: contain; border-radius: 50%; background: rgba(255,255,255,.14);
 }
 .amigo-launcher span { font-weight: 700; letter-spacing: -.015em; }
-.amigo-launcher:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(110,48,160,.34); }
-.amigo-launcher:focus-visible { outline: 3px solid #9a55df; outline-offset: 3px; }
-.brand-mark { background: linear-gradient(140deg,rgba(255,150,62,.12),rgba(220,57,140,.10),rgba(121,57,211,.12)); }
+.amigo-launcher:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(47,75,216,.34); }
+.amigo-launcher:focus-visible { outline: 3px solid #5b8cff; outline-offset: 3px; }
+.brand-mark { background: linear-gradient(140deg,rgba(67,56,202,.12),rgba(47,107,240,.10),rgba(18,194,214,.12)); }
 .brand-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .btn-primary, .search-submit, .primary-new {
-  background: linear-gradient(115deg,#ff963e 0%,#dc398c 52%,#7939d3 100%);
+  background: linear-gradient(115deg,#4338ca 0%,#2f4bd8 52%,#1a63d8 100%);
   border-color: transparent; color: #fff;
 }
 .btn-primary:hover, .search-submit:hover, .primary-new:hover { filter: brightness(1.05); }

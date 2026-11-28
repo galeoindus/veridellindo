@@ -4,7 +4,7 @@
 :root {
   color-scheme: light;
   --amigo-accent: #7b35d4;
-  --amigo-accent-2: #d72d91;
+  --amigo-accent-2: #12aec8;
   --amigo-warm: #ff8b38;
   --amigo-page: #f7f5fb;
   --amigo-panel: rgba(255,255,255,.88);
@@ -126,7 +126,7 @@ body.amigo-chat .msg.ai .bubble {
 body.dark.amigo-chat .msg.ai .bubble { box-shadow: 0 12px 32px rgba(0,0,0,.18); }
 body.amigo-chat .msg.me .bubble {
   max-width: min(82%, 720px); padding: 13px 18px; border: 1px solid rgba(255,255,255,.15);
-  border-radius: 21px 8px 21px 21px; background: linear-gradient(120deg,#7636d2,#c02eaa 62%,#e96d69);
+  border-radius: 21px 8px 21px 21px; background: linear-gradient(120deg,#4338ca 0%,#2f4bd8 52%,#1a63d8 100%);
   color: #fff; box-shadow: 0 9px 24px rgba(126,54,177,.17);
 }
 body.amigo-chat .msg.me .bubble a { color: #fff; }
@@ -155,8 +155,8 @@ body.amigo-chat .toolbtn {
 }
 body.amigo-chat .toolbtn:hover { background: rgba(123,53,212,.09); color: var(--amigo-ink); }
 body.amigo-chat #plusBtn { border: 1px solid var(--amigo-line); background: rgba(123,53,212,.045); }
-body.amigo-chat #micBtn.on { background: rgba(219,55,86,.12); color: #de365c; box-shadow: 0 0 0 4px rgba(219,55,86,.08); animation: amigoMicPulse 1.35s ease-in-out infinite; }
-body.amigo-chat #send { width: 44px; height: 44px; flex: 0 0 44px; border: 0; border-radius: 15px; background: linear-gradient(135deg,#ff963e,#df398d 52%,#7939d3); color: #fff; box-shadow: 0 7px 17px rgba(174,57,151,.25); }
+body.amigo-chat #micBtn.on { background: rgba(220,38,38,.12); color: #dc2626; box-shadow: 0 0 0 4px rgba(220,38,38,.08); animation: amigoMicPulse 1.35s ease-in-out infinite; }
+body.amigo-chat #send { width: 44px; height: 44px; flex: 0 0 44px; border: 0; border-radius: 15px; background: linear-gradient(135deg,#4338ca 0%,#2f4bd8 52%,#1a63d8 100%); color: #fff; box-shadow: 0 7px 17px rgba(47,75,216,.26); }
 body.amigo-chat #send:disabled { background: var(--amigo-line); box-shadow: none; color: var(--amigo-muted); }
 body.amigo-chat #send:not(:disabled):hover { filter: brightness(1.06); transform: translateY(-1px); }
 body.amigo-chat .menu { border: 1px solid var(--amigo-line); border-radius: 18px; background: var(--amigo-card); box-shadow: var(--amigo-shadow); overflow: hidden; }
@@ -172,7 +172,7 @@ body.amigo-chat .modal h2 { color: var(--amigo-ink); }
 body.amigo-chat .modal .sub, body.amigo-chat .field .hint { color: var(--amigo-muted); }
 body.amigo-chat .field input[type=text], body.amigo-chat .field input[type=password], body.amigo-chat .field select { border-color: var(--amigo-line); border-radius: 12px; background: var(--amigo-page); color: var(--amigo-ink); }
 body.amigo-chat .field input:focus, body.amigo-chat .field select:focus { border-color: rgba(123,53,212,.6); box-shadow: 0 0 0 3px rgba(123,53,212,.1); }
-body.amigo-chat .btn.primary { background: linear-gradient(115deg,#883bd0,#cf368d); color: #fff; }
+body.amigo-chat .btn.primary { background: linear-gradient(115deg,#4338ca,#2f4bd8 52%,#1a63d8); color: #fff; }
 body.amigo-chat .btn.ghost { background: var(--amigo-page); color: var(--amigo-ink); border-color: var(--amigo-line); }
 body.amigo-chat .chatrow { border-color: var(--amigo-line); border-radius: 13px; background: var(--amigo-page); }
 body.amigo-chat .scrim { background: rgba(16,12,25,.46); backdrop-filter: blur(3px); }
@@ -220,9 +220,9 @@ body.amigo-chat .composer :focus-visible { outline-offset: 1px; }
 }
 
 /* Image tools use the same brand ramp as the primary composer action. */
-body.amigo-chat .dlbtn { background: linear-gradient(115deg,#ff963e,#dc398c 52%,#7939d3); box-shadow: 0 7px 18px -9px rgba(123,53,212,.55); }
-body.amigo-chat .bubble .tick.on { background: linear-gradient(135deg,#ff963e,#dc398c 52%,#7939d3); }
-body.amigo-chat .fgo, body.amigo-chat #setupBtn { background: linear-gradient(115deg,#ff963e,#dc398c 52%,#7939d3); color: #fff; }
+body.amigo-chat .dlbtn { background: linear-gradient(115deg,#4338ca 0%,#2f4bd8 52%,#1a63d8 100%); box-shadow: 0 7px 18px -9px rgba(47,75,216,.45); }
+body.amigo-chat .bubble .tick.on { background: linear-gradient(135deg,#4338ca 0%,#2f4bd8 52%,#1a63d8 100%); }
+body.amigo-chat .fgo, body.amigo-chat #setupBtn { background: linear-gradient(115deg,#4338ca 0%,#2f4bd8 52%,#1a63d8 100%); color: #fff; }
 
 
 /* Composer finish: a stable, theme-aware glass surface shared with the main search. */

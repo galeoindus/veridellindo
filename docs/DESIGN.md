@@ -10,11 +10,14 @@ sheltered place). A quiet place where things are checked. The product is
 Veridellindo; the conversational assistant is Amigo; its botanical companion
 character is Veri. Veri is a mascot, not a second product or a replacement name.
 
-**The mark.** The supplied Veridellindo logo is a white lotus-like line symbol
-set over a warm orange, coral, magenta and violet gradient cloud, with a small
-charcoal sparkle at the lower right. Use the same master artwork for the site
-header, browser icons, app icons and social preview. Keep its transparent
-background; never replace the brand mark with the mascot.
+**The mark.** The supplied Veridellindo logo is a hexagonal emblem built from
+interlocking cubes: indigo and royal blue on the left, cyan and teal on the
+right, with white faces reading as light through the form. Use the same master
+artwork — `assets/img/brand/logo-master.png`, cut from the supplied image and
+carried on a transparent field — for the site header, browser icons, app icons
+and social preview. Every raster is generated from that one master by
+`npm run brand-assets`; never hand-export a second drawing of it, and never
+replace the brand mark with the mascot.
 
 **The companion character.** Veri is the assistant's friendly botanical spirit:
 a translucent green/teal seed body, two leaf sprouts, large expressive eyes,
@@ -27,19 +30,24 @@ joy. The CSS motion is gentle and decorative only; text/state must still explain
 what the assistant is doing. The original Veridellindo mark remains the product
 identity and the companion must never replace it in the header, favicon or PWA.
 
-**The tile.** The supplied gradient is the visual anchor: warm orange and gold
-flow through coral and pink into violet. Use it sparingly for primary actions,
-active states and brand accents. Keep reading surfaces quiet, opaque and high
-contrast so the full-colour logo remains distinctive.
+**The tile.** The mark's own gradient is the visual anchor: indigo through
+royal blue into blue, on the surfaces that carry text. Use it sparingly for
+primary actions, active states and brand accents. Cyan and teal are the
+secondary family and stay decorative — a white label on the cyan end of the
+gradient is only 2.2:1, so any surface with text on it stops at `#1a63d8`.
+Keep reading surfaces quiet, opaque and high contrast so the full-colour logo
+remains distinctive.
 
 **The promise.** *Every answer, with its source.* It is the tagline, the
 manifest description, the `alternateName` in structured data and the first line
 of the README. If a new surface needs a one-line description, use that line
 rather than inventing a second one.
 
-**The colours.** Soft lilac-white and deep plum surfaces support the orange,
-coral, magenta and violet brand gradient. Keep long-form content calm and
-readable; reserve the brighter gradient for focal actions and brand moments.
+**The colours.** Cool white (`#f5f8fd`) and deep navy (`#070d1a`) surfaces
+support the indigo, blue, cyan and teal brand gradient. Accent `#2f4bd8` clears
+6.3:1 on the light field and `#7ea6ff` clears 8.1:1 on the dark one. Keep
+long-form content calm and readable; reserve the brighter gradient for focal
+actions and brand moments.
 
 **The type.** A serif display for headings — Iowan Old Style, Palatino, Georgia
 and Tiro Devanagari Hindi in that order — and the system sans for everything

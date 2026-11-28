@@ -34,7 +34,7 @@
   --lift: 6px 6px 14px rgba(150, 122, 92, .22), -6px -6px 14px rgba(255, 253, 248, .9);
   --lift-sm: 4px 4px 10px rgba(150, 122, 92, .18), -4px -4px 10px rgba(255, 253, 248, .85);
   --press: inset 4px 4px 9px rgba(150, 122, 92, .26), inset -4px -4px 9px rgba(255, 253, 248, .9);
-  --grad: linear-gradient(135deg, #d98a5f, #b4613a 55%, #a8456a);
+  --grad: linear-gradient(135deg, #4338ca 0%,#2f4bd8 52%,#1a63d8 100%);
 }
 
 .app-shell[data-theme=dark] {
@@ -58,7 +58,7 @@
   --lift: 6px 6px 14px rgba(0, 0, 0, .5), -5px -5px 12px rgba(255, 245, 230, .045);
   --lift-sm: 4px 4px 10px rgba(0, 0, 0, .45), -4px -4px 10px rgba(255, 245, 230, .04);
   --press: inset 5px 5px 11px rgba(0, 0, 0, .55), inset -4px -4px 9px rgba(255, 245, 230, .05);
-  --grad: linear-gradient(135deg, #f0a06b, #d0714a 55%, #c26383);
+  --grad: linear-gradient(135deg, #4338ca 0%,#2f4bd8 52%,#1a63d8 100%);
 }
 
 /* the ground: warm, with one bloom behind the hero */

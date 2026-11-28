@@ -21,12 +21,12 @@
   --vd-slow: 320ms;
 
   /* One ring, used by every focusable thing. */
-  --vd-ring: 0 0 0 3px color-mix(in srgb, var(--accent, #b46a45) 30%, transparent);
+  --vd-ring: 0 0 0 3px color-mix(in srgb, var(--accent, #2f4bd8) 30%, transparent);
 
   /* Shadows that sit on paper rather than float above it. */
   --vd-lift-1: 0 1px 2px color-mix(in srgb, var(--charcoal, #242824) 6%, transparent);
   --vd-lift-2: 0 2px 4px color-mix(in srgb, var(--charcoal, #242824) 5%, transparent),
-               0 12px 24px -14px color-mix(in srgb, var(--forest, #173b32) 26%, transparent);
+               0 12px 24px -14px color-mix(in srgb, var(--forest, #12224a) 26%, transparent);
 }
 /* A press should feel like a press, and never move the thing under the finger
    far enough to change what is being clicked. */
@@ -34,7 +34,7 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
 
 /* ── focus: visible, consistent, never a surprise ──────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--accent, #b46a45);
+  outline: 2px solid var(--accent, #2f4bd8);
   outline-offset: 2px;
   box-shadow: var(--vd-ring);
 }
@@ -55,7 +55,7 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
     box-shadow: var(--vd-lift-2);
     transform: translateY(-2px);
   }
-  .side-link:hover, .bottom-nav a:hover { background: color-mix(in srgb, var(--accent, #b46a45) 8%, transparent); }
+  .side-link:hover, .bottom-nav a:hover { background: color-mix(in srgb, var(--accent, #2f4bd8) 8%, transparent); }
 }
 
 /* ── the chat: rhythm, not decoration ──────────────────────────────────── */
@@ -106,11 +106,11 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
   background-color: color-mix(in srgb, var(--border-2, #cfc3ac) 85%, transparent);
 }
 *::-webkit-scrollbar-thumb:hover {
-  background-color: color-mix(in srgb, var(--accent, #b46a45) 55%, transparent);
+  background-color: color-mix(in srgb, var(--accent, #2f4bd8) 55%, transparent);
 }
 
 /* ── selection ─────────────────────────────────────────────────────────── */
-::selection { background: color-mix(in srgb, var(--accent, #b46a45) 26%, transparent); }
+::selection { background: color-mix(in srgb, var(--accent, #2f4bd8) 26%, transparent); }
 
 /* ── respect the reader's settings, completely ─────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
@@ -158,14 +158,14 @@ button:active:not(:disabled), .btn:active:not(:disabled) { transform: translateY
   position: fixed; right: 18px; bottom: 18px; z-index: 60;
   display: inline-flex; align-items: center; gap: 8px;
   padding: 11px 16px; border-radius: 999px; text-decoration: none;
-  background: var(--primary, #173b32); color: #f7f4ec;
+  background: var(--primary, #12224a); color: #f7f4ec;
   font: 600 13.5px/1 var(--font-sans, system-ui, sans-serif);
   box-shadow: 0 10px 26px -10px rgba(23, 59, 50, .55);
   transition: transform .16s cubic-bezier(.22,.61,.36,1), box-shadow .16s;
 }
 .amigo-launcher svg { width: 17px; height: 17px; flex: none; }
 .amigo-launcher:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(23, 59, 50, .6); }
-.amigo-launcher:focus-visible { outline: 2px solid var(--focus, #b46a45); outline-offset: 3px; }
+.amigo-launcher:focus-visible { outline: 2px solid var(--focus, #2f4bd8); outline-offset: 3px; }
 
 /* the phone's bottom bar owns the bottom edge; lift the launcher above it */
 @media (max-width: 860px) {

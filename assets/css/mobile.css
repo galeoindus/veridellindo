@@ -1105,7 +1105,7 @@ body:not(.amigo-chat) .composer,
   border-color: color-mix(in srgb, var(--im-accent) 34%, var(--im-border));
 }
 .composer .searchbar button[type="submit"] {
-  background: linear-gradient(118deg, #ff963e 0%, #dc398c 52%, #7939d3 100%);
+  background: linear-gradient(118deg, #4338ca 0%,#2f4bd8 52%,#1a63d8 100%);
   border: 0;
   color: #fff;
   box-shadow: 0 7px 17px -8px rgba(174,57,151,.5);

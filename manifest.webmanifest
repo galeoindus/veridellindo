@@ -7,8 +7,8 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#101713",
-  "theme_color": "#173b32",
+  "background_color": "#070d1c",
+  "theme_color": "#0a2f8f",
   "lang": "en",
   "dir": "ltr",
   "categories": [
@@ -18,19 +18,19 @@
   ],
   "icons": [
     {
-      "src": "assets/img/brand/veridellindo-round.svg?v=6.11.6-17e8cff",
+      "src": "assets/img/brand/veridellindo-round.svg?v=6.11.6-e795d89",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "assets/img/brand/logo-512.png?v=6.11.6-17e8cff",
+      "src": "assets/img/brand/logo-512.png?v=6.11.6-e795d89",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "assets/img/brand/logo-maskable-512.png?v=6.11.6-17e8cff",
+      "src": "assets/img/brand/logo-maskable-512.png?v=6.11.6-e795d89",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

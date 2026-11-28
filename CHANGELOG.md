@@ -9,6 +9,37 @@ something was fixed.
 The build id on every page is `<version>-<commit>`, written by
 `npm run stamp:build`. If the two disagree, the page was hand-edited.
 
+## [Unreleased]
+
+### Fixed
+- **A citation marker no longer leaves the article.** Every `<sup>` marker is
+  `<a href="#ref-3">`, and the hash router treated any fragment as a route, so
+  pressing `[1]` replaced the article with the not-found view. In-page anchors
+  are now scrolled to (and focused) instead of routed, and a fragment with no
+  matching element is swallowed rather than parsed as an address.
+- **Amigo's live research reached none of its providers.** The
+  `Content-Security-Policy` in `_headers` had no `connect-src` entry for
+  DuckDuckGo, the GitHub search API, Open-Meteo (weather and geocoding) or HN
+  Algolia, so the browser blocked every one of those lookups. All five are
+  allowed now, and `test/csp-connect-src.test.mjs` fails if a provider is added
+  to the client without being added to the policy.
+- **The 429 from `/api/chat` advertised no wait.** `json(body, status, extra)`
+  took only two arguments, so the `Retry-After` the caller passed was dropped.
+- **The OpenRouter key rotation advanced more than once per request.** The only
+  accessor had the rotation as a side effect and was called for the
+  `hasOpenRouter` check, again inside `runOpenRouter`, and once per GET health
+  check. `listOpenRouterKeys()` is the pure read; `openRouterKeys()` rotates.
+- **`X-Forwarded-For` was used whole as the rate-limit bucket**, so a client
+  could send its own chain and get a fresh allowance per request. The first
+  entry is the caller.
+- **A non-list in local storage crashed the views.** `getBookmarks()` and
+  `getHistory()` returned whatever JSON was stored; an object made `.some`
+  throw inside `isBookmarked`. Both now return a list or nothing.
+- **The active bottom-nav tab lost its colour.** `mobile.css` used
+  `var(--accent-ink)`, a token no theme defines, with no fallback — invalid at
+  computed-value time, so the label inherited the muted grey.
+- Removed a duplicated `og:image` and `twitter:image` from nine pages.
+
 ## [6.11.0] — 28 November 2026
 
 ### Added

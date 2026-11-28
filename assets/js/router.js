@@ -250,9 +250,37 @@ export function initLinkBehaviour({ prefetch = null } = {}) {
   document.addEventListener('touchstart', warm, { passive: true });
 
   document.addEventListener('click', (event) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.button > 0) return;
+    const anchor = event.target.closest?.('a[href]');
+    if (!anchor) return;
+    if (anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+
+    /* An in-page anchor is not a route.
+     *
+     * The article's citation markers are `<a href="#ref-3">`, and the body
+     * carries section links like `<a href="#Design">`. The router owns the
+     * hash, so letting the browser follow one of those replaced the current
+     * route with a fragment that matches no route — and every [1] in every
+     * article sent the reader to the not-found view. Scroll to the target
+     * instead, and swallow the fragment even when no such element is on the
+     * page: a hash the router cannot parse is always a 404. */
+    const address = anchor.getAttribute('href') || '';
+    if (address.startsWith('#') && !address.startsWith('#/')) {
+      event.preventDefault();
+      let id = address.slice(1);
+      try { id = decodeURIComponent(id); } catch { /* keep it as written */ }
+      const target = id ? document.getElementById(id) : null;
+      if (!target) return;
+      target.scrollIntoView({ block: 'start' });
+      // Land the keyboard and the screen reader on the target too, without a
+      // second scroll.
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+      return;
+    }
+
     const a = event.target.closest?.('a[href^="#/"]');
     if (!a) return;
-    if (a.target === '_blank' || event.metaKey || event.ctrlKey || event.shiftKey) return;
     adoptPath();
     requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'auto' }));
   });

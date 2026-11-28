@@ -52,7 +52,11 @@ function emit(event, payload) {
 /* --------------------------------------------------------------- bookmarks */
 
 export function getBookmarks() {
-  return read(STORAGE_KEYS.bookmarks, []);
+  const list = read(STORAGE_KEYS.bookmarks, []);
+  // A stored value is not guaranteed to be a list: an older build, a hand-edited
+  // entry or a corrupted write leaves an object behind, and `.some` on it threw
+  // inside isBookmarked, which took the whole view down.
+  return Array.isArray(list) ? list : [];
 }
 
 export function isBookmarked(id) {
@@ -91,7 +95,8 @@ export function clearBookmarks() {
 /* ----------------------------------------------------------------- history */
 
 export function getHistory() {
-  return read(STORAGE_KEYS.history, []);
+  const list = read(STORAGE_KEYS.history, []);
+  return Array.isArray(list) ? list : [];
 }
 
 export function pushHistory(item) {

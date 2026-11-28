@@ -38,13 +38,17 @@ const MAX_MESSAGES = 40;
 const MAX_BODY_BYTES = 256 * 1024;
 const MAX_CHARS = 60_000;
 
-function json(body, status = 200) {
+function json(body, status = 200, extra = {}) {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       'cache-control': 'no-store',
       'x-content-type-options': 'nosniff',
+      // Extra headers (Retry-After on a 429) used to be passed by the caller
+      // and dropped here, because this signature took no third argument — so
+      // the rate-limit response advertised no window to wait for.
+      ...extra,
     },
   });
 }
@@ -141,7 +145,16 @@ function textOf(result) {
 const MAX_OPENROUTER_KEYS = 12;
 let keyCursor = 0;
 
-export function openRouterKeys(env) {
+/**
+ * Every configured key, in slot order, with no side effect.
+ *
+ * Anything that only asks "is there a key at all" must use this. The rotating
+ * accessor below advances the cursor each time it is called, and it used to be
+ * the only way in — so one chat request advanced it twice (once for the
+ * `hasOpenRouter` check, once inside runOpenRouter) and a GET health check
+ * advanced it as well. The rotation was meant to happen once per request.
+ */
+export function listOpenRouterKeys(env) {
   const keys = [];
   for (let i = 1; i <= MAX_OPENROUTER_KEYS; i += 1) {
     const key = String(env?.[`OPENROUTER_API_KEY_${i}`] || '').trim();
@@ -149,6 +162,12 @@ export function openRouterKeys(env) {
   }
   const legacy = String(env?.OPENROUTER_API_KEY || '').trim();
   if (legacy && !keys.includes(legacy)) keys.push(legacy);
+  return keys;
+}
+
+/** The keys for this request, starting one slot further along each time. */
+export function openRouterKeys(env) {
+  const keys = listOpenRouterKeys(env);
   if (keys.length < 2) return keys;
   keyCursor = (keyCursor + 1) % keys.length;
   return [...keys.slice(keyCursor), ...keys.slice(0, keyCursor)];
@@ -283,8 +302,11 @@ const CHAT_PER_MINUTE = 12;
 const chatHits = new Map();
 
 function callerKey(request) {
+  // The first entry of X-Forwarded-For is the caller; the rest are proxies.
+  // The whole header was used as the bucket key, so a client could send its own
+  // chain and get a fresh allowance with every request.
   return request.headers.get('cf-connecting-ip')
-    || request.headers.get('x-forwarded-for')
+    || request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
     || 'unknown';
 }
 
@@ -347,7 +369,7 @@ export async function onRequestPost({ request, env = {} }) {
      label could show one thing and the answer come from another. The requested
      provider is honoured against server-owned allowlists now. */
   const requestedProvider = String(body.provider || 'auto').toLowerCase();
-  const hasOpenRouter = openRouterKeys(env).length > 0;
+  const hasOpenRouter = listOpenRouterKeys(env).length > 0;
   let deltaSent = false;
   const sawDelta = () => deltaSent;
 
@@ -426,7 +448,7 @@ export async function onRequestGet({ env = {} }) {
   return json({
     ok: true,
     workersAI: Boolean(env?.AI && typeof env.AI.run === 'function'),
-    openRouter: openRouterKeys(env).length > 0,
+    openRouter: listOpenRouterKeys(env).length > 0,
     models: [...WORKERS_MODELS],
   });
 }

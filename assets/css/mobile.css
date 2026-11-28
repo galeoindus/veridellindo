@@ -67,7 +67,10 @@
   }
   .bottom-nav a[aria-current="page"] {
     background: color-mix(in srgb, var(--accent) 16%, transparent);
-    color: var(--accent-ink);
+    /* --accent-ink is not defined by any theme, and a var() with no fallback is
+       invalid at computed-value time — so the active tab's label silently fell
+       back to the inherited muted grey and sat unreadable on its own tint. */
+    color: var(--accent-ink, var(--accent));
     font-weight: 600;
   }
   .bottom-nav svg { width: 21px; height: 21px; }

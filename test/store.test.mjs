@@ -11,7 +11,7 @@ import { JSDOM } from 'jsdom';
 const dom = new JSDOM('', { url: 'https://veridellindo.pages.dev/' });
 globalThis.localStorage = dom.window.localStorage;
 
-const { on, pushHistory, getHistory, toggleBookmark, getBookmarks, clearHistory, clearBookmarks } =
+const { on, pushHistory, getHistory, toggleBookmark, getBookmarks, clearHistory, clearBookmarks, isBookmarked } =
   await import('../assets/js/store.js');
 
 test('the history event never carries more than the 200 that were saved', () => {
@@ -43,4 +43,15 @@ test('a bookmark toggles off again', () => {
   assert.equal(getBookmarks().length, 1);
   assert.equal(toggleBookmark({ id: 'x', title: 'X' }), false);
   assert.equal(getBookmarks().length, 0);
+});
+
+test('a stored value that is not a list does not break the views', () => {
+  // An older build, a hand-edited entry or a half-finished write can leave an
+  // object where a list belongs. `.some` on it threw inside isBookmarked and
+  // took the whole article view down.
+  localStorage.setItem('veridell:bookmarks', JSON.stringify({ not: 'a list' }));
+  localStorage.setItem('veridell:history', JSON.stringify('nope'));
+  assert.deepEqual(getBookmarks(), []);
+  assert.deepEqual(getHistory(), []);
+  assert.equal(isBookmarked('anything'), false);
 });

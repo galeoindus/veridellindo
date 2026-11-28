@@ -56,26 +56,26 @@ const SKILLS = {"design-critique": {"icon": "🎨", "name": "Design Critique", "
  * keeps serving the previous artwork. */
 const BUILD_ID = (document.querySelector('meta[name="veridell-build"]') || {}).content || "";
 const AMIGO_BRAND_URI = "/assets/img/brand/logo-192.png" + (BUILD_ID ? "?v=" + BUILD_ID : "");
-const VERI_ASSETS = Object.freeze(Object.fromEntries(
+const AMIGO_ASSETS = Object.freeze(Object.fromEntries(
   ["idle", "wave", "think", "warm", "celebrate", "explain", "welcome", "listen", "joy"].map((pose) => [
-    pose, "/assets/img/mascot/veri-" + pose + ".webp" + (BUILD_ID ? "?v=" + BUILD_ID : "")
+    pose, "/assets/img/mascot/amigo-" + pose + ".webp" + (BUILD_ID ? "?v=" + BUILD_ID : "")
   ])
 ));
 function darkNow(){ return document.body.classList.contains("dark"); }
-function setVeriMood(target, mood){
-  const img = target && target.querySelector ? target.querySelector(".veri-chat-avatar") : null;
+function setAmigoMood(target, mood){
+  const img = target && target.querySelector ? target.querySelector(".amigo-chat-avatar") : null;
   if (!img) return;
-  const pose = Object.prototype.hasOwnProperty.call(VERI_ASSETS, mood) ? mood : "idle";
+  const pose = Object.prototype.hasOwnProperty.call(AMIGO_ASSETS, mood) ? mood : "idle";
   if (img.dataset.mood === pose) return;
   img.dataset.mood = pose;
-  img.src = VERI_ASSETS[pose];
+  img.src = AMIGO_ASSETS[pose];
 }
 function dharmaHTML(){ return '<span class="typing-mascot" aria-label="Amigo is thinking"><i></i><i></i><i></i></span>'; }
 
 const AMP = String.fromCharCode(38);
 const $ = s => document.querySelector(s);
 
-/* The chat companion uses the lightweight Veri pose assets above. Nothing here
+/* The chat companion uses the lightweight Amigo pose assets above. Nothing here
  * depends on it: the welcome shows the brand mark and the waiting state shows
  * the typing dots, which report progress rather than a character. */
 
@@ -572,9 +572,9 @@ function addMsg(role, text, opts){
   const wrap = document.createElement("div");
   wrap.className = "msg " + (role === "user" ? "me" : "ai");
   if (role === "assistant"){
-    const who = document.createElement("div"); who.className = "who veri-who"; who.setAttribute("aria-hidden", "true");
-    const avatar = document.createElement("img"); avatar.className = "veri-chat-avatar";
-    avatar.src = VERI_ASSETS.idle; avatar.alt = ""; avatar.width = 72; avatar.height = 80;
+    const who = document.createElement("div"); who.className = "who amigo-who"; who.setAttribute("aria-hidden", "true");
+    const avatar = document.createElement("img"); avatar.className = "amigo-chat-avatar";
+    avatar.src = AMIGO_ASSETS.idle; avatar.alt = ""; avatar.width = 72; avatar.height = 80;
     avatar.decoding = "async"; avatar.loading = "lazy"; avatar.dataset.mood = "idle";
     who.append(avatar); wrap.append(who);
   }
@@ -831,7 +831,7 @@ function renderMsg(m){
     else {
       const rendered = addMsg(m.role, m.content, Object.keys(o).length ? o : null);
       if (m.role === "assistant"){
-        setVeriMood(rendered.parentElement, m.image ? "celebrate" : "warm");
+        setAmigoMood(rendered.parentElement, m.image ? "celebrate" : "warm");
         addAmigoSignature(rendered, m.provider || "", m.model || "");
       }
     }
@@ -852,12 +852,12 @@ function fmt(n){
 function showHero(){
   const d = document.createElement("div"); d.className = "hero";
   d.innerHTML =
-    '<section class="veri-chat-welcome" aria-labelledby="veriChatGreeting">' +
-      '<figure class="veri-chat-art"><img src="' + VERI_ASSETS.welcome + '" alt="Veri, a happy glowing leaf spirit with two leaves, little hands and feet" width="367" height="403" decoding="async" fetchpriority="high"></figure>' +
-      '<div class="veri-chat-copy"><span class="veri-chat-label">YOUR CURIOUS LITTLE COMPANION</span>' +
-        '<h2 id="veriChatGreeting">Hi, I’m Veri!</h2>' +
+    '<section class="amigo-chat-welcome" aria-labelledby="amigoChatGreeting">' +
+      '<figure class="amigo-chat-art"><img src="' + AMIGO_ASSETS.welcome + '" alt="Amigo, the leaf companion, waving" width="367" height="403" decoding="async" fetchpriority="high"></figure>' +
+      '<div class="amigo-chat-copy"><span class="amigo-chat-label">YOUR CURIOUS LITTLE COMPANION</span>' +
+        '<h2 id="amigoChatGreeting">Hi, I’m Amigo!</h2>' +
         '<p>I’m here to help ideas take root. Ask me to write, research, explain, plan or simply think something through with you.</p>' +
-        '<span class="veri-chat-note">Every good question can grow into something wonderful.</span></div>' +
+        '<span class="amigo-chat-note">Every good question can grow into something wonderful.</span></div>' +
     '</section>' +
     (workerBase() ? '' : '<div class="worker-note">Using this site\'s own endpoint. <button type="button" data-open-settings="1">Open settings</button></div>') +
     '<div class="gcards">' +
@@ -997,7 +997,7 @@ function isCurrentRequest(id){ return REQUEST.id === id; }
 function setRequestState(state){
   REQUEST.state = state;
   const moods = { thinking: "think", responding: "explain", done: "warm", stopped: "listen", error: "listen", idle: "idle" };
-  setVeriMood(REQUEST.mascotWrap, moods[state] || "idle");
+  setAmigoMood(REQUEST.mascotWrap, moods[state] || "idle");
   const stopEl = document.getElementById("stop");
   if (stopEl) stopEl.hidden = !(state === "thinking" || state === "responding");
   if (state === "thinking") announce("Amigo is thinking");
@@ -1120,8 +1120,8 @@ function engineLabel(provider, model){
 function addAmigoSignature(bub, provider, model){
   if (!bub || bub.querySelector(".amigo-signature")) return;
   const row = document.createElement("div"); row.className = "amigo-signature";
-  const img = document.createElement("img"); img.src = VERI_ASSETS.wave; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
-  const name = document.createElement("span"); name.className = "amigo-name"; name.textContent = "Veri · Amigo";
+  const img = document.createElement("img"); img.src = AMIGO_ASSETS.wave; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
+  const name = document.createElement("span"); name.className = "amigo-name"; name.textContent = "Amigo";
   const label = document.createElement("span"); label.className = "engine-label"; label.textContent = engineLabel(provider, model);
   row.append(img, name, label); bub.append(row);
 }
@@ -1443,25 +1443,25 @@ async function send(){
   announce("Amigo is thinking");
   const bub = addMsg("assistant", "", { typing: true });
   const bubWrap = bub.parentElement; REQUEST.mascotWrap = bubWrap;
-  if (bubWrap){ bubWrap.classList.add("answering"); setVeriMood(bubWrap, "think"); }
+  if (bubWrap){ bubWrap.classList.add("answering"); setAmigoMood(bubWrap, "think"); }
 
   /* image generation: if the user wants a picture (or 🎨 is on), draw it and stop here */
   if (!!settings.imageMode || wantsImage(text)){
     bub.innerHTML = '<span class="searching">' + dharmaHTML() + ' 🎨 Drawing your image…</span>';
-    setVeriMood(bubWrap, "think");
+    setAmigoMood(bubWrap, "think");
     try {
       const src = await genImage(text);
       const cap = "🎨 Here is your image.";
       bub.innerHTML = mdLite(cap);
       addImage(bub, src, text);
-      setVeriMood(bubWrap, "celebrate");
+      setAmigoMood(bubWrap, "celebrate");
       addAmigoSignature(bub, "workers-ai", "@cf/black-forest-labs/flux-1-schnell");
       if (bubWrap) addCopy(bubWrap, text, false);
       curHistory().push({ role: "assistant", content: cap, image: src, imagePrompt: text, provider: "workers-ai", model: "@cf/black-forest-labs/flux-1-schnell" });
       histSave();
     } catch(err){
       bub.classList.add("err");
-      setVeriMood(bubWrap, "listen");
+      setAmigoMood(bubWrap, "listen");
       bub.textContent = "⚠️ " + (err && err.message ? err.message : "Image generation failed.");
       const rb = document.createElement("button");
       rb.className = "retrybtn"; rb.textContent = "↻ Try again";
@@ -1481,7 +1481,7 @@ async function send(){
     const deep = !!settings.deepSearch;
     if (deep || wantsWeather(text) || wantsGithub(text) || wantsTrends(text) || wantsLive(text) || settings.liveMode || /https?:\/\//.test(text)){
       bub.innerHTML = '<span class="searching">' + dharmaHTML() + ' Researching live sources…</span>';
-      setVeriMood(bubWrap, "think");
+      setAmigoMood(bubWrap, "think");
       sources = await runConnectors(text, deep);
       if (!sources) bub.innerHTML = '<span class="typing">' + dharmaHTML()
             + '<span class="sr-only">Amigo is responding</span></span>';

@@ -8,9 +8,9 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (path) => readFileSync(join(root, path), 'utf8');
 const poses = ['idle', 'wave', 'think', 'warm', 'celebrate', 'explain', 'welcome', 'listen', 'joy'];
 
-test('Veri has a complete, optimized, transparent pose set', () => {
+test('Amigo has a complete, optimized, transparent pose set', () => {
   for (const pose of poses) {
-    const path = `assets/img/mascot/veri-${pose}.webp`;
+    const path = `assets/img/mascot/amigo-${pose}.webp`;
     assert.ok(existsSync(join(root, path)), `${path} is missing`);
     const bytes = readFileSync(join(root, path));
     assert.equal(bytes.toString('ascii', 0, 4), 'RIFF', `${path} is not WebP`);
@@ -19,21 +19,21 @@ test('Veri has a complete, optimized, transparent pose set', () => {
   }
 });
 
-test('the main knowledge home page introduces Veri before its search hero', () => {
+test('the main knowledge home page introduces Amigo before its search hero', () => {
   const home = read('assets/js/views/home.js');
-  assert.match(home, /veri-home-welcome/);
-  assert.match(home, /veri-welcome\.webp/);
+  assert.match(home, /amigo-home-welcome/);
+  assert.match(home, /amigo-welcome\.webp/);
   assert.match(home, /Hello, curious mind/);
   assert.match(home, /trace back to its source/);
 });
 
 test('Amigo gives every assistant turn an avatar and maps request states to poses', () => {
   const app = read('amigo/app.js');
-  assert.match(app, /className = "veri-chat-avatar"/);
-  assert.match(app, /function setVeriMood/);
+  assert.match(app, /className = "amigo-chat-avatar"/);
+  assert.match(app, /function setAmigoMood/);
   assert.match(app, /thinking: "think", responding: "explain", done: "warm"/);
-  assert.match(app, /setVeriMood\(bubWrap, "celebrate"\)/);
-  assert.match(app, /Hi, I’m Veri!/);
+  assert.match(app, /setAmigoMood\(bubWrap, "celebrate"\)/);
+  assert.match(app, /Hi, I’m Amigo!/);
 });
 
 test('the experience layer handles mobile layouts, reduced motion and wider article panels', () => {

@@ -7,15 +7,15 @@ is optimized for web delivery (roughly 51–55 KB per pose).
 
 | File | Intended use | Suggested interface state |
 |---|---|---|
-| `veri-welcome.webp` | Large homepage / new-chat greeting | First visit or empty conversation |
-| `veri-idle.webp` | Small neutral assistant avatar | Default / waiting |
-| `veri-wave.webp` | Friendly greeting and re-engagement | Welcome back / acknowledgement |
-| `veri-think.webp` | Thinking expression | Research, retrieval or model wait |
-| `veri-explain.webp` | Open-hand explaining pose | Streaming / explaining an answer |
-| `veri-warm.webp` | Gentle closed-hand smile | Completed answer / answer signature |
-| `veri-celebrate.webp` | Eyes closed, hands raised | Successful image generation / celebration |
-| `veri-listen.webp` | Attentive, listening pose | Stopped, retry or recovery state |
-| `veri-joy.webp` | Full joyful expression | Optional positive feedback state |
+| `amigo-welcome.webp` | Large homepage / new-chat greeting | First visit or empty conversation |
+| `amigo-idle.webp` | Small neutral assistant avatar | Default / waiting |
+| `amigo-wave.webp` | Friendly greeting and re-engagement | Welcome back / acknowledgement |
+| `amigo-think.webp` | Thinking expression | Research, retrieval or model wait |
+| `amigo-explain.webp` | Open-hand explaining pose | Streaming / explaining an answer |
+| `amigo-warm.webp` | Gentle closed-hand smile | Completed answer / answer signature |
+| `amigo-celebrate.webp` | Eyes closed, hands raised | Successful image generation / celebration |
+| `amigo-listen.webp` | Attentive, listening pose | Stopped, retry or recovery state |
+| `amigo-joy.webp` | Full joyful expression | Optional positive feedback state |
 
 ## Implementation rules
 
